@@ -3,345 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAMPIRAN TEKNIS TOR - HYDRO-RESCUE MASTERPLAN GANDA-GANDA</title>
+    <title>HYDRO-RESCUE MASTERPLAN GANDA-GANDA - KKN 2026</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #060913;
-        }
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        /* Engineering Grid Background for Blueprint style */
-        .blueprint-grid {
-            background-color: #0d1527;
-            background-image: 
-                linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            position: relative;
-        }
-        .blueprint-grid::before {
-            content: "DRAWING BLUEPRINT // SCALE: 1:15 // UNIT: METRIC";
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 8px;
-            color: #38bdf8;
-            opacity: 0.7;
-            font-weight: bold;
-            letter-spacing: 1px;
+            background-color: #04060d;
         }
         ::-webkit-scrollbar {
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #090d16;
+            background: #080c14;
         }
         ::-webkit-scrollbar-thumb {
             background: #1e293b;
             border-radius: 999px;
         }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        .glowing-panel {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.04);
+        }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
+<body class="text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-slate-950">
 
     <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-4 md:px-8 py-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="bg-amber-500/10 text-amber-450 text-xs px-2.5 py-1 rounded-full font-bold border border-amber-500/20">LAMPIRAN TEKNIS DOKUMEN TOR</span>
-                    <span class="text-slate-400 text-xs">KKN-PPM UGM Saba Mortara 2026</span>
+                    <span class="bg-emerald-500/10 text-emerald-450 text-xs px-2.5 py-1 rounded-full font-bold border border-emerald-500/20">Cetak Biru Rekayasa Lingkungan</span>
+                    <span class="text-slate-400 text-xs">KKN Terintegrasi Desa Ganda-ganda 2026</span>
                 </div>
-                <h1 class="text-2xl font-black text-white mt-1 flex items-center gap-2 uppercase tracking-tight">
-                    <i data-lucide="blueprint" class="text-sky-400 animate-pulse"></i> LAMPIRAN BLUEPRINT & VISUALISASI OUTPUT
+                <h1 class="text-2xl font-extrabold text-white mt-1 flex items-center gap-2 tracking-tight uppercase">
+                    <i data-lucide="activity" class="text-emerald-400 animate-pulse"></i> HYDRO-RESCUE MASTERPLAN GANDA-GANDA
                 </h1>
-                <p class="text-slate-400 text-xs mt-0.5 font-medium">Spesifikasi CAD, Rencana Desain Lapangan, & Visualisasi Hasil Nyata (Deliverables)</p>
+                <p class="text-slate-400 text-xs mt-0.5 font-medium">Sistem Pengendali Sedimen Pertambangan Berbasis Alam (Nature-Based Solutions) & Optimasi Utilitas Air Baku SPAM IKK Petasia</p>
             </div>
             
-            <div class="flex bg-slate-950 p-1.5 rounded-xl border border-slate-800">
-                <button onclick="switchCategory('blueprint')" id="btn-cat-blueprint" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-sky-500 text-slate-950 shadow-md flex items-center gap-1.5">
-                    <i data-lucide="compass" class="w-4 h-4"></i> Gambar Teknik CAD
-                </button>
-                <button onclick="switchCategory('output')" id="btn-cat-output" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
-                    <i data-lucide="award" class="w-4 h-4"></i> Hasil Nyata (Deliverables)
-                </button>
+            <div class="flex items-center gap-3 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800">
+                <i data-lucide="gauge" class="text-emerald-400 w-5 h-5"></i>
+                <div class="text-left">
+                    <span class="text-[9px] text-slate-500 block font-bold uppercase">Sinergi Instansi</span>
+                    <span class="text-xs text-slate-300 font-bold">Dinas PUPR & UPTD SPAM</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Workspace -->
+    <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Left Side: Interactive Graphic Viewer (Blueprint Canvas / Product Mockup) -->
-        <div class="lg:col-span-8 flex flex-col gap-4">
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 md:p-6 flex flex-col flex-1 shadow-2xl relative">
+        <!-- Left Side: Simulation Interactive Window -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 md:p-6 flex flex-col flex-1 shadow-2xl glowing-panel relative">
                 
-                <!-- Dynamic Content Selectors -->
-                <div class="mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                <!-- Stepper Tabs -->
+                <div class="mb-4">
+                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Matriks Program Kerja Terintegrasi</span>
+                    <div class="grid grid-cols-3 md:grid-cols-6 gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-850">
+                        <button onclick="changeProker(0)" id="tab-0" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all bg-emerald-500 text-slate-950 shadow-md">
+                            <span class="block text-center">Proker 1</span>
+                            <span class="block text-[8px] opacity-75 truncate">Rahul (Fisika)</span>
+                        </button>
+                        <button onclick="changeProker(1)" id="tab-1" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white">
+                            <span class="block text-center">Proker 2</span>
+                            <span class="block text-[8px] opacity-75 truncate">Nida (Kimia)</span>
+                        </button>
+                        <button onclick="changeProker(2)" id="tab-2" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white">
+                            <span class="block text-center">Proker 3</span>
+                            <span class="block text-[8px] opacity-75 truncate">Tata (Hutan)</span>
+                        </button>
+                        <button onclick="changeProker(3)" id="tab-3" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white">
+                            <span class="block text-center">Proker 4</span>
+                            <span class="block text-[8px] opacity-75 truncate">Dani (Biologi)</span>
+                        </button>
+                        <button onclick="changeProker(4)" id="tab-4" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white">
+                            <span class="block text-center">Proker 5</span>
+                            <span class="block text-[8px] opacity-75 truncate">Arya (Agri)</span>
+                        </button>
+                        <button onclick="changeProker(5)" id="tab-5" class="px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white">
+                            <span class="block text-center">Proker 6</span>
+                            <span class="block text-[8px] opacity-75 truncate">Alya (TK)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulation Header -->
+                <div class="flex justify-between items-center mb-3">
                     <div>
-                        <h2 id="viewer-title" class="text-base font-extrabold text-white flex items-center gap-2">
+                        <h2 id="sim-title" class="text-sm font-extrabold text-white flex items-center gap-1.5">
                             <!-- Populated Dynamically -->
                         </h2>
-                        <p id="viewer-subtitle" class="text-[11px] text-slate-400">
+                        <p id="sim-subtitle" class="text-[11px] text-slate-400">
                             <!-- Populated Dynamically -->
                         </p>
                     </div>
-
-                    <!-- Inner Category Tabs -->
-                    <div id="inner-tabs" class="flex gap-1.5 bg-slate-950 p-1 rounded-lg border border-slate-800 text-[11px]">
+                    <button id="btn-state" onclick="toggleContextState()" class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700 text-[10px] font-bold text-slate-200 transition-all flex items-center gap-1">
                         <!-- Populated Dynamically -->
+                    </button>
+                </div>
+
+                <!-- Actual Canvas -->
+                <div class="relative rounded-xl border border-slate-800 bg-slate-950 flex-1 min-h-[350px] overflow-hidden flex items-center justify-center">
+                    <canvas id="masterCanvas" class="w-full h-full block cursor-pointer"></canvas>
+
+                    <!-- Interactive Tooltip inside Canvas -->
+                    <div id="canvas-info-card" class="absolute bottom-3 left-3 right-3 bg-slate-900/95 border border-slate-800 p-2.5 rounded-lg shadow-xl backdrop-blur-md hidden transition-all">
+                        <h4 id="canvas-card-title" class="text-[11px] font-extrabold text-emerald-400 uppercase tracking-wider"></h4>
+                        <p id="canvas-card-desc" class="text-[10px] text-slate-300 mt-0.5 leading-relaxed"></p>
                     </div>
                 </div>
 
-                <!-- Main Canvas Area -->
-                <div id="canvas-container" class="blueprint-grid rounded-xl border border-slate-800 flex-1 min-h-[420px] relative overflow-hidden flex items-center justify-center">
-                    <canvas id="portfolioCanvas" class="w-full h-full block cursor-pointer"></canvas>
-
-                    <!-- Technical Specifications HUD overlay -->
-                    <div id="tech-hud" class="absolute top-12 left-4 bg-slate-950/80 border border-slate-800 p-2.5 rounded-lg text-[9px] mono text-sky-400 max-w-xs pointer-events-none">
-                        <!-- Populated Dynamically -->
-                    </div>
-
-                    <!-- Interactive Tooltip Overlay Card -->
-                    <div id="interactive-card" class="absolute bottom-4 left-4 right-4 bg-slate-950/95 border border-sky-900/50 p-3 rounded-lg shadow-xl backdrop-blur hidden">
-                        <h4 id="card-title" class="text-xs font-bold text-sky-400 uppercase tracking-wider"></h4>
-                        <p id="card-desc" class="text-[11px] text-slate-300 mt-1 leading-relaxed"></p>
-                    </div>
-                </div>
-
-                <!-- Custom Nav instructions -->
-                <p id="viewer-tip" class="text-[10px] text-slate-500 mt-2 text-center italic">
-                    Gunakan kursor Anda untuk menjelajahi spesifikasi struktural gambar di atas.
+                <!-- Sim Tip Indicator -->
+                <p id="sim-tip" class="text-[10px] text-slate-500 mt-2 text-center italic">
+                    <!-- Populated Dynamically -->
                 </p>
 
             </div>
         </div>
 
-        <!-- Right Side: Structural Specifications & Interactive Parameterizer -->
-        <div class="lg:col-span-4 flex flex-col gap-6">
+        <!-- Right Side: Calculators, Outputs, & Deliverables -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
             
-            <!-- Contextual Parameters & Calculations -->
-            <div id="param-card" class="bg-slate-900 rounded-2xl border border-slate-800 p-5 shadow-xl flex flex-col gap-4">
+            <!-- PJ Card -->
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 shadow-xl flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                    <i id="pj-icon" data-lucide="user" class="w-6 h-6"></i>
+                </div>
                 <div>
-                    <h3 class="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-1.5">
-                        <i data-lucide="settings" class="text-sky-400 w-4 h-4"></i> Konfigurator Desain Teknik
-                    </h3>
-                    <p class="text-[10px] text-slate-400">Sesuaikan dimensi fisik rencana bangunan untuk kalkulasi material</p>
+                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest block">Penanggung Jawab Komponen</span>
+                    <h3 id="pj-name" class="text-sm font-bold text-white"></h3>
+                    <p id="pj-prodi" class="text-[11px] text-emerald-400 font-medium"></p>
+                </div>
+            </div>
+
+            <!-- Parametric Calculator -->
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl flex flex-col gap-4">
+                <div>
+                    <h2 class="text-sm font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wide">
+                        <i data-lucide="calculator" class="text-emerald-400 w-4 h-4"></i> Parameter & Kalkulator Desain
+                    </h2>
+                    <p class="text-[10px] text-slate-400">Modifikasi data teknis di bawah untuk simulasi volume dan efisiensi logistik</p>
                 </div>
 
-                <!-- Inputs Slider -->
-                <div id="slider-group" class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-850">
-                    <!-- Sliders populated dynamically -->
+                <div id="controls-container" class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-850">
+                    <!-- Sliders injected here -->
                 </div>
 
-                <!-- Materials / Statistics Outputs -->
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-850">
-                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Daftar Bill of Quantity (BOM)</span>
-                    <div id="bom-list" class="space-y-2 text-xs">
-                        <!-- BOM items populated dynamically -->
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 flex flex-col gap-2">
+                    <span class="text-[10px] text-slate-500 font-bold uppercase">Estimasi Output Lapangan / Teknis</span>
+                    <div id="outputs-container" class="grid grid-cols-2 gap-2 text-xs">
+                        <!-- Outputs injected here -->
                     </div>
                 </div>
             </div>
 
-            <!-- Program Integration and Info -->
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 shadow-xl flex flex-col gap-3">
-                <h3 class="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-1.5">
-                    <i data-lucide="info" class="text-amber-500 w-4 h-4"></i> Signifikansi bagi Dinas PUPR
+            <!-- Deliverables Card -->
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl">
+                <h3 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="award" class="text-emerald-400 w-4.5 h-4.5"></i> Rencana Hasil Nyata (Deliverables)
                 </h3>
-                <p id="significance-desc" class="text-xs text-slate-300 leading-relaxed">
-                    <!-- Populated dynamically -->
-                </p>
+                <div id="deliverables-container" class="space-y-3">
+                    <!-- Deliverables injected here -->
+                </div>
+            </div>
+
+            <!-- Pitching Card -->
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl">
+                <h3 class="text-xs font-bold text-white mb-2.5 uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="file-text" class="text-amber-400 w-4 h-4"></i> Strategi Pitching Proker ke PUPR
+                </h3>
+                <div id="pitch-container" class="space-y-2 text-xs text-slate-300 leading-relaxed">
+                    <!-- Pitch items injected here -->
+                </div>
             </div>
 
         </div>
 
     </main>
 
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 px-6 py-4 mt-auto text-center text-xs text-slate-500">
+        <p>© 2026 Hydro-Rescue Masterplan Ganda-ganda - Sinergi Akademik Terpadu.</p>
+    </footer>
+
+    <!-- Interactive Simulator Application Logic -->
     <script>
         // Init Lucide
         lucide.createIcons();
 
-        // Canvas references
-        const canvas = document.getElementById('portfolioCanvas');
-        const ctx = canvas.getContext('2d');
-        const canvasContainer = document.getElementById('canvas-container');
+        const simCanvas = document.getElementById('masterCanvas');
+        const ctx = simCanvas.getContext('2d');
 
-        // Dynamic Text Elements
-        const viewerTitle = document.getElementById('viewer-title');
-        const viewerSubtitle = document.getElementById('viewer-subtitle');
-        const innerTabs = document.getElementById('inner-tabs');
-        const techHud = document.getElementById('tech-hud');
-        const interactiveCard = document.getElementById('interactive-card');
-        const cardTitle = document.getElementById('card-title');
-        const cardDesc = document.getElementById('card-desc');
-        const significanceDesc = document.getElementById('significance-desc');
+        // UI Target references
+        const simTitle = document.getElementById('sim-title');
+        const simSubtitle = document.getElementById('sim-subtitle');
+        const btnState = document.getElementById('btn-state');
+        const simTip = document.getElementById('sim-tip');
+        const pjIcon = document.getElementById('pj-icon');
+        const pjName = document.getElementById('pj-name');
+        const pjProdi = document.getElementById('pj-prodi');
 
-        // Form Control Elements
-        const sliderGroup = document.getElementById('slider-group');
-        const bomList = document.getElementById('bom-list');
+        const controlsContainer = document.getElementById('controls-container');
+        const outputsContainer = document.getElementById('outputs-container');
+        const deliverablesContainer = document.getElementById('deliverables-container');
+        const pitchContainer = document.getElementById('pitch-container');
+        const canvasCard = document.getElementById('canvas-info-card');
+        const canvasCardTitle = document.getElementById('canvas-card-title');
+        const canvasCardDesc = document.getElementById('canvas-card-desc');
 
-        // Categories & Tabs State Variables
-        let currentCategory = 'blueprint'; // 'blueprint' or 'output'
-        let currentActiveTabIdx = 0; // 0 or 1 per category
-        let isRainyMode = false;
+        // Global Interactive State variables
+        let activeProker = 0;
+        let contextState = 'low';
+        let particles = [];
+        let animationFrameId = null;
 
-        // Sliders variables
-        let slideAVal = 6.0; // Panjang parit / NTU air masuk
-        let slideBVal = 1.0; // Lebar parit / debit operasional
-        let slideCVal = 1.5; // Dalam parit
+        let valSliderA = 50; 
+        let valSliderB = 400;
+        let valSliderC = 1.5;
 
-        // Complete Portfolio Database
-        const portfolioDB = {
-            blueprint: [
-                {
-                    tabLabel: "Infiltration Gallery",
-                    title: "Gambar Teknik CAD: Detail Potongan Infiltration Gallery",
-                    subtitle: "Skema penyaringan lateral media bergradasi multi-lapisan pelindung intake Lambolo",
-                    tip: "Sentuh/Arahkan kursor Anda di atas lapisan gradasi filter untuk melihat ketebalan dan spesifikasi batu/pasir.",
-                    hud: `DRAWING NO: IG-01A\nPROJECT: HYDRO-RESCUE\nSYSTEM: INFILTRATION GALLERY\nLOCATION: BANTARAN SUNGAI\nSPEC: PVC CLASS AW PERFORATED`,
-                    significance: "Gambar penampang melintang ini membuktikan kepada Kepala Bidang Cipta Karya PUPR bahwa air permukaan yang keruh pekat (lumpur nikel) tidak dialirkan langsung ke pipa transmisi, melainkan diresapkan menyamping melalui pori-pori pasir kuarsa untuk menyaring partikel suspensi secara optimal.",
-                    sliders: [
-                        { id: 'slide-a', label: 'Panjang Parit Rencana (L)', min: 2, max: 15, step: 0.5, val: 6, suffix: ' meter' },
-                        { id: 'slide-b', label: 'Lebar Parit Rencana (W)', min: 0.8, max: 2.0, step: 0.1, val: 1.0, suffix: ' meter' },
-                        { id: 'slide-c', label: 'Kedalaman Parit (D)', min: 1.0, max: 2.5, step: 0.1, val: 1.5, suffix: ' meter' }
-                    ],
-                    bom: [
-                        { name: "Pipa PVC Perforated 6\" (4m)", calc: () => `${Math.ceil(slideAVal / 4)} Batang` },
-                        { name: "Kain Geotextile Non-Woven", calc: () => `${((slideBVal * slideAVal) + (2 * slideCVal * slideAVal)).toFixed(1)} m²` },
-                        { name: "Pasir Silika (Lapisan 1)", calc: () => `${(slideAVal * slideBVal * slideCVal * 0.4).toFixed(2)} m³` },
-                        { name: "Kerikil Sedang (Lapisan 2)", calc: () => `${(slideAVal * slideBVal * slideCVal * 0.25).toFixed(2)} m³` },
-                        { name: "Batu Split (Lapisan 3)", calc: () => `${(slideAVal * slideBVal * slideCVal * 0.25).toFixed(2)} m³` }
-                    ]
-                },
-                {
-                    tabLabel: "Bio-Fencing (Sekat Ranting)",
-                    title: "Gambar Teknik CAD: Gully Plug Sekat Ranting Bertingkat",
-                    subtitle: "Hambatan sedimen mekanis mikro penurun kecepatan limpasan air di lereng parit",
-                    tip: "Sentuh/Arahkan kursor di atas sekat bio untuk melihat cara anyaman dahan menjebak tanah erosi.",
-                    hud: `DRAWING NO: BF-02C\nPROJECT: HYDRO-RESCUE\nSYSTEM: GULLY PLUG SEDIMENT\nLOCATION: LERENG PARIT ALAM\nSPEC: BAMBOO LIVE STAKES`,
-                    significance: "Konstruksi sekat ranting bertingkat ini dirancang untuk dipresentasikan ke Bidang Pengairan/Sumber Daya Air PUPR. Dengan memasang struktur ekonomis ini, sedimen laterit dari lereng bukit tambang akan terperangkap di parit dan tidak menyumbat bak pengumpul SPAM IKK Petasia.",
-                    sliders: [
-                        { id: 'slide-a', label: 'Lebar Parit Aliran Lumpur', min: 1.0, max: 5.0, step: 0.5, val: 2.0, suffix: ' meter' },
-                        { id: 'slide-b', label: 'Jumlah Sekat Rencana (Bertingkat)', min: 1, max: 6, step: 1, val: 3, suffix: ' unit' }
-                    ],
-                    bom: [
-                        { name: "Pasak Bambu Hidup (1.2m)", calc: () => `${(Math.ceil(slideAVal * 5) + 1) * slideBVal} Batang` },
-                        { name: "Bundel Ranting Kayu Lokal", calc: () => `${Math.ceil(slideAVal * 2) * slideBVal} Ikat` },
-                        { name: "Lembar Sabut Kelapa / Ijuk", calc: () => `${Math.ceil(slideAVal * 1) * slideBVal} Lembar` }
-                    ]
+        // Hydro-Rescue Database Matrix
+        const prokerDB = [
+            {
+                title: "Pemetaan Spasial Kualitas Air & Spektrofotometri",
+                subtitle: "Rahul (Teknik Fisika) - Instrumentasi Pendeteksian Polutan & Turbiditas Hulu",
+                pj: "Rahul",
+                prodi: "Teknik Fisika",
+                icon: "map",
+                stateBtn: { low: "Kondisi Sungai Normal", high: "Kondisi Erosi Kritis" },
+                tip: "Klik node pada visual peta hulu untuk menganalisis data kualitas fisis air baku Lambolo.",
+                sliders: [
+                    { id: 'slide-a', label: 'Radius Pemetaan Grid Drone', min: 10, max: 100, step: 5, val: 50, suffix: ' m' },
+                    { id: 'slide-b', label: 'Acuan Indeks Kekeruhan Hulu', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
+                ],
+                outputs: [
+                    { label: "Luas Pemetaan Efektif", id: "out-1", calc: () => `${(Math.PI * Math.pow(valSliderA, 2) / 10000).toFixed(2)} Ha` },
+                    { label: "Deviasi Pengukuran Alat", id: "out-2", calc: () => `${(valSliderB * 0.05).toFixed(1)} NTU (±5%)` }
+                ],
+                deliverables: [
+                    { icon: "map-pin", title: "Peta Koordinat Digital Erosi Tambang", desc: "Tautan peta digital GIS via Google My Maps / ArcGIS Online yang merinci posisi persis lubang bukaan tambang pemicu sedimentasi." },
+                    { icon: "file-spreadsheet", title: "Buku Database Fisika Air Baku", desc: "Laporan berkala tren parameter TDS, pH, dan kandungan logam terlarut untuk acuan perencanaan pipa Cipta Karya." }
+                ],
+                pitch: [
+                    "<strong>Justifikasi Ilmiah:</strong> Tunjukkan data grafik lonjakan NTU hasil spektrofotometri Rahul ke PUPR untuk membuktikan bahwa WTP bawah tidak akan sanggup bertahan tanpa pengamanan di hulu sungai.",
+                    "<strong>Integrasi Tata Ruang:</strong> Sinkronisasikan koordinat peta GIS KKN dengan titik kerentanan pipa transmisi milik Cipta Karya PUPR."
+                ]
+            },
+            {
+                title: "Filtrasi Sederhana Skala Rumah Tangga Pasca-Banjir",
+                subtitle: "Nida (Kimia) - Pengamanan Akses Sanitasi Domestik Mandiri Komunal",
+                pj: "Nida",
+                prodi: "Kimia Murni",
+                icon: "beaker",
+                stateBtn: { low: "Kondisi Air Keruh Sedang", high: "Kondisi Lumpur Pekat" },
+                tip: "Gerakkan kursor di area parit saringan untuk melihat proses penyerapan partikel lempung laterit.",
+                sliders: [
+                    { id: 'slide-a', label: 'Tinggi Lapisan Pasir Silika', min: 10, max: 40, step: 1, val: 25, suffix: ' cm' },
+                    { id: 'slide-b', label: 'Tinggi Lapisan Arang Tempurung', min: 5, max: 25, step: 1, val: 15, suffix: ' cm' }
+                ],
+                outputs: [
+                    { label: "Debit Bersih Dihasilkan", id: "out-1", calc: () => `${(valSliderA * 0.8).toFixed(1)} Liter / Jam` },
+                    { label: "Kapasitas Adsorpsi Air", id: "out-2", calc: () => `${(valSliderB * 1.8).toFixed(0)} mg/Gram Media` }
+                ],
+                deliverables: [
+                    { icon: "package", title: "Unit Prototipe Filter Ember Ganda", desc: "Satu set filter fisik siap pakai menggunakan wadah lokal dengan media gradasi terstandar arang aktif dan pasir kuarsa." },
+                    { icon: "book-open", title: "Modul Infografis Penjernihan Air", desc: "Buku panduan visual cetak laminating air-air tentang cara mencuci media filter secara mandiri untuk dibagikan ke warga RT." }
+                ],
+                pitch: [
+                    "<strong>Jaring Pengaman Warga:</strong> Yakinkan PUPR bahwa proker Nida adalah mitigasi jangka pendek krusial ketika operasional SPAM IKK mati total akibat banjir bandang lumpur tambang.",
+                    "<strong>Adsorpsi Kimia Lokal:</strong> Tekankan keunggulan aktivasi arang batok kelapa lokal Ganda-ganda yang ampuh menetralkan bau tanah pekat pada air."
+                ]
+            },
+            {
+                title: "Sosialisasi Konservasi Air & Sabuk Hijau DAS",
+                subtitle: "Tata (Kehutanan) - Pengikatan Struktur Tanah Lereng & Proteksi Hutan Hulu",
+                pj: "Talitha (Tata)",
+                prodi: "Kehutanan",
+                icon: "trees",
+                stateBtn: { low: "Kondisi Lereng Gundul Tambang", high: "Lereng Ditangkar Rumput Vetiver" },
+                tip: "Amati perbedaan limpasan lumpur aktif saat bukit dipasangi penangkar vegetasi akar wangi (vetiver).",
+                sliders: [
+                    { id: 'slide-a', label: 'Intensitas Curah Hujan Rencana', min: 10, max: 120, step: 5, val: 60, suffix: ' mm/jam' },
+                    { id: 'slide-b', label: 'Luas Target Reboisasi Sabuk Hijau', min: 0.5, max: 5.0, step: 0.1, val: 2.0, suffix: ' Hektar' }
+                ],
+                outputs: [
+                    { label: "Limpasan Air Permukaan", id: "out-1", calc: () => contextState === 'low' ? `${(valSliderA * 0.85).toFixed(1)} L/detik` : `${(valSliderA * 0.25).toFixed(1)} L/detik` },
+                    { label: "Taksiran Reduksi Erosi", id: "out-2", calc: () => contextState === 'low' ? "0% (Sangat Rawan)" : `${(valSliderB * 12.5).toFixed(1)} Ton / Tahun` }
+                ],
+                deliverables: [
+                    { icon: "navigation", title: "Peta Rencana Zonasi Vegetatif DAS", desc: "Cetak cetak-biru (blueprint) batas koordinat lereng curam kritis hulu Lambolo yang direkomendasikan untuk enklave vegetasi." },
+                    { icon: "users", title: "Pembentukan Kader Pemuda Penjaga Sungai", desc: "Komunitas kecil Karang Taruna Desa Ganda-ganda yang dilatih metode pemantauan kesehatan vegetasi hulu secara berkala." }
+                ],
+                pitch: [
+                    "<strong>Source-Control Management:</strong> Yakinkan Kabid Cipta Karya PUPR bahwa investasi pembibitan rumput vetiver jauh lebih murah daripada biaya pengerukan lumpur kanal intake setiap bulan.",
+                    "<strong>Proteksi DAS:</strong> Gunakan argumen konservasi kehutanan untuk mendorong Pemda memperketat regulasi pembuangan material erosi tambang."
+                ]
+            },
+            {
+                title: "Produksi Filter Serat Cocopeat & Sabut Kelapa",
+                subtitle: "Dani (Biologi) - Pemanfaatan Biomassa Lokal Lignoselulosa Penjebak Lumpur",
+                pj: "Dani",
+                prodi: "Biologi",
+                icon: "layers",
+                stateBtn: { low: "Serat Renggang", high: "Serat Kepadatan Tinggi" },
+                tip: "Amati kemampuan serat alami berpori makro dalam menjebak suspensi koloid lempung jingga laterit.",
+                sliders: [
+                    { id: 'slide-a', label: 'Ketebalan Blok Media Filter', min: 5, max: 30, step: 1, val: 15, suffix: ' cm' },
+                    { id: 'slide-b', label: 'Massa Sabut Kelapa Diolah', min: 10, max: 80, step: 2, val: 40, suffix: ' kg' }
+                ],
+                outputs: [
+                    { label: "Retensi Air Maksimum", id: "out-1", calc: () => `${(valSliderA * 1.8).toFixed(1)} Liter / Blok` },
+                    { label: "Volume Cocopeat Dihasilkan", id: "out-2", calc: () => `${(valSliderB * 2.2).toFixed(1)} Liter` }
+                ],
+                deliverables: [
+                    { icon: "grid", title: "Bantalan Filter Bio-Serat Siap Pakai", desc: "Produk fisik jaring sabut kelapa terkompresi sebagai media filter porus siap pasang pada sistem jebakan sedimen hulu." },
+                    { icon: "microscope", title: "Lembar Uji Laboratorium Daya Jerap Serat", desc: "Data ilmiah daya tampung serat lignoselulosa sabut kelapa terhadap partikel TSS nikel sebelum jenuh." }
+                ],
+                pitch: [
+                    "<strong>Substitusi Material Murah:</strong> Sampaikan ke PUPR bahwa pemanfaatan sabut kelapa sisa limbah perkebunan ini memotong biaya pengadaan media pasir pabrikan hingga 40%.",
+                    "<strong>Sifat Filtrasi Biologis:</strong> Kandungan lignin alami tahan pelapukan air, membuatnya sangat kokoh diaplikasikan langsung di dasar parit basah."
+                ]
+            },
+            {
+                title: "Sedimen Terpadu: Infiltration Gallery & Bio-Fencing",
+                subtitle: "Arya (Agribisnis) - Gotong Royong Infrastruktur Pengendali Hulu-Bantaran",
+                pj: "Arya",
+                prodi: "Agribisnis",
+                icon: "hammer",
+                stateBtn: { low: "Debit Aliran Normal", high: "Debit Hujan Ekstrem (Lumpur Masif)" },
+                tip: "Klik komponen zona parit lateral untuk melihat struktur batu pecah, kerikil, dan pipa berselimut kain geotextile.",
+                sliders: [
+                    { id: 'slide-a', label: 'Panjang Rencana Parit (L)', min: 2, max: 15, step: 0.5, val: 6, suffix: ' meter' },
+                    { id: 'slide-b', label: 'Lebar Rencana Parit (W)', min: 0.8, max: 2.0, step: 0.1, val: 1.0, suffix: ' meter' },
+                    { id: 'slide-c', label: 'Kedalaman Galian Parit (D)', min: 1.0, max: 2.5, step: 0.1, val: 1.5, suffix: ' meter' }
+                ],
+                outputs: [
+                    { label: "Volume Tanah Digali", id: "out-1", calc: () => `${(valSliderA * valSliderB * valSliderC).toFixed(2)} m³` },
+                    { label: "Luas Kain Geotextile Butuh", id: "out-2", calc: () => `${((valSliderB * valSliderA) + (2 * valSliderC * valSliderA)).toFixed(2)} m²` }
+                ],
+                deliverables: [
+                    { icon: "check-square", title: "Konstruksi 3 Unit Sekat Bio-Fencing", desc: "Fisik sekat ranting kayu berpasak bambu hidup zig-zag yang telah terpasang di parit limpasan kritis lereng bukit tambang." },
+                    { icon: "layout", title: "Desain Draf Teknik Infiltration Gallery", desc: "Cetak cetak (blue print) rancangan pipa perforated berselimut geotextile di bawah bantaran sungai untuk diajukan pengadaannya ke PUPR." }
+                ],
+                pitch: [
+                    "<strong>Skema Sharing Cost Logistik:</strong> Sampaikan besok bahwa Arya siap mengoordinasikan kerja bakti warga untuk tebang bambu & ranting lokal. PUPR cukup mendukung material pipa PVC & Geotextile.",
+                    "<strong>Sistem Pertahanan Berlapis:</strong> Jelaskan keunggulan kombinasi sekat ranting penahan di lereng parit dan unit infiltrasi lateral tepat di dasar sungai sebelum pintu intake."
+                ]
+            },
+            {
+                title: "Penyusunan Dosing Chart PAC Operator WTP",
+                subtitle: "Alya (Teknik Kimia) - Optimasi Dosis Kimia & Efisiensi Operasional Clarifier",
+                pj: "Alya",
+                prodi: "Teknik Kimia",
+                icon: "activity",
+                stateBtn: { low: "Kondisi Sungai Jernih", high: "Kondisi Sungai Banjir Lumpur" },
+                tip: "Geser kekeruhan air baku untuk melihat pembentukan flok koagulasi makro dan laju pengendapan lumpur.",
+                sliders: [
+                    { id: 'slide-a', label: 'Debit Operasional WTP Paket', min: 10, max: 200, step: 5, val: 144, suffix: ' m³/jam' },
+                    { id: 'slide-b', label: 'Kekeruhan Air Masuk (NTU)', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
+                ],
+                outputs: [
+                    { label: "Kebutuhan Bubuk PAC", id: "out-1", calc: () => `${((valSliderA * (valSliderB > 400 ? 55 : 30) * 24) / 1000).toFixed(1)} kg / Hari` },
+                    { label: "Laju Pembuangan Lumpur", id: "out-2", calc: () => `${(valSliderA * valSliderB * 0.0006).toFixed(1)} Liter / Jam` }
+                ],
+                deliverables: [
+                    { icon: "file-text", title: "Lembar SOP Dosing Chart Terlaminasi", desc: "Tabel matriks panduan cepat penakaran karung bubuk PAC berbasis nilai NTU harian yang ditempel di ruang pembubuhan kimia." },
+                    { icon: "trending-down", title: "Buku Kalkulasi Efisiensi Anggaran Operasional", desc: "Laporan analisis penghematan anggaran belanja bahan kimia bulanan UPTD SPAM pasca optimalisasi dosis hidrolik." }
+                ],
+                pitch: [
+                    "<strong>Hentikan Tebak-tebakan Dosis:</strong> Tawarkan tabel buatan Alya ini sebagai Standard Operating Procedure (SOP) ilmiah baru bagi operator UPTD SPAM IKK Petasia untuk menghemat karung PAC (Foto IMG_4510).",
+                    "<strong>Optimasi Clarifier Baja:</strong> Menjamin flok lumpur mengendap sempurna di silo kerucut bawah (Foto IMG_4505) tanpa merusak saringan saring halus."
+                ]
+            }
+        ];
+
+        // Change Active Proker Tab
+        function changeProker(index) {
+            activeProker = index;
+            const db = prokerDB[index];
+
+            for (let i = 0; i < 6; i++) {
+                const btn = document.getElementById(`tab-${i}`);
+                if (i === index) {
+                    btn.className = "px-2 py-2 rounded-lg text-[10px] font-bold transition-all bg-emerald-500 text-slate-950 shadow-md";
+                } else {
+                    btn.className = "px-2 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-400 hover:text-white";
                 }
-            ],
-            output: [
-                {
-                    tabLabel: "Peta Spasial GIS",
-                    title: "Rencana Output: Peta Digital GIS Erosi Hulu Lambolo",
-                    subtitle: "Dokumen spasial koordinat lubang galian tambang rawan pemicu sedimentasi WTP",
-                    tip: "Sentuh titik penanda (pin merah/kuning) pada peta untuk membaca analisis kerentanan parameter air.",
-                    hud: `OUTPUT TYPE: GIS MAP DATABASE\nSOFTWARE: ARCGIS / MY MAPS\nPJ PROKER: RAHUL & TATA\nACCESSIBILITY: CLOUD ONLINE\nCOORDINATE SYSTEM: WGS 1984`,
-                    significance: "Peta digital ini akan diserahkan langsung ke jajaran Bappeda dan Dinas PUPR sebagai bahan inventarisasi spasial daerah tangkapan air Lambolo yang kritis, guna mempermudah pembuatan kebijakan regulasi tata ruang hulu.",
-                    sliders: [
-                        { id: 'slide-a', label: 'Akurasi Grid Deteksi Drone', min: 5, max: 50, step: 1, val: 10, suffix: ' meter' },
-                        { id: 'slide-b', label: 'Jumlah Titik Koordinat Terpetakan', min: 10, max: 100, step: 5, val: 45, suffix: ' Titik' }
-                    ],
-                    bom: [
-                        { name: "Peta Cetak Lanskap Glossy (A0)", calc: () => "3 Lembar (Dinas, SPAM, Kantor Desa)" },
-                        { name: "Sertifikasi Akurasi Koordinat", calc: () => "± 2.5 meter (Sangat Presisi)" }
-                    ]
-                },
-                {
-                    tabLabel: "SOP Dosing Chart PAC",
-                    title: "Rencana Output: SOP Tabel Takaran Kimia Operator WTP",
-                    subtitle: "Lembar panduan operasional pembubuhan PAC terstandar hidrolis untuk operator lapangan",
-                    tip: "Ganti tingkat kekeruhan air masuk di bawah untuk mengamati pembentukan flok koagulasi lumpur.",
-                    hud: `OUTPUT TYPE: SOP OPERATIONAL\nMEDIA: HEAVY LAMINATED SHEET\nPJ PROKER: ALYA (TEKNIK KIMIA)\nTARGET USER: FIELD OPERATOR\nCHEMICAL TYPE: COAGULANT PAC`,
-                    significance: "Tabel SOP anti-air ini akan ditempel permanen di ruang penakaran tangki baja WTP Petasia (Foto IMG_4510). Pihak UPTD SPAM dapat menggunakannya sebagai acuan ilmiah baku untuk menghemat penggunaan bahan kimia penjernih hingga 30% per bulan.",
-                    sliders: [
-                        { id: 'slide-a', label: 'Kekeruhan Air Sungai (NTU)', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' },
-                        { id: 'slide-b', label: 'Debit Operasional WTP', min: 10, max: 200, step: 5, val: 144, suffix: ' m³/jam' }
-                    ],
-                    bom: [
-                        { name: "Kebutuhan Bubuk PAC Harian", calc: () => `${((slideBVal * (slideAVal > 400 ? 55 : 30) * 24) / 1000).toFixed(1)} kg / Hari` },
-                        { name: "Laju Pembuangan Lumpur", id: "out-2", calc: () => `${(slideBVal * slideAVal * 0.0006).toFixed(1)} Liter / Jam` }
-                    ]
-                }
-            ]
-        };
-
-        // Switch Category (CAD vs Deliverables)
-        function switchCategory(cat) {
-            currentCategory = cat;
-            currentActiveTabIdx = 0; // reset to first inner tab
-            
-            // UI Button highlights
-            const btnBlueprint = document.getElementById('btn-cat-blueprint');
-            const btnOutput = document.getElementById('btn-cat-output');
-            
-            if (cat === 'blueprint') {
-                btnBlueprint.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-sky-500 text-slate-950 shadow-md flex items-center gap-1.5";
-                btnOutput.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
-                canvasContainer.className = "blueprint-grid rounded-xl border border-slate-800 flex-1 min-h-[420px] relative overflow-hidden flex items-center justify-center";
-            } else {
-                btnOutput.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-slate-950 shadow-md flex items-center gap-1.5";
-                btnBlueprint.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
-                canvasContainer.className = "rounded-xl border border-slate-800 flex-1 min-h-[420px] relative overflow-hidden flex items-center justify-center bg-slate-950";
             }
 
-            loadActiveContent();
+            simTitle.innerHTML = `<i data-lucide="${db.icon}" class="text-emerald-400 w-5 h-5"></i> ${db.title}`;
+            simSubtitle.innerText = db.subtitle;
+            simTip.innerText = db.tip;
+
+            pjName.innerText = `${db.pj}`;
+            pjProdi.innerText = `Program Studi ${db.prodi}`;
+            pjIcon.setAttribute('data-lucide', db.icon === 'map' ? 'map-pin' : db.icon);
+
+            contextState = 'low';
+            btnState.innerText = db.stateBtn.low;
+
+            valSliderA = db.sliders[0].val;
+            valSliderB = db.sliders[1].val;
+            valSliderC = db.sliders[2] ? db.sliders[2].val : 1.5;
+
+            generateSliders(db.sliders);
+            calculateOutputs();
+            initParticles();
+
+            lucide.createIcons();
+            canvasCard.classList.add('hidden');
         }
 
-        // Load inner tabs and controls based on state
-        function loadActiveContent() {
-            const list = portfolioDB[currentCategory];
-            const currentData = list[currentActiveTabIdx];
-
-            // Render inner tabs buttons
-            innerTabs.innerHTML = '';
-            list.forEach((item, idx) => {
-                const tabBtn = document.createElement('button');
-                tabBtn.className = `px-2.5 py-1 rounded transition-all font-bold ${idx === currentActiveTabIdx ? (currentCategory === 'blueprint' ? 'bg-sky-500 text-slate-950' : 'bg-emerald-500 text-slate-950') : 'text-slate-400 hover:text-white'}`;
-                tabBtn.innerText = item.tabLabel;
-                tabBtn.onclick = () => {
-                    currentActiveTabIdx = idx;
-                    loadActiveContent();
-                };
-                innerTabs.appendChild(tabBtn);
-            });
-
-            // Update Titles
-            viewerTitle.innerText = currentData.title;
-            viewerSubtitle.innerText = currentData.subtitle;
-            simTip.innerText = currentData.tip;
-            techHud.innerText = currentData.hud;
-            significanceDesc.innerText = currentData.significance;
-
-            // Load sliders
-            slideAVal = currentData.sliders[0].val;
-            slideBVal = currentData.sliders[1].val;
-            slideCVal = currentData.sliders[2] ? currentData.sliders[2].val : 1.5;
-            generateSliders(currentData.sliders);
-
-            // Hide/Show Hud
-            if (currentCategory === 'blueprint') {
-                techHud.classList.remove('hidden');
+        function toggleContextState() {
+            const db = prokerDB[activeProker];
+            if (contextState === 'low') {
+                contextState = 'high';
+                btnState.innerText = db.stateBtn.high;
+                btnState.className = "px-2.5 py-1 rounded text-[10px] font-bold text-white transition-all bg-amber-500 text-slate-950";
             } else {
-                techHud.classList.add('hidden');
+                contextState = 'low';
+                btnState.innerText = db.stateBtn.low;
+                btnState.className = "px-2.5 py-1 rounded text-[10px] font-bold text-slate-355 hover:bg-slate-700 transition-all bg-slate-800 border border-slate-700";
             }
-
-            calculateBOM();
-            interactiveCard.classList.add('hidden');
+            initParticles();
+            calculateOutputs();
         }
 
-        // Generate dynamic sliders
         function generateSliders(slidersData) {
-            sliderGroup.innerHTML = '';
+            controlsContainer.innerHTML = '';
             slidersData.forEach((slider, i) => {
                 const labelWrap = document.createElement('div');
                 labelWrap.className = 'flex justify-between text-xs mb-1';
@@ -351,7 +448,7 @@
                 label.innerText = slider.label;
 
                 const valDisplay = document.createElement('span');
-                valDisplay.className = currentCategory === 'blueprint' ? 'text-sky-400 font-bold' : 'text-emerald-450 font-bold';
+                valDisplay.className = 'text-emerald-450 font-bold';
                 valDisplay.id = `val-display-${i}`;
                 valDisplay.innerText = slider.val + slider.suffix;
 
@@ -364,321 +461,456 @@
                 input.max = slider.max;
                 input.step = slider.step;
                 input.value = slider.val;
-                input.className = `w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer ${currentCategory === 'blueprint' ? 'accent-sky-400' : 'accent-emerald-450'}`;
+                input.className = 'w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-450';
                 
                 input.oninput = (e) => {
                     const parsedVal = parseFloat(e.target.value);
                     valDisplay.innerText = parsedVal + slider.suffix;
-                    if (i === 0) slideAVal = parsedVal;
-                    if (i === 1) slideBVal = parsedVal;
-                    if (i === 2) slideCVal = parsedVal;
-                    calculateBOM();
+                    if (i === 0) valSliderA = parsedVal;
+                    if (i === 1) valSliderB = parsedVal;
+                    if (i === 2) valSliderC = parsedVal;
+                    calculateOutputs();
+                    initParticles();
                 };
 
                 const block = document.createElement('div');
                 block.appendChild(labelWrap);
                 block.appendChild(input);
-                sliderGroup.appendChild(block);
+                controlsContainer.appendChild(block);
             });
         }
 
-        // Calculate and Render dynamic BOM (Bill of Materials) list
-        function calculateBOM() {
-            const currentData = portfolioDB[currentCategory][currentActiveTabIdx];
-            bomList.innerHTML = '';
+        function calculateOutputs() {
+            const db = prokerDB[activeProker];
+            outputsContainer.innerHTML = '';
+            
+            db.outputs.forEach(out => {
+                const card = document.createElement('div');
+                card.className = 'p-3 bg-slate-900 rounded-lg border border-slate-850 flex flex-col justify-between';
 
-            currentData.bom.forEach(item => {
+                const label = document.createElement('span');
+                label.className = 'text-[9px] text-slate-500 uppercase tracking-wider block font-bold';
+                label.innerText = out.label;
+
+                const val = document.createElement('span');
+                val.className = 'text-sm font-bold text-white mt-1';
+                val.innerText = out.calc();
+
+                card.appendChild(label);
+                card.appendChild(val);
+                outputsContainer.appendChild(card);
+            });
+
+            deliverablesContainer.innerHTML = '';
+            db.deliverables.forEach(item => {
                 const row = document.createElement('div');
-                row.className = 'flex justify-between items-center text-xs p-2.5 rounded-lg bg-slate-800/50 border border-slate-800';
+                row.className = 'p-3 rounded-lg bg-slate-950 border border-slate-850 flex gap-3 items-start';
 
-                const nameLabel = document.createElement('span');
-                nameLabel.className = 'text-slate-300 font-medium';
-                nameLabel.innerText = item.name;
+                const iconBox = document.createElement('div');
+                iconBox.className = 'w-8 h-8 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0';
+                iconBox.innerHTML = `<i data-lucide="${item.icon}" class="w-4.5 h-4.5"></i>`;
 
-                const calcVal = document.createElement('span');
-                calcVal.className = 'font-bold text-white';
-                calcVal.innerText = item.calc();
+                const textWrap = document.createElement('div');
+                
+                const title = document.createElement('h4');
+                title.className = 'text-xs font-bold text-slate-100';
+                title.innerText = item.title;
 
-                row.appendChild(nameLabel);
-                row.appendChild(calcVal);
-                bomList.appendChild(row);
+                const desc = document.createElement('p');
+                desc.className = 'text-[10px] text-slate-400 mt-0.5 leading-normal';
+                desc.innerText = item.desc;
+
+                textWrap.appendChild(title);
+                textWrap.appendChild(desc);
+                row.appendChild(iconBox);
+                row.appendChild(textWrap);
+                deliverablesContainer.appendChild(row);
             });
+
+            pitchContainer.innerHTML = '';
+            db.pitch.forEach(point => {
+                const row = document.createElement('div');
+                row.className = 'flex gap-2.5 items-start';
+                
+                const bullet = document.createElement('span');
+                bullet.className = 'w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0';
+
+                const text = document.createElement('p');
+                text.className = 'text-xs text-slate-300';
+                text.innerHTML = point;
+
+                row.appendChild(bullet);
+                row.appendChild(text);
+                pitchContainer.appendChild(row);
+            });
+            lucide.createIcons();
         }
 
-        // Resize
+        function initParticles() {
+            particles = [];
+            let count = contextState === 'high' ? 80 : 30;
+            if (activeProker === 0) count = 0; 
+            
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * simCanvas.width,
+                    y: Math.random() * simCanvas.height,
+                    speed: 1 + Math.random() * 2,
+                    size: 1 + Math.random() * 3,
+                    alpha: 0.5 + Math.random() * 0.5,
+                    color: 'rgba(194, 65, 12, 0.7)'
+                });
+            }
+        }
+
         function resizeCanvas() {
-            const container = canvas.parentElement;
-            canvas.width = container.clientWidth || 700;
-            canvas.height = container.clientHeight || 420;
+            const container = simCanvas.parentElement;
+            simCanvas.width = container.clientWidth || 600;
+            simCanvas.height = container.clientHeight || 350;
+            initParticles();
         }
 
-        // Click interaction inside Canvas to show spec tooltips
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
-            const mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+        simCanvas.addEventListener('click', (e) => {
+            const rect = simCanvas.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left) * (simCanvas.width / rect.width);
+            const mouseY = (e.clientY - rect.top) * (simCanvas.height / rect.height);
 
-            // Layer coordinates detection based on current active tab
-            if (currentCategory === 'blueprint' && currentActiveTabIdx === 0) {
-                // INFILTRATION GALLERY Blueprints Coordinates
-                const sandLine = canvas.width * 0.65;
-                const gravelLine = canvas.width * 0.48;
-                const splitLine = canvas.width * 0.32;
-                const pipeLeft = canvas.width * 0.12;
-                const pipeRight = canvas.width * 0.24;
-
-                if (mouseX > sandLine && mouseX < canvas.width * 0.8) {
-                    showInteractiveCard("Lapisan 1: Pasir Silika Kasar (T: 25cm)", "Lapisan pasir silika sebagai gerbang utama saringan lateral. Berfungsi menyaring lumpur merah mikro (*tailing* nikel) sebelum air menyentuh batuan dalam.");
-                } else if (mouseX > gravelLine && mouseX <= sandLine) {
-                    showInteractiveCard("Lapisan 2: Kerikil Sedang (T: 20cm)", "Berperan sebagai media transisi gradasi. Menahan pasir silika agar tidak hanyut terhisap masuk oleh tarikan isap pipa kolektor.");
-                } else if (mouseX > splitLine && mouseX <= gravelLine) {
-                    showInteractiveCard("Lapisan 3: Batu Pecah / Split (T: 20cm)", "Batu belah komersial di sekeliling pipa. Menyediakan ruang resapan bebas pori makro agar laju alir air jernih lancar mengalir masuk ke pipa utama.");
-                } else if (mouseX > pipeLeft && mouseX <= pipeRight) {
-                    showInteractiveCard("Pipa PVC Perforated 6\" & Geotextile", "Pipa PVC kelas AW yang dilubangi kecil-kecil dan dibungkus *Kain Geotextile Non-Woven*. Menyaring sisa debu pasir halus agar air masuk ke pipa transmisi 100% bebas endapan lumpur.");
-                } else {
-                    interactiveCard.classList.add('hidden');
-                }
-            } else if (currentCategory === 'blueprint' && currentActiveTabIdx === 1) {
-                // BIO FENCING Blueprints Coordinates
-                const fenceCenterX = canvas.width * 0.55;
-
-                if (mouseX >= fenceCenterX - 40 && mouseX <= fenceCenterX + 20) {
-                    showInteractiveCard("Sistem Anyaman Sekat Ranting & Sabut", "Pilar pasak bambu hidup zig-zag menahan anyaman ranting horizontal dan bantalan sabut kelapa. Mereduksi kecepatan erosi limpasan dari lereng bukit tambang.");
-                } else {
-                    interactiveCard.classList.add('hidden');
-                }
-            } else if (currentCategory === 'output' && currentActiveTabIdx === 0) {
-                // PETA GIS COORDINATES
+            if (activeProker === 0) {
                 const nodes = [
-                    { x: canvas.width * 0.2, y: canvas.height * 0.3, title: "Titik Longsor Bukit Hulu (Lambolo)", desc: "Koordinat galian tebing curam pemicu masuknya noda lumpur nikel merah laterit pekat ke aliran dasar." },
-                    { x: canvas.width * 0.5, y: canvas.height * 0.45, title: "Titik Kritis Pintu Air Intake SPAM", desc: "Tempat penangkapan air permukaan utama, terancam lumpuh total jika sedimentasi tidak ditangani." }
+                    { x: simCanvas.width * 0.2, y: simCanvas.height * 0.3, title: "Bukit Tambang Hulu Lambolo", desc: "Titik utama pembukaan lahan dan erosi laterit nikel hulu. Turbiditas mencapai >800 NTU saat hujan lebat." },
+                    { x: simCanvas.width * 0.5, y: simCanvas.height * 0.45, title: "Intake Sungai Lambolo", desc: "Pintu penangkapan air baku utama SPAM IKK Petasia. Mengalami sendimentasi parah hingga melumpuhkan pompa." },
+                    { x: simCanvas.width * 0.8, y: simCanvas.height * 0.7, title: "Instalasi WTP Petasia", desc: "Fasilitas pengolahan air bersih (WTP Paket Baja). Beban bahan kimia membengkak akibat air baku berlumpur hulu." }
                 ];
 
                 let clickedNode = null;
                 nodes.forEach(node => {
                     const dist = Math.hypot(mouseX - node.x, mouseY - node.y);
-                    if (dist < 25) clickedNode = node;
+                    if (dist < 20) clickedNode = node;
                 });
 
                 if (clickedNode) {
-                    showInteractiveCard(clickedNode.title, clickedNode.desc);
+                    canvasCard.classList.remove('hidden');
+                    canvasCardTitle.innerText = clickedNode.title;
+                    canvasCardDesc.innerText = clickedNode.desc;
                 } else {
-                    interactiveCard.classList.add('hidden');
+                    canvasCard.classList.add('hidden');
                 }
-            } else {
-                interactiveCard.classList.add('hidden');
+            } else if (activeProker === 4) {
+                const sandLine = simCanvas.width * 0.65;
+                const gravelLine = simCanvas.width * 0.48;
+                const splitLine = simCanvas.width * 0.32;
+
+                canvasCard.classList.remove('hidden');
+                if (mouseX > sandLine) {
+                    canvasCardTitle.innerText = "Saringan Ranting & Sabut (Hulu)";
+                    canvasCardDesc.innerText = "Struktur Bio-Fencing dipasang melintang memotong lereng parit terbuka untuk memotong kecepatan laju aliran lumpur dari atas bukit.";
+                } else if (mouseX > gravelLine && mouseX <= sandLine) {
+                    canvasCardTitle.innerText = "Lapisan 1: Pasir Silika Kasar";
+                    canvasCardDesc.innerText = "Penyaring fisik terluar di bantaran sungai. Efektif menangkap partikel lempung nikel kasar ukuran mikro sebelum meresap lebih dalam.";
+                } else if (mouseX > splitLine && mouseX <= gravelLine) {
+                    canvasCardTitle.innerText = "Lapisan 2: Kerikil Sedang (Pebbles)";
+                    canvasCardDesc.innerText = "Media penahan pasir silika agar tidak ikut terlarut atau tergelincir masuk ke dalam lubang pipa perforated di bawahnya.";
+                } else {
+                    canvasCardTitle.innerText = "Lapisan 3: Batu Split & Pipa Geotextile";
+                    canvasCardDesc.innerText = "Mengelilingi inti pipa pengumpul secara longgar agar air jernih yang tersaring leluasa mengalir masuk ke saluran isap menuju WTP.";
+                }
             }
         });
 
-        function showInteractiveCard(title, desc) {
-            interactiveCard.classList.remove('hidden');
-            cardTitle.innerText = title;
-            cardDesc.innerText = desc;
-            if (currentCategory === 'blueprint') {
-                cardTitle.className = "text-xs font-bold text-sky-400 uppercase tracking-wider";
-                interactiveCard.className = "absolute bottom-4 left-4 right-4 bg-slate-950/95 border border-sky-900/50 p-3 rounded-lg shadow-xl backdrop-blur";
-            } else {
-                cardTitle.className = "text-xs font-bold text-emerald-400 uppercase tracking-wider";
-                interactiveCard.className = "absolute bottom-4 left-4 right-4 bg-slate-950/95 border border-emerald-900/50 p-3 rounded-lg shadow-xl backdrop-blur";
-            }
-        }
+        function animate() {
+            ctx.clearRect(0, 0, simCanvas.width, simCanvas.height);
 
-        // Draw Blueprint (Infiltration Gallery & Bio-fencing)
-        function drawBlueprints() {
-            if (currentActiveTabIdx === 0) {
-                // 1. INFILTRATION GALLERY BLUEPRINT
-                // Draw ground layers
-                ctx.strokeStyle = '#38bdf8';
-                ctx.lineWidth = 1;
-
-                // Ground borders
-                ctx.strokeRect(0, canvas.height * 0.1, canvas.width * 0.8, canvas.height * 0.8);
-                
-                // Sand layer
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.1)';
-                ctx.fillRect(canvas.width * 0.48, canvas.height * 0.1, canvas.width * 0.32, canvas.height * 0.8);
-                ctx.strokeRect(canvas.width * 0.48, canvas.height * 0.1, canvas.width * 0.32, canvas.height * 0.8);
-
-                // Gravel layer
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
-                ctx.fillRect(canvas.width * 0.32, canvas.height * 0.1, canvas.width * 0.16, canvas.height * 0.8);
-                ctx.strokeRect(canvas.width * 0.32, canvas.height * 0.1, canvas.width * 0.16, canvas.height * 0.8);
-
-                // Split layer
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-                ctx.fillRect(canvas.width * 0.12, canvas.height * 0.1, canvas.width * 0.20, canvas.height * 0.8);
-                ctx.strokeRect(canvas.width * 0.12, canvas.height * 0.1, canvas.width * 0.20, canvas.height * 0.8);
-
-                // Draw Perforated Pipe
-                const pipeX = canvas.width * 0.18;
-                const pipeW = canvas.width * 0.08;
-                ctx.fillStyle = '#0f172a';
-                ctx.fillRect(pipeX, canvas.height * 0.15, pipeW, canvas.height * 0.7);
-                ctx.strokeRect(pipeX, canvas.height * 0.15, pipeW, canvas.height * 0.7);
-
-                // Pipe perforated dashed wrap (Geotextile)
-                ctx.strokeStyle = '#0284c7';
-                ctx.lineWidth = 1.5;
-                ctx.setLineDash([4, 4]);
-                ctx.strokeRect(pipeX - 5, canvas.height * 0.15, pipeW + 10, canvas.height * 0.7);
-                ctx.setLineDash([]);
-
-                // Drawing Labels/Measures inside CAD
-                ctx.fillStyle = '#38bdf8';
-                ctx.font = '9px "JetBrains Mono"';
-                ctx.fillText("LAPISAN 1: PASIR SILIKA", canvas.width * 0.50, canvas.height * 0.5);
-                ctx.fillText("LAPISAN 2: KERIKIL", canvas.width * 0.33, canvas.height * 0.5);
-                ctx.fillText("LAPISAN 3: SPLIT", canvas.width * 0.14, canvas.height * 0.5);
-                ctx.fillText("PERFORATED PIPE 6\"", pipeX - 25, canvas.height * 0.13);
-
-                // Draw river water entering laterally
-                ctx.strokeStyle = '#0284c7';
+            if (activeProker === 0) {
+                // RAHUL: MAPS & SPEC SCAN (PROKER 1)
+                ctx.strokeStyle = '#1e293b';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.moveTo(canvas.width * 0.85, canvas.height * 0.4);
-                ctx.lineTo(canvas.width * 0.65, canvas.height * 0.4);
-                ctx.lineTo(canvas.width * 0.48, canvas.height * 0.42);
+                ctx.moveTo(simCanvas.width * 0.2, simCanvas.height * 0.3);
+                ctx.quadraticCurveTo(simCanvas.width * 0.35, simCanvas.height * 0.5, simCanvas.width * 0.5, simCanvas.height * 0.45);
+                ctx.quadraticCurveTo(simCanvas.width * 0.65, simCanvas.height * 0.4, simCanvas.width * 0.8, simCanvas.height * 0.7);
                 ctx.stroke();
 
-                ctx.beginPath();
-                ctx.moveTo(canvas.width * 0.65, canvas.height * 0.4);
-                ctx.lineTo(canvas.width * 0.60, canvas.height * 0.38);
-                ctx.lineTo(canvas.width * 0.60, canvas.height * 0.42);
-                ctx.closePath();
-                ctx.fillStyle = '#0284c7';
-                ctx.fill();
-
-            } else {
-                // 2. BIO-FENCING BLUEPRINT
-                ctx.strokeStyle = '#38bdf8';
-                ctx.lineWidth = 1;
-
-                // Draw Slope Contour
-                ctx.beginPath();
-                ctx.moveTo(0, canvas.height * 0.3);
-                ctx.lineTo(canvas.width * 0.55, canvas.height * 0.65);
-                ctx.lineTo(canvas.width, canvas.height * 0.85);
-                ctx.stroke();
-
-                // Draw Bamboo Stakes
-                const fX = canvas.width * 0.55;
-                ctx.fillStyle = '#0d1527';
-                ctx.fillRect(fX - 8, canvas.height * 0.32, 6, canvas.height * 0.4);
-                ctx.strokeRect(fX - 8, canvas.height * 0.32, 6, canvas.height * 0.4);
-
-                ctx.fillRect(fX + 4, canvas.height * 0.35, 5, canvas.height * 0.38);
-                ctx.strokeRect(fX + 4, canvas.height * 0.35, 5, canvas.height * 0.38);
-
-                // Draw horizontal twigs crossing
-                for (let h = canvas.height * 0.38; h < canvas.height * 0.65; h += 12) {
-                    ctx.strokeRect(fX - 18, h, 32, 4);
-                }
-
-                // Draw coir sheet block
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
-                ctx.fillRect(fX - 25, canvas.height * 0.4, 7, canvas.height * 0.22);
-                ctx.strokeRect(fX - 25, canvas.height * 0.4, 7, canvas.height * 0.22);
-
-                ctx.fillStyle = '#38bdf8';
-                ctx.font = '9px "JetBrains Mono"';
-                ctx.fillText("ANYAMAN RANTING KAYU", fX - 50, canvas.height * 0.3);
-                ctx.fillText("PASAK BAMBU", fX + 15, canvas.height * 0.45);
-                ctx.fillText("SABUT KELAPA", fX - 95, canvas.height * 0.55);
-            }
-        }
-
-        // Draw Output Mockup (Peta GIS & SOP Chart)
-        function drawOutputs() {
-            if (currentActiveTabIdx === 0) {
-                // 1. MOCKUP PETA GIS INTERAKTIF
-                // Draw map background silhouette
-                ctx.fillStyle = '#0f172a';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.strokeStyle = '#10b981';
-                ctx.lineWidth = 1.5;
-                ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
-
-                // Draw river lines
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(canvas.width * 0.1, canvas.height * 0.2);
-                ctx.bezierCurveTo(canvas.width * 0.3, canvas.height * 0.3, canvas.width * 0.4, canvas.height * 0.5, canvas.width * 0.8, canvas.height * 0.7);
-                ctx.stroke();
-
-                // Draw nodes
                 const drawNode = (x, y, label, color) => {
                     ctx.save();
                     ctx.beginPath();
-                    ctx.arc(x, y, 8, 0, Math.PI * 2);
+                    ctx.arc(x, y, 12, 0, Math.PI * 2);
                     ctx.fillStyle = color;
                     ctx.fill();
                     ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, 12 + Math.sin(Date.now() * 0.005) * 8, 0, Math.PI * 2);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.4;
                     ctx.stroke();
                     ctx.restore();
 
                     ctx.fillStyle = '#94a3b8';
                     ctx.font = 'bold 9px sans-serif';
-                    ctx.fillText(label, x - 20, y - 15);
+                    ctx.fillText(label, x - 30, y - 20);
                 };
 
-                drawNode(canvas.width * 0.2, canvas.height * 0.3, "TITIK EROSI HULU", "#ef4444");
-                drawNode(canvas.width * 0.5, canvas.height * 0.45, "INTAKE SPAM", "#f59e0b");
+                drawNode(simCanvas.width * 0.2, simCanvas.height * 0.3, "1. BUKIT TAMBANG (HULU)", "#ef4444");
+                drawNode(simCanvas.width * 0.5, simCanvas.height * 0.45, "2. INTAKE LAMBOLO", "#f59e0b");
+                drawNode(simCanvas.width * 0.8, simCanvas.height * 0.7, "3. INSTALASI WTP", "#10b981");
 
-            } else {
-                // 2. MOCKUP TABEL SOP DOSING CHART
-                ctx.fillStyle = '#1e293b';
-                ctx.fillRect(40, 40, canvas.width - 80, canvas.height - 80);
-                ctx.strokeStyle = '#10b981';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
-
-                // Draw Title inside sheet
-                ctx.fillStyle = '#f8fafc';
-                ctx.font = 'bold 12px sans-serif';
-                ctx.fillText("SOP DOSING CHART PAC - SPAM PETASIA", 60, 70);
-
-                // Table lines inside mockup
+                ctx.save();
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+                ctx.fillRect(15, simCanvas.height - 95, 160, 80);
                 ctx.strokeStyle = '#334155';
-                ctx.lineWidth = 1;
-                for (let y = 100; y < canvas.height - 80; y += 30) {
+                ctx.strokeRect(15, simCanvas.height - 95, 160, 80);
+
+                ctx.strokeStyle = '#34d399';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(25, simCanvas.height - 35);
+                for (let x = 0; x < 140; x++) {
+                    const wave = Math.sin(x * 0.05 + Date.now() * 0.01) * 20;
+                    ctx.lineTo(25 + x, simCanvas.height - 55 + wave * (valSliderA / 100));
+                }
+                ctx.stroke();
+                ctx.fillStyle = '#64748b';
+                ctx.font = '8px monospace';
+                ctx.fillText("SPEKTRO SCAN: AIR BAKU", 25, simCanvas.height - 80);
+                ctx.restore();
+
+            } else if (activeProker === 1) {
+                const filterW = 120;
+                const filterH = 220;
+                const filterX = simCanvas.width / 2 - filterW / 2;
+                const filterY = simCanvas.height / 2 - filterH / 2;
+
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(filterX, filterY, filterW, filterH);
+
+                const drawLayer = (offsetY, h, color, name) => {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(filterX + 3, filterY + offsetY, filterW - 6, h);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 8px sans-serif';
+                    ctx.fillText(name, filterX + 10, filterY + offsetY + h / 2 + 3);
+                };
+
+                const layer1H = valSliderA * 1.5; 
+                const layer2H = valSliderB * 1.5; 
+                drawLayer(10, layer1H, '#c2b280', "PASIR SILIKA");
+                drawLayer(10 + layer1H, layer2H, '#1e293b', "ARANG AKTIF");
+                drawLayer(10 + layer1H + layer2H, 50, '#71717a', "KERIKIL ALAMI");
+
+                particles.forEach(p => {
+                    p.x += (Math.random() * 1 - 0.5);
+                    p.y += p.speed;
+
+                    if (p.x < filterX || p.x > filterX + filterW) {
+                        p.x = filterX + Math.random() * filterW;
+                    }
+                    if (p.y > filterY + filterH) {
+                        p.y = filterY;
+                        p.color = 'rgba(194, 65, 12, 0.7)';
+                    }
+
+                    if (p.y > filterY + 10 + layer1H) {
+                        p.color = 'rgba(180, 150, 100, 0.5)';
+                    }
+                    if (p.y > filterY + 10 + layer1H + layer2H) {
+                        p.color = 'rgba(56, 189, 248, 0.8)';
+                    }
+
                     ctx.beginPath();
-                    ctx.moveTo(60, y);
-                    ctx.lineTo(canvas.width - 80, y);
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+
+            } else if (activeProker === 2) {
+                ctx.fillStyle = '#1e293b';
+                ctx.beginPath();
+                ctx.moveTo(0, simCanvas.height * 0.3);
+                ctx.lineTo(simCanvas.width * 0.6, simCanvas.height * 0.7);
+                ctx.lineTo(simCanvas.width, simCanvas.height * 0.75);
+                ctx.lineTo(simCanvas.width, simCanvas.height);
+                ctx.lineTo(0, simCanvas.height);
+                ctx.fill();
+
+                if (contextState === 'high') {
+                    ctx.fillStyle = '#059669';
+                    for (let x = 20; x < simCanvas.width * 0.6; x += 35) {
+                        const y = simCanvas.height * 0.3 + (x * 0.67);
+                        ctx.beginPath();
+                        ctx.arc(x, y, 6, 0, Math.PI, true);
+                        ctx.fill();
+                        
+                        ctx.strokeStyle = '#047857';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x - 5, y + 45);
+                        ctx.lineTo(x + 10, y + 80);
+                        ctx.stroke();
+                    }
+                }
+
+                particles.forEach(p => {
+                    p.x += p.speed;
+                    p.y += p.speed * 1.5;
+
+                    if (p.y > simCanvas.height) {
+                        p.x = Math.random() * simCanvas.width;
+                        p.y = 0;
+                    }
+
+                    const slopeY = simCanvas.height * 0.3 + (p.x * 0.67);
+                    if (p.x < simCanvas.width * 0.6 && p.y > slopeY) {
+                        p.color = contextState === 'high' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(194, 65, 12, 0.8)';
+                        p.y = slopeY;
+                        p.x += 2;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+
+            } else if (activeProker === 3) {
+                ctx.strokeStyle = '#ca8a04';
+                ctx.lineWidth = valSliderA / 8;
+                for (let x = 50; x < simCanvas.width; x += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x + Math.sin(x) * 20, simCanvas.height);
+                    ctx.stroke();
+                }
+                for (let y = 30; y < simCanvas.height; y += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(simCanvas.width, y + Math.cos(y) * 20);
                     ctx.stroke();
                 }
 
-                ctx.fillStyle = '#a8a29e';
-                ctx.font = '10px sans-serif';
-                ctx.fillText("NTU Air Masuk (Kekeruhan) ──► Kebutuhan PAC harian (kg)", 60, 95);
-                ctx.fillText("Normal (< 50 NTU) : 34.5 kg / Hari", 60, 120);
-                ctx.fillText("Sedang (50 - 150 NTU) : 69.1 kg / Hari", 60, 150);
-                ctx.fillText("Hujan (150 - 400 NTU) : 120.9 kg / Hari", 60, 180);
-                ctx.fillText("Krisis (> 400 NTU) : 190.0 kg / Hari", 60, 210);
+                particles.forEach(p => {
+                    p.x += p.speed;
+                    if (p.x > simCanvas.width) {
+                        p.x = 0;
+                        p.stopped = false;
+                    }
+
+                    if (!p.stopped && p.x > simCanvas.width * 0.4 && p.x < simCanvas.width * 0.7) {
+                        if (Math.random() < (valSliderA / 100)) {
+                            p.stopped = true;
+                        }
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.stopped ? p.size * 1.5 : p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.stopped ? 'rgba(180, 83, 9, 0.9)' : 'rgba(217, 119, 6, 0.5)';
+                    ctx.fill();
+                });
+
+            } else if (activeProker === 4) {
+                ctx.fillStyle = '#1e293b';
+                ctx.fillRect(0, simCanvas.height * 0.8, simCanvas.width, simCanvas.height * 0.2);
+
+                ctx.fillStyle = contextState === 'high' ? 'rgba(139, 69, 19, 0.8)' : 'rgba(30, 144, 255, 0.4)';
+                ctx.fillRect(simCanvas.width * 0.65, simCanvas.height * 0.2, simCanvas.width * 0.35, simCanvas.height * 0.6);
+
+                const sandLine = simCanvas.width * 0.65;
+                const gravelLine = simCanvas.width * 0.48;
+                const splitLine = simCanvas.width * 0.32;
+
+                ctx.fillStyle = '#c2b280'; 
+                ctx.fillRect(gravelLine, simCanvas.height * 0.2, sandLine - gravelLine, simCanvas.height * 0.6);
+
+                ctx.fillStyle = '#a1a1aa'; 
+                ctx.fillRect(splitLine, simCanvas.height * 0.2, gravelLine - splitLine, simCanvas.height * 0.6);
+
+                ctx.fillStyle = '#52525b'; 
+                ctx.fillRect(simCanvas.width * 0.12, simCanvas.height * 0.2, splitLine - (simCanvas.width * 0.12), simCanvas.height * 0.6);
+
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillRect(simCanvas.width * 0.16, simCanvas.height * 0.25, 30, simCanvas.height * 0.5);
+
+                particles.forEach(p => {
+                    p.x -= p.speed * 0.8;
+                    if (p.x < simCanvas.width * 0.12) {
+                        p.x = simCanvas.width * 0.85;
+                        p.color = contextState === 'high' ? 'rgba(180, 83, 9, 0.9)' : 'rgba(30, 144, 255, 0.6)';
+                    }
+
+                    if (p.x < sandLine && p.x >= gravelLine) {
+                        p.color = 'rgba(180, 140, 80, 0.5)';
+                    } else if (p.x < gravelLine && p.x >= splitLine) {
+                        p.color = 'rgba(186, 230, 253, 0.5)';
+                    } else if (p.x < splitLine) {
+                        p.color = 'rgba(14, 165, 233, 1)'; 
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+
+            } else if (activeProker === 5) {
+                const mx = simCanvas.width / 2;
+                const my = simCanvas.height / 2;
+
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.6)';
+                ctx.fillRect(30, 30, simCanvas.width - 60, simCanvas.height - 60);
+                ctx.strokeStyle = '#334155';
+                ctx.strokeRect(30, 30, simCanvas.width - 60, simCanvas.height - 60);
+
+                const angle = Date.now() * 0.003;
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(mx, 40);
+                ctx.lineTo(mx, simCanvas.height - 40);
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(mx, my);
+                ctx.rotate(angle);
+                ctx.beginPath();
+                ctx.moveTo(-60, 0);
+                ctx.lineTo(60, 0);
+                ctx.stroke();
+                ctx.restore();
+
+                particles.forEach(p => {
+                    p.x += Math.sin(Date.now() * 0.01 + p.y) * 2;
+                    p.y += p.speed * (valSliderB / 400); 
+
+                    if (p.y > simCanvas.height - 50) {
+                        p.y = 50;
+                        p.x = Math.random() * simCanvas.width;
+                    }
+
+                    const flocSize = Math.max(2, p.size * (valSliderB / 300));
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, flocSize, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(217, 119, 6, 0.7)';
+                    ctx.fill();
+                });
             }
         }
 
-        // Master Animation/Render Loop
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            if (currentCategory === 'blueprint') {
-                drawBlueprints();
-            } else {
-                drawOutputs();
-            }
-
-            requestAnimationFrame(animate);
+        function drawScene() {
+            animate();
+            animationFrameId = requestAnimationFrame(drawScene);
         }
 
-        // Add listeners to input sliders
         window.addEventListener('resize', resizeCanvas);
 
-        // Initial Boot
-        resizeCanvas();
-        switchCategory('blueprint');
-        animate();
+        window.onload = function() {
+            changeProker(0); 
+            resizeCanvas();  
+            drawScene();     
+        };
 
     </script>
 </body>
