@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HYDRO-RESCUE MASTERPLAN GANDA-GANDA - KKN 2026</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -34,7 +32,6 @@
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-slate-950">
 
-    <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-4 md:px-8 py-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
@@ -58,14 +55,11 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Left Side: Simulation Interactive Window -->
         <div class="lg:col-span-7 flex flex-col gap-4">
             <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 md:p-6 flex flex-col flex-1 shadow-2xl glowing-panel relative">
                 
-                <!-- Stepper Tabs -->
                 <div class="mb-4">
                     <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Matriks Program Kerja Terintegrasi</span>
                     <div class="grid grid-cols-3 md:grid-cols-6 gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-850">
@@ -96,44 +90,34 @@
                     </div>
                 </div>
 
-                <!-- Simulation Header -->
                 <div class="flex justify-between items-center mb-3">
                     <div>
                         <h2 id="sim-title" class="text-sm font-extrabold text-white flex items-center gap-1.5">
-                            <!-- Populated Dynamically -->
-                        </h2>
+                            </h2>
                         <p id="sim-subtitle" class="text-[11px] text-slate-400">
-                            <!-- Populated Dynamically -->
-                        </p>
+                            </p>
                     </div>
                     <button id="btn-state" onclick="toggleContextState()" class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700 text-[10px] font-bold text-slate-200 transition-all flex items-center gap-1">
-                        <!-- Populated Dynamically -->
-                    </button>
+                        </button>
                 </div>
 
-                <!-- Actual Canvas -->
                 <div class="relative rounded-xl border border-slate-800 bg-slate-950 flex-1 min-h-[350px] overflow-hidden flex items-center justify-center">
                     <canvas id="masterCanvas" class="w-full h-full block cursor-pointer"></canvas>
 
-                    <!-- Interactive Tooltip inside Canvas -->
                     <div id="canvas-info-card" class="absolute bottom-3 left-3 right-3 bg-slate-900/95 border border-slate-800 p-2.5 rounded-lg shadow-xl backdrop-blur-md hidden transition-all">
                         <h4 id="canvas-card-title" class="text-[11px] font-extrabold text-emerald-400 uppercase tracking-wider"></h4>
                         <p id="canvas-card-desc" class="text-[10px] text-slate-300 mt-0.5 leading-relaxed"></p>
                     </div>
                 </div>
 
-                <!-- Sim Tip Indicator -->
                 <p id="sim-tip" class="text-[10px] text-slate-500 mt-2 text-center italic">
-                    <!-- Populated Dynamically -->
-                </p>
+                    </p>
 
             </div>
         </div>
 
-        <!-- Right Side: Calculators, Outputs, & Deliverables -->
         <div class="lg:col-span-5 flex flex-col gap-6">
             
-            <!-- PJ Card -->
             <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 shadow-xl flex items-center gap-3">
                 <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
                     <i id="pj-icon" data-lucide="user" class="w-6 h-6"></i>
@@ -145,7 +129,6 @@
                 </div>
             </div>
 
-            <!-- Parametric Calculator -->
             <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl flex flex-col gap-4">
                 <div>
                     <h2 class="text-sm font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wide">
@@ -155,47 +138,39 @@
                 </div>
 
                 <div id="controls-container" class="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-850">
-                    <!-- Sliders injected here -->
-                </div>
+                    </div>
 
                 <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 flex flex-col gap-2">
                     <span class="text-[10px] text-slate-500 font-bold uppercase">Estimasi Output Lapangan / Teknis</span>
                     <div id="outputs-container" class="grid grid-cols-2 gap-2 text-xs">
-                        <!-- Outputs injected here -->
-                    </div>
+                        </div>
                 </div>
             </div>
 
-            <!-- Deliverables Card -->
             <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl">
                 <h3 class="text-xs font-bold text-white mb-3 uppercase tracking-wider flex items-center gap-1.5">
                     <i data-lucide="award" class="text-emerald-400 w-4.5 h-4.5"></i> Rencana Hasil Nyata (Deliverables)
                 </h3>
                 <div id="deliverables-container" class="space-y-3">
-                    <!-- Deliverables injected here -->
-                </div>
+                    </div>
             </div>
 
-            <!-- Pitching Card -->
             <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 md:p-6 shadow-xl">
                 <h3 class="text-xs font-bold text-white mb-2.5 uppercase tracking-wider flex items-center gap-1.5">
                     <i data-lucide="file-text" class="text-amber-400 w-4 h-4"></i> Strategi Pitching Proker ke PUPR
                 </h3>
                 <div id="pitch-container" class="space-y-2 text-xs text-slate-300 leading-relaxed">
-                    <!-- Pitch items injected here -->
-                </div>
+                    </div>
             </div>
 
         </div>
 
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 bg-slate-950 px-6 py-4 mt-auto text-center text-xs text-slate-500">
         <p>© 2026 Hydro-Rescue Masterplan Ganda-ganda - Sinergi Akademik Terpadu.</p>
     </footer>
 
-    <!-- Interactive Simulator Application Logic -->
     <script>
         // Init Lucide
         lucide.createIcons();
@@ -233,28 +208,28 @@
         // Hydro-Rescue Database Matrix
         const prokerDB = [
             {
-                title: "Pemetaan Spasial Kualitas Air & Spektrofotometri",
-                subtitle: "Rahul (Teknik Fisika) - Instrumentasi Pendeteksian Polutan & Turbiditas Hulu",
+                title: "CHROMA-GUARD: Portable Water Quality Analyzer Berbasis Elektro-Optik",
+                subtitle: "Rahul (Teknik Fisika) - Instrumentasi Analisis Kimia Kolorimetri & Kekeruhan On-Site",
                 pj: "Rahul",
                 prodi: "Teknik Fisika",
                 icon: "map",
-                stateBtn: { low: "Kondisi Sungai Normal", high: "Kondisi Erosi Kritis" },
-                tip: "Klik node pada visual peta hulu untuk menganalisis data kualitas fisis air baku Lambolo.",
+                stateBtn: { low: "Mode Scan Normal", high: "Deteksi Kritis Laterit" },
+                tip: "Klik node pada visual peta hulu untuk mensimulasikan pembacaan sensor inframerah/nephelometry.",
                 sliders: [
-                    { id: 'slide-a', label: 'Radius Pemetaan Grid Drone', min: 10, max: 100, step: 5, val: 50, suffix: ' m' },
-                    { id: 'slide-b', label: 'Acuan Indeks Kekeruhan Hulu', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
+                    { id: 'slide-a', label: 'Konsentrasi Logam Terlarut', min: 0.1, max: 5.0, step: 0.1, val: 1.2, suffix: ' ppm' },
+                    { id: 'slide-b', label: 'Tingkat Kekeruhan Air Baku (Nephelometer)', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
                 ],
                 outputs: [
-                    { label: "Luas Pemetaan Efektif", id: "out-1", calc: () => `${(Math.PI * Math.pow(valSliderA, 2) / 10000).toFixed(2)} Ha` },
-                    { label: "Deviasi Pengukuran Alat", id: "out-2", calc: () => `${(valSliderB * 0.05).toFixed(1)} NTU (±5%)` }
+                    { label: "Deviasi Detektor Optik", id: "out-1", calc: () => `${(valSliderB * 0.05).toFixed(1)} NTU (±5%)` },
+                    { label: "Status Kelayakan Sanitasi", id: "out-2", calc: () => valSliderA > 1.5 || valSliderB > 200 ? "ZONA MERAH (Bahaya)" : "ZONA HIJAU (Aman)" }
                 ],
                 deliverables: [
-                    { icon: "map-pin", title: "Peta Koordinat Digital Erosi Tambang", desc: "Tautan peta digital GIS via Google My Maps / ArcGIS Online yang merinci posisi persis lubang bukaan tambang pemicu sedimentasi." },
-                    { icon: "file-spreadsheet", title: "Buku Database Fisika Air Baku", desc: "Laporan berkala tren parameter TDS, pH, dan kandungan logam terlarut untuk acuan perencanaan pipa Cipta Karya." }
+                    { icon: "cpu", title: "Prototipe Alat Ukur CHROMA-GUARD", desc: "Perangkat keras embedded system berbasis ESP32, IC Op-Amp TL082, LED Hijau 540nm, dan fotodioda untuk reagen DPC." },
+                    { icon: "map-pin", title: "Draf Peta Spasial Geospatial GIS", desc: "Peta pemetaan 20 titik sampling sumur dan sungai penyuplai untuk pemetaan wilayah aman sanitasi domisili warga." }
                 ],
                 pitch: [
-                    "<strong>Justifikasi Ilmiah:</strong> Tunjukkan data grafik lonjakan NTU hasil spektrofotometri Rahul ke PUPR untuk membuktikan bahwa WTP bawah tidak akan sanggup bertahan tanpa pengamanan di hulu sungai.",
-                    "<strong>Integrasi Tata Ruang:</strong> Sinkronisasikan koordinat peta GIS KKN dengan titik kerentanan pipa transmisi milik Cipta Karya PUPR."
+                    "<strong>Otak Data Masterplan:</strong> Jelaskan ke PUPR bahwa data turbiditas (NTU) riil hasil nephelometry CHROMA-GUARD digunakan langsung sebagai basis pemicu input otomatis bagi Dosing Chart PAC Alya (Proker 6).",
+                    "<strong>Advokasi Valid:</strong> Menghadirkan database kualitas air yang valid berbasis spektrofotometri dasar untuk pengajuan program jangka panjang PAMSIMAS."
                 ]
             },
             {
@@ -283,28 +258,28 @@
                 ]
             },
             {
-                title: "Sosialisasi Konservasi Air & Sabuk Hijau DAS",
-                subtitle: "Tata (Kehutanan) - Pengikatan Struktur Tanah Lereng & Proteksi Hutan Hulu",
+                title: "Sosialisasi Konservasi Air & Rekayasa Terasering",
+                subtitle: "Tata (Kehutanan) - Pengikatan Struktur Lereng Kritis & Pemotongan Panjang Lereng Parit",
                 pj: "Talitha (Tata)",
                 prodi: "Kehutanan",
                 icon: "trees",
-                stateBtn: { low: "Kondisi Lereng Gundul Tambang", high: "Lereng Ditangkar Rumput Vetiver" },
-                tip: "Amati perbedaan limpasan lumpur aktif saat bukit dipasangi penangkar vegetasi akar wangi (vetiver).",
+                stateBtn: { low: "Sosialisasi Komunitas Hulu", high: "Plan B: Aktifkan Terasering" },
+                tip: "Ganti mode visual ke Plan B untuk melihat penurunan run-off erosi secara hidrolika pasca-sengkedan dibangun.",
                 sliders: [
                     { id: 'slide-a', label: 'Intensitas Curah Hujan Rencana', min: 10, max: 120, step: 5, val: 60, suffix: ' mm/jam' },
-                    { id: 'slide-b', label: 'Luas Target Reboisasi Sabuk Hijau', min: 0.5, max: 5.0, step: 0.1, val: 2.0, suffix: ' Hektar' }
+                    { id: 'slide-b', label: 'Jumlah Trap Sengkedan Desain', min: 2, max: 8, step: 1, val: 4, suffix: ' Trap' }
                 ],
                 outputs: [
-                    { label: "Limpasan Air Permukaan", id: "out-1", calc: () => contextState === 'low' ? `${(valSliderA * 0.85).toFixed(1)} L/detik` : `${(valSliderA * 0.25).toFixed(1)} L/detik` },
-                    { label: "Taksiran Reduksi Erosi", id: "out-2", calc: () => contextState === 'low' ? "0% (Sangat Rawan)" : `${(valSliderB * 12.5).toFixed(1)} Ton / Tahun` }
+                    { label: "Kecepatan Aliran Permukaan", id: "out-1", calc: () => contextState === 'low' ? `${(valSliderA * 0.85).toFixed(1)} m/s` : `${(valSliderA * 0.25 / valSliderB).toFixed(2)} m/s` },
+                    { label: "Reduksi Erosi Bukit", id: "out-2", calc: () => contextState === 'low' ? "0% (Sangat Rawan)" : `${(valSliderB * 18.5).toFixed(1)}% Reduksi Lumpur` }
                 ],
                 deliverables: [
-                    { icon: "navigation", title: "Peta Rencana Zonasi Vegetatif DAS", desc: "Cetak cetak-biru (blueprint) batas koordinat lereng curam kritis hulu Lambolo yang direkomendasikan untuk enklave vegetasi." },
-                    { icon: "users", title: "Pembentukan Kader Pemuda Penjaga Sungai", desc: "Komunitas kecil Karang Taruna Desa Ganda-ganda yang dilatih metode pemantauan kesehatan vegetasi hulu secara berkala." }
+                    { icon: "file-text", title: "Buku Saku Regulasi Konservasi Air", desc: "Panduan pembatasan bukaan lahan zona tangkapan air hulu Lambolo dan draf kesepakatan tata guna lahan desa." },
+                    { icon: "layout", title: "Draf Desain Teknik Terasering Lereng", desc: "Cetak cetak-biru (blueprint) perhitungan kemiringan lereng bertrap untuk penahan laju limpasan air tanah terbuka." }
                 ],
                 pitch: [
-                    "<strong>Source-Control Management:</strong> Yakinkan Kabid Cipta Karya PUPR bahwa investasi pembibitan rumput vetiver jauh lebih murah daripada biaya pengerukan lumpur kanal intake setiap bulan.",
-                    "<strong>Proteksi DAS:</strong> Gunakan argumen konservasi kehutanan untuk mendorong Pemda memperketat regulasi pembuangan material erosi tambang."
+                    "<strong>Source-Control Makro:</strong> Jelaskan bahwa sosialisasi Tata berfungsi mengunci regulasi hulu desa, sementara Plan B Terasering secara mekanika tanah memotong gaya geser erosi di lereng atas parit.",
+                    "<strong>Mitigasi Struktural Alam:</strong> Mengurangi laju sedimentasi pekat yang meluncur ke bawah menuju instalasi tangkapan fisik penahan milik Arya."
                 ]
             },
             {
@@ -360,27 +335,27 @@
             },
             {
                 title: "Penyusunan Dosing Chart PAC Operator WTP",
-                subtitle: "Alya (Teknik Kimia) - Optimasi Dosis Kimia & Efisiensi Operasional Clarifier",
+                subtitle: "Alya (Teknik Kimia) - Optimasi Dosis Kimia Berbasis Umpan Balik Indikator NTU",
                 pj: "Alya",
                 prodi: "Teknik Kimia",
                 icon: "activity",
-                stateBtn: { low: "Kondisi Sungai Jernih", high: "Kondisi Sungai Banjir Lumpur" },
-                tip: "Geser kekeruhan air baku untuk melihat pembentukan flok koagulasi makro dan laju pengendapan lumpur.",
+                stateBtn: { low: "Air Sungai Jernih (<50 NTU)", high: "Air Banjir Lumpur (>400 NTU)" },
+                tip: "Geser slider kekeruhan air masuk (NTU) yang merujuk pada output riil CHROMA-GUARD Rahul.",
                 sliders: [
                     { id: 'slide-a', label: 'Debit Operasional WTP Paket', min: 10, max: 200, step: 5, val: 144, suffix: ' m³/jam' },
-                    { id: 'slide-b', label: 'Kekeruhan Air Masuk (NTU)', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
+                    { id: 'slide-b', label: 'Kekeruhan Masuk dari Proker 1', min: 50, max: 1000, step: 10, val: 400, suffix: ' NTU' }
                 ],
                 outputs: [
                     { label: "Kebutuhan Bubuk PAC", id: "out-1", calc: () => `${((valSliderA * (valSliderB > 400 ? 55 : 30) * 24) / 1000).toFixed(1)} kg / Hari` },
-                    { label: "Laju Pembuangan Lumpur", id: "out-2", calc: () => `${(valSliderA * valSliderB * 0.0006).toFixed(1)} Liter / Jam` }
+                    { label: "Bukaan Aliran Pompa Dozer", id: "out-2", calc: () => `${(valSliderA * (valSliderB > 400 ? 6.8 : 3.4)).toFixed(0)} mL / Menit` }
                 ],
                 deliverables: [
                     { icon: "file-text", title: "Lembar SOP Dosing Chart Terlaminasi", desc: "Tabel matriks panduan cepat penakaran karung bubuk PAC berbasis nilai NTU harian yang ditempel di ruang pembubuhan kimia." },
                     { icon: "trending-down", title: "Buku Kalkulasi Efisiensi Anggaran Operasional", desc: "Laporan analisis penghematan anggaran belanja bahan kimia bulanan UPTD SPAM pasca optimalisasi dosis hidrolik." }
                 ],
                 pitch: [
-                    "<strong>Hentikan Tebak-tebakan Dosis:</strong> Tawarkan tabel buatan Alya ini sebagai Standard Operating Procedure (SOP) ilmiah baru bagi operator UPTD SPAM IKK Petasia untuk menghemat karung PAC (Foto IMG_4510).",
-                    "<strong>Optimasi Clarifier Baja:</strong> Menjamin flok lumpur mengendap sempurna di silo kerucut bawah (Foto IMG_4505) tanpa merusak saringan saring halus."
+                    "<strong>Koneksi Data Tanpa Tebakan:</strong> Tunjukkan bahwa operator kini tidak bekerja buta; nilai NTU yang diproduksi secara instan oleh CHROMA-GUARD (Proker 1) dimasukkan langsung ke matriks grafik tabel buatan Alya.",
+                    "<strong>Presisi Flokulasi Clarifier:</strong> Mencegah over-dosing zat kimia korosif yang dapat merusak struktur kompartemen plate settler filtrasi paket baja."
                 ]
             }
         ];
@@ -657,24 +632,27 @@
                 drawNode(simCanvas.width * 0.5, simCanvas.height * 0.45, "2. INTAKE LAMBOLO", "#f59e0b");
                 drawNode(simCanvas.width * 0.8, simCanvas.height * 0.7, "3. INSTALASI WTP", "#10b981");
 
+                // Spectrophotometer HUD overlay simulation
                 ctx.save();
-                ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
-                ctx.fillRect(15, simCanvas.height - 95, 160, 80);
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                ctx.fillRect(15, simCanvas.height - 105, 190, 90);
                 ctx.strokeStyle = '#334155';
-                ctx.strokeRect(15, simCanvas.height - 95, 160, 80);
+                ctx.strokeRect(15, simCanvas.height - 105, 190, 90);
 
-                ctx.strokeStyle = '#34d399';
+                ctx.strokeStyle = '#10b981';
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
                 ctx.moveTo(25, simCanvas.height - 35);
-                for (let x = 0; x < 140; x++) {
-                    const wave = Math.sin(x * 0.05 + Date.now() * 0.01) * 20;
-                    ctx.lineTo(25 + x, simCanvas.height - 55 + wave * (valSliderA / 100));
+                for (let x = 0; x < 170; x++) {
+                    const wave = Math.sin(x * 0.06 + Date.now() * 0.015) * 22;
+                    ctx.lineTo(25 + x, simCanvas.height - 55 + wave * (valSliderB / 600));
                 }
                 ctx.stroke();
+                ctx.fillStyle = '#34d399';
+                ctx.font = 'bold 8px monospace';
+                ctx.fillText(`CHROMA SCAN: 540nm | ${valSliderB} NTU`, 22, simCanvas.height - 92);
                 ctx.fillStyle = '#64748b';
-                ctx.font = '8px monospace';
-                ctx.fillText("SPEKTRO SCAN: AIR BAKU", 25, simCanvas.height - 80);
+                ctx.fillText(`Kadar Nikel: ${valSliderA} ppm`, 22, simCanvas.height - 82);
                 ctx.restore();
 
             } else if (activeProker === 1) {
@@ -727,47 +705,81 @@
                 });
 
             } else if (activeProker === 2) {
-                ctx.fillStyle = '#1e293b';
-                ctx.beginPath();
-                ctx.moveTo(0, simCanvas.height * 0.3);
-                ctx.lineTo(simCanvas.width * 0.6, simCanvas.height * 0.7);
-                ctx.lineTo(simCanvas.width, simCanvas.height * 0.75);
-                ctx.lineTo(simCanvas.width, simCanvas.height);
-                ctx.lineTo(0, simCanvas.height);
-                ctx.fill();
+                // TATA: PLAN B TERASERING SCENE RENDER
+                ctx.fillStyle = '#111827';
+                ctx.fillRect(0, 0, simCanvas.width, simCanvas.height);
 
-                if (contextState === 'high') {
-                    ctx.fillStyle = '#059669';
-                    for (let x = 20; x < simCanvas.width * 0.6; x += 35) {
-                        const y = simCanvas.height * 0.3 + (x * 0.67);
-                        ctx.beginPath();
-                        ctx.arc(x, y, 6, 0, Math.PI, true);
-                        ctx.fill();
-                        
-                        ctx.strokeStyle = '#047857';
-                        ctx.lineWidth = 1.5;
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
-                        ctx.lineTo(x - 5, y + 45);
-                        ctx.lineTo(x + 10, y + 80);
-                        ctx.stroke();
+                if (contextState === 'low') {
+                    // Normal Slope (Gundul Kritis)
+                    ctx.fillStyle = '#271c19';
+                    ctx.beginPath();
+                    ctx.moveTo(0, simCanvas.height * 0.2);
+                    ctx.lineTo(simCanvas.width * 0.7, simCanvas.height * 0.85);
+                    ctx.lineTo(simCanvas.width, simCanvas.height * 0.9);
+                    ctx.lineTo(simCanvas.width, simCanvas.height);
+                    ctx.lineTo(0, simCanvas.height);
+                    ctx.fill();
+
+                    ctx.fillStyle = '#ea580c';
+                    ctx.font = 'bold 10px sans-serif';
+                    ctx.fillText("LERENG KRITIS: ALIRAN EROSI TINGGI", 30, simCanvas.height - 30);
+                } else {
+                    // Plan B Active: Terasering / Sengkedan Steps
+                    ctx.fillStyle = '#14532d';
+                    ctx.beginPath();
+                    ctx.moveTo(0, simCanvas.height * 0.2);
+                    
+                    let currentX = 0;
+                    let currentY = simCanvas.height * 0.2;
+                    const stepW = (simCanvas.width * 0.7) / valSliderB;
+                    const stepH = (simCanvas.height * 0.65) / valSliderB;
+
+                    for (let i = 0; i < valSliderB; i++) {
+                        currentX += stepW;
+                        ctx.lineTo(currentX, currentY);
+                        currentY += stepH;
+                        ctx.lineTo(currentX, currentY);
                     }
+                    
+                    ctx.lineTo(simCanvas.width, currentY);
+                    ctx.lineTo(simCanvas.width, simCanvas.height);
+                    ctx.lineTo(0, simCanvas.height);
+                    ctx.fill();
+
+                    // Green grass lines on top of steps
+                    ctx.strokeStyle = '#22c55e';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#34d399';
+                    ctx.font = 'bold 10px sans-serif';
+                    ctx.fillText(`PLAN B: ${valSliderB} TINGKAT SENGKEDAN/TERASERING`, 30, simCanvas.height - 30);
                 }
 
+                // Rain & erosion vectors animation
                 particles.forEach(p => {
-                    p.x += p.speed;
-                    p.y += p.speed * 1.5;
+                    p.x += p.speed * 1.2;
+                    p.y += p.speed * 1.8;
 
                     if (p.y > simCanvas.height) {
-                        p.x = Math.random() * simCanvas.width;
+                        p.x = Math.random() * simCanvas.width * 0.5;
                         p.y = 0;
                     }
 
-                    const slopeY = simCanvas.height * 0.3 + (p.x * 0.67);
-                    if (p.x < simCanvas.width * 0.6 && p.y > slopeY) {
-                        p.color = contextState === 'high' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(194, 65, 12, 0.8)';
-                        p.y = slopeY;
-                        p.x += 2;
+                    // Dynamic collision response depending on step grid
+                    let limitY = simCanvas.height * 0.2 + (p.x * 0.92);
+                    if (contextState === 'high') {
+                        const stepIndex = Math.floor(p.x / ((simCanvas.width * 0.7) / valSliderB));
+                        limitY = simCanvas.height * 0.2 + (stepIndex * ((simCanvas.height * 0.65) / valSliderB));
+                    }
+
+                    if (p.y > limitY) {
+                        p.y = limitY;
+                        // Reduce speed on steps (Plan B)
+                        p.x += contextState === 'high' ? 0.3 : 2.5; 
+                        p.color = contextState === 'high' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(234, 88, 12, 0.8)';
+                    } else {
+                        p.color = 'rgba(56, 189, 248, 0.6)';
                     }
 
                     ctx.beginPath();
