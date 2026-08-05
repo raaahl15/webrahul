@@ -148,10 +148,10 @@
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
                 <a href="#home" class="text-white font-semibold hover:text-pink-400 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-pink-500 after:rounded-full">Beranda</a>
-                <a href="#flat-showcase-section" class="hover:text-pink-400 transition-colors">Virtual Mortara</a>
-                <a href="#flat-showcase-section" class="hover:text-pink-400 transition-colors">Digilib Mortara</a>
-                <a href="#arc-carousel-section" class="hover:text-pink-400 transition-colors">Tentang Desa</a>
-                <a href="#flat-showcase-section" class="glass-pill px-5 py-2 rounded-full text-white font-medium text-xs tracking-wider uppercase border border-pink-500/30">
+                <a href="#flat-showcase-section" onclick="setActiveCategory(0)" class="hover:text-pink-400 transition-colors">Virtual Mortara</a>
+                <a href="#flat-showcase-section" onclick="setActiveCategory(1)" class="hover:text-pink-400 transition-colors">Digilib Mortara</a>
+                <a href="#flat-showcase-section" onclick="setActiveCategory(2)" class="hover:text-pink-400 transition-colors">Video Dokumenter</a>
+                <a href="#arc-carousel-section" class="glass-pill px-5 py-2 rounded-full text-white font-medium text-xs tracking-wider uppercase border border-pink-500/30">
                     Eksplor
                 </a>
             </nav>
@@ -309,49 +309,41 @@
         lucide.createIcons();
 
         /* ==========================================================================
-           1. FLAT SHOWCASE MIDDLE CAROUSEL (Korsel Lurus Tengah Seamless)
+           1. FLAT SHOWCASE MIDDLE CAROUSEL (3 MENU UTAMA)
            ========================================================================== */
         const flatItemsData = [
             {
-                title: "Perpustakaan Digital",
-                subtitle: "Koleksi literasi, arsip sejarah & dokumen Desa Ganda Ganda",
-                badge: "Digilib Mortara",
-                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
-            },
-            {
+                id: "virtual",
                 title: "Virtual Mortara 3D",
                 subtitle: "Dokumentasi 3D Cadas Prasejarah & Lukisan Kuno",
                 badge: "Virtual 3D",
                 img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
             },
             {
+                id: "digilib",
+                title: "Digilib Mortara",
+                subtitle: "Koleksi Literasi, Arsip Sejarah & Dokumen Desa Ganda Ganda",
+                badge: "Digilib Mortara",
+                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: "video",
                 title: "Video Dokumenter",
                 subtitle: "Ekspedisi Sinematik Situs Cadas Desa Ganda Ganda",
-                badge: "Dokumenter",
+                badge: "Video Dokumenter",
                 img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                title: "Galeri Telapak Tangan",
-                subtitle: "Dokumentasi Foto Artefak Prasejarah",
-                badge: "Arsip Foto",
-                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Peta Geospasial Cadas",
-                subtitle: "Titik Koordinat Warisan Leluhur Ganda Ganda",
-                badge: "Geofasilitas",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Katalog Artefak Batu",
-                subtitle: "Penemuan Alat Serpih & Batu Purba",
-                badge: "Artefak",
-                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
         let activeFlatIndex = 0;
         const flatContainer = document.getElementById('flat-carousel-container');
+
+        function setActiveCategory(idx) {
+            activeFlatIndex = idx;
+            activeArcIndex = idx;
+            updateFlatPositions();
+            updateArcPositions();
+        }
 
         function createFlatCards() {
             if (!flatContainer) return;
@@ -392,7 +384,7 @@
             const cards = flatContainer.querySelectorAll('.carousel-card-item');
             const total = flatItemsData.length;
             const isMobile = window.innerWidth < 640;
-            const spacingX = isMobile ? 150 : 235;
+            const spacingX = isMobile ? 160 : 250;
 
             cards.forEach((card, idx) => {
                 let diff = idx - activeFlatIndex;
@@ -433,27 +425,9 @@
                     card.style.filter = 'brightness(0.82)';
                     card.classList.remove('active-glow-card');
                     card.style.pointerEvents = 'auto';
-                } else if (diff === 2) {
-                    // Right 2 (FLAT LURUS)
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.55';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
-                } else if (diff === -2) {
-                    // Left 2 (FLAT LURUS)
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(-${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.55';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
                 } else {
                     const side = diff > 0 ? 1 : -1;
-                    const posX = side * spacingX * 2.6;
+                    const posX = side * spacingX * 2.2;
                     card.style.transform = `translateX(${posX}px) scale(0.6)`;
                     card.style.opacity = '0';
                     card.style.zIndex = '1';
@@ -469,83 +443,30 @@
             });
         }
 
-        const flatPrevBtn = document.getElementById('flat-prev-btn');
-        if (flatPrevBtn) {
-            flatPrevBtn.addEventListener('click', () => {
-                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                updateFlatPositions();
-            });
-        }
-
-        const flatNextBtn = document.getElementById('flat-next-btn');
-        if (flatNextBtn) {
-            flatNextBtn.addEventListener('click', () => {
-                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                updateFlatPositions();
-            });
-        }
-
-        // Touch Swipe Gesture for Flat Carousel
-        let flatTouchStartX = 0;
-        let flatTouchEndX = 0;
-
-        if (flatContainer) {
-            flatContainer.addEventListener('touchstart', (e) => {
-                flatTouchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            flatContainer.addEventListener('touchend', (e) => {
-                flatTouchEndX = e.changedTouches[0].screenX;
-                if (flatTouchStartX - flatTouchEndX > 35) {
-                    activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                    updateFlatPositions();
-                } else if (flatTouchEndX - flatTouchStartX > 35) {
-                    activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                    updateFlatPositions();
-                }
-            }, { passive: true });
-        }
-
-
         /* ==========================================================================
-           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (Korsel Setengah Lingkaran Bawah)
+           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (3 MENU UTAMA)
            ========================================================================== */
         const arcItemsData = [
             {
-                title: "Eksplorasi Ruang 3D Cadas",
-                subtitle: "Desa Ganda Ganda, Morowali Utara",
+                id: "virtual",
+                title: "Virtual Mortara 3D",
+                subtitle: "Eksplorasi Ruang 3D Cadas Prasejarah",
                 badge: "Virtual 3D",
-                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
             },
             {
-                title: "Perpustakaan Digital Mortara",
-                subtitle: "Koleksi Dokumen & Sejarah Purba",
-                badge: "Digilib",
+                id: "digilib",
+                title: "Digilib Mortara",
+                subtitle: "Perpustakaan Digital & Dokumen Sejarah",
+                badge: "Digilib Mortara",
                 img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
             },
             {
-                title: "Video Dokumenter Sinematik",
-                subtitle: "Ekspedisi Situs Cadas Prasejarah",
-                badge: "Dokumenter",
+                id: "video",
+                title: "Video Dokumenter",
+                subtitle: "Ekspedisi Sinematik Ganda Ganda",
+                badge: "Video Dokumenter",
                 img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                title: "Galeri Telapak Tangan Purba",
-                subtitle: "Situs Artefak Cadas Ganda Ganda",
-                badge: "Arsip Foto",
-                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Peta Geospasial Situs Cadas",
-                subtitle: "Titik Koordinat Warisan Leluhur",
-                badge: "Geofasilitas",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Katalog Artefak Batu Purba",
-                subtitle: "Penemuan Alat Serpih & Artefak Cadas",
-                badge: "Artefak",
-                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
@@ -594,7 +515,7 @@
             const total = arcItemsData.length;
             const isMobile = window.innerWidth < 640;
 
-            const spacingX = isMobile ? 135 : 215;
+            const spacingX = isMobile ? 140 : 230;
 
             cards.forEach((card, idx) => {
                 let diff = idx - activeArcIndex;
@@ -623,7 +544,7 @@
                     card.style.pointerEvents = 'auto';
                 } else if (diff === 1) {
                     // Right 1 - Descending along Semicircle Arc
-                    card.style.transform = `translateX(${spacingX}px) translateY(${isMobile ? 18 : 28}px) rotate(${isMobile ? 8 : 12}deg) scale(0.88)`;
+                    card.style.transform = `translateX(${spacingX}px) translateY(${isMobile ? 20 : 32}px) rotate(${isMobile ? 10 : 14}deg) scale(0.88)`;
                     card.style.opacity = '0.85';
                     card.style.zIndex = '20';
                     card.style.filter = 'brightness(0.82)';
@@ -631,34 +552,16 @@
                     card.style.pointerEvents = 'auto';
                 } else if (diff === -1) {
                     // Left 1 - Descending along Semicircle Arc
-                    card.style.transform = `translateX(-${spacingX}px) translateY(${isMobile ? 18 : 28}px) rotate(${isMobile ? -8 : -12}deg) scale(0.88)`;
+                    card.style.transform = `translateX(-${spacingX}px) translateY(${isMobile ? 20 : 32}px) rotate(${isMobile ? -10 : -14}deg) scale(0.88)`;
                     card.style.opacity = '0.85';
                     card.style.zIndex = '20';
                     card.style.filter = 'brightness(0.82)';
                     card.classList.remove('active-glow-card');
                     card.style.pointerEvents = 'auto';
-                } else if (diff === 2) {
-                    // Right 2 - Lower along Semicircle Arc
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(${posX}px) translateY(${isMobile ? 48 : 72}px) rotate(${isMobile ? 14 : 20}deg) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.6';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
-                } else if (diff === -2) {
-                    // Left 2 - Lower along Semicircle Arc
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(-${posX}px) translateY(${isMobile ? 48 : 72}px) rotate(${isMobile ? -14 : -20}deg) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.6';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
                 } else {
                     // Offscreen Semicircle Zone
                     const side = diff > 0 ? 1 : -1;
-                    const posX = side * spacingX * 2.5;
+                    const posX = side * spacingX * 2.2;
                     card.style.transform = `translateX(${posX}px) translateY(110px) rotate(${side * 25}deg) scale(0.6)`;
                     card.style.opacity = '0';
                     card.style.zIndex = '1';
