@@ -103,8 +103,8 @@
         /* Smooth Carousel Item Animations */
         .carousel-card-item {
             position: absolute;
-            will-change: transform, opacity, filter;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, border-color 0.3s ease;
+            will-change: transform, opacity, box-shadow;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.3s ease;
         }
 
         .active-glow-card {
@@ -615,38 +615,155 @@
         }
 
         /* ==========================================================================
-           2. BOTTOM ARC CAROUSEL (3 MENU UTAMA - SETENGAH LINGKARAN)
+           1. FLAT SHOWCASE MIDDLE CAROUSEL (PERSISTENT DOM WITH SMOOTH ANIMATION)
+           ========================================================================== */
+        let currentFlatIndex = 0;
+        const flatContainer = document.getElementById('flat-carousel-container');
+        const flatPrevBtn = document.getElementById('flat-prev-btn');
+        const flatNextBtn = document.getElementById('flat-next-btn');
+        let flatCardElements = [];
+
+        function initFlatCarousel() {
+            if (!flatContainer) return;
+            flatContainer.innerHTML = '';
+            flatCardElements = [];
+
+            const isMobile = window.innerWidth < 640;
+            const cardWidth = isMobile ? 260 : 320;
+
+            // Create 5 persistent card elements for smooth CSS transition
+            for (let i = 0; i < 5; i++) {
+                const card = document.createElement('div');
+                card.className = 'carousel-card-item glass-card rounded-[28px] p-4 flex flex-col justify-between border cursor-pointer';
+                card.style.width = `${cardWidth}px`;
+                card.style.height = `${isMobile ? 320 : 350}px`;
+                flatContainer.appendChild(card);
+                flatCardElements.push(card);
+            }
+            updateFlatCarousel();
+        }
+
+        function updateFlatCarousel() {
+            if (!flatCardElements.length) return;
+
+            const isMobile = window.innerWidth < 640;
+            const spacingX = isMobile ? 180 : 250;
+
+            flatCardElements.forEach((card, index) => {
+                const offset = index - 2; // Slots: -2, -1, 0, 1, 2
+                let dataIndex = (currentFlatIndex + offset) % mainCategoriesData.length;
+                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
+
+                const item = mainCategoriesData[dataIndex];
+                const translateX = offset * spacingX;
+                const scale = offset === 0 ? 1.05 : 0.92;
+                const opacity = offset === 0 ? 1 : (Math.abs(offset) === 1 ? 0.85 : 0.3);
+                const zIndex = offset === 0 ? 30 : (30 - Math.abs(offset) * 10);
+
+                card.style.transform = `translateX(${translateX}px) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+
+                if (offset === 0) {
+                    card.classList.add('active-glow-card', 'border-pink-500/70');
+                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
+                } else {
+                    card.classList.remove('active-glow-card', 'border-pink-500/70');
+                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
+                }
+
+                card.innerHTML = `
+                    <div class="w-full h-48 sm:h-52 rounded-2xl overflow-hidden relative mb-3 group">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                        <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold ${item.badgeColor}">
+                            ${item.badge}
+                        </span>
+                    </div>
+                    <div class="text-left px-1">
+                        <h3 class="text-base font-bold text-white leading-snug">${item.subtitle}</h3>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed line-clamp-2 font-normal">${item.desc}</p>
+                    </div>
+                `;
+
+                card.onclick = () => {
+                    if (offset !== 0) {
+                        currentFlatIndex = dataIndex;
+                        updateFlatCarousel();
+                    }
+                };
+            });
+            lucide.createIcons();
+        }
+
+        function setActiveCategory(index) {
+            currentFlatIndex = index % mainCategoriesData.length;
+            currentArcIndex = index % mainCategoriesData.length;
+            updateFlatCarousel();
+            updateArcCarousel();
+        }
+
+        if (flatPrevBtn) {
+            flatPrevBtn.addEventListener('click', () => {
+                currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                updateFlatCarousel();
+            });
+        }
+
+        if (flatNextBtn) {
+            flatNextBtn.addEventListener('click', () => {
+                currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
+                updateFlatCarousel();
+            });
+        }
+
+        /* ==========================================================================
+           2. BOTTOM ARC CAROUSEL (PERSISTENT DOM WITH CURVED SEMICIRCLE TRANSITION)
            ========================================================================== */
         let currentArcIndex = 0;
         const arcContainer = document.getElementById('arc-carousel-items');
         const prevArcBtn = document.getElementById('prev-arc-btn');
         const nextArcBtn = document.getElementById('next-arc-btn');
+        let arcCardElements = [];
 
-        function renderArcCarousel() {
+        function initArcCarousel() {
             if (!arcContainer) return;
             arcContainer.innerHTML = '';
+            arcCardElements = [];
 
             const isMobile = window.innerWidth < 640;
             const cardWidth = isMobile ? 240 : 280;
 
-            // Render 5 relative slots along curved path
-            for (let offset = -2; offset <= 2; offset++) {
+            // Create 5 persistent card elements for smooth arc animation
+            for (let i = 0; i < 5; i++) {
+                const card = document.createElement('div');
+                card.className = 'carousel-card-item glass-card rounded-[28px] p-3 border cursor-pointer';
+                card.style.width = `${cardWidth}px`;
+                card.style.height = `${isMobile ? 240 : 260}px`;
+                arcContainer.appendChild(card);
+                arcCardElements.push(card);
+            }
+            updateArcCarousel();
+        }
+
+        function updateArcCarousel() {
+            if (!arcCardElements.length) return;
+
+            const isMobile = window.innerWidth < 640;
+
+            arcCardElements.forEach((card, index) => {
+                const offset = index - 2; // Slots: -2, -1, 0, 1, 2
                 let dataIndex = (currentArcIndex + offset) % mainCategoriesData.length;
                 if (dataIndex < 0) dataIndex += mainCategoriesData.length;
 
                 const item = mainCategoriesData[dataIndex];
-                const card = document.createElement('div');
-                
-                card.className = `carousel-card-item glass-card rounded-[28px] p-3 border cursor-pointer ${
-                    offset === 0 ? 'active-glow-card border-pink-500/70 z-30' : 'border-white/10 z-10 hover:border-pink-500/40'
-                }`;
 
-                // Curved Semicircle Arc Math: Calculate X offset, Y drop, and rotation angle
                 let translateX = 0;
                 let translateY = 0;
                 let rotate = 0;
                 let scale = 1;
                 let opacity = 1;
+                let zIndex = 10;
 
                 if (offset === 0) {
                     translateX = 0;
@@ -654,36 +771,48 @@
                     rotate = 0;
                     scale = 1.05;
                     opacity = 1;
+                    zIndex = 30;
                 } else if (offset === -1) {
                     translateX = isMobile ? -160 : -220;
                     translateY = isMobile ? 25 : 35;
                     rotate = -14;
                     scale = 0.88;
                     opacity = 0.8;
+                    zIndex = 20;
                 } else if (offset === 1) {
                     translateX = isMobile ? 160 : 220;
                     translateY = isMobile ? 25 : 35;
                     rotate = 14;
                     scale = 0.88;
                     opacity = 0.8;
+                    zIndex = 20;
                 } else if (offset < -1) {
                     translateX = isMobile ? -280 : -380;
                     translateY = isMobile ? 60 : 90;
                     rotate = -28;
                     scale = 0.7;
                     opacity = 0;
+                    zIndex = 10;
                 } else if (offset > 1) {
                     translateX = isMobile ? 280 : 380;
                     translateY = isMobile ? 60 : 90;
                     rotate = 28;
                     scale = 0.7;
                     opacity = 0;
+                    zIndex = 10;
                 }
 
-                card.style.width = `${cardWidth}px`;
-                card.style.height = `${isMobile ? 240 : 260}px`;
                 card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
                 card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+
+                if (offset === 0) {
+                    card.classList.add('active-glow-card', 'border-pink-500/70');
+                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
+                } else {
+                    card.classList.remove('active-glow-card', 'border-pink-500/70');
+                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
+                }
 
                 card.innerHTML = `
                     <div class="h-36 sm:h-40 rounded-[20px] overflow-hidden relative mb-2 group">
@@ -699,29 +828,27 @@
                     <p class="text-[10px] text-slate-300 px-1 line-clamp-2 text-center font-normal">${item.desc}</p>
                 `;
 
-                card.addEventListener('click', () => {
+                card.onclick = () => {
                     if (offset !== 0) {
                         currentArcIndex = dataIndex;
-                        renderArcCarousel();
+                        updateArcCarousel();
                     }
-                });
-
-                arcContainer.appendChild(card);
-            }
+                };
+            });
             lucide.createIcons();
         }
 
         if (prevArcBtn) {
             prevArcBtn.addEventListener('click', () => {
                 currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
-                renderArcCarousel();
+                updateArcCarousel();
             });
         }
 
         if (nextArcBtn) {
             nextArcBtn.addEventListener('click', () => {
                 currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
-                renderArcCarousel();
+                updateArcCarousel();
             });
         }
 
@@ -735,10 +862,10 @@
                 touchEndX = e.changedTouches[0].screenX;
                 if (touchStartX - touchEndX > 40) {
                     currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
-                    renderFlatCarousel();
+                    updateFlatCarousel();
                 } else if (touchEndX - touchStartX > 40) {
                     currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
-                    renderFlatCarousel();
+                    updateFlatCarousel();
                 }
             }, { passive: true });
         }
@@ -749,23 +876,23 @@
                 touchEndX = e.changedTouches[0].screenX;
                 if (touchStartX - touchEndX > 40) {
                     currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
-                    renderArcCarousel();
+                    updateArcCarousel();
                 } else if (touchEndX - touchStartX > 40) {
                     currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
-                    renderArcCarousel();
+                    updateArcCarousel();
                 }
             }, { passive: true });
         }
 
         // Initialize Carousels & Responsiveness
         window.addEventListener('load', () => {
-            renderFlatCarousel();
-            renderArcCarousel();
+            initFlatCarousel();
+            initArcCarousel();
         });
 
         window.addEventListener('resize', () => {
-            renderFlatCarousel();
-            renderArcCarousel();
+            initFlatCarousel();
+            initArcCarousel();
         });
     </script>
 </body>
