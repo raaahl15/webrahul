@@ -593,6 +593,46 @@
             });
         }
 
+        /* ==========================================================================
+           3. FLAT SHOWCASE NAVIGATION & TOUCH EVENT LISTENERS
+           ========================================================================== */
+        const flatPrevBtn = document.getElementById('flat-prev-btn');
+        if (flatPrevBtn) {
+            flatPrevBtn.addEventListener('click', () => {
+                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+                updateFlatPositions();
+            });
+        }
+
+        const flatNextBtn = document.getElementById('flat-next-btn');
+        if (flatNextBtn) {
+            flatNextBtn.addEventListener('click', () => {
+                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+                updateFlatPositions();
+            });
+        }
+
+        // Touch Swipe Gesture for Flat Carousel
+        let flatTouchStartX = 0;
+        let flatTouchEndX = 0;
+
+        if (flatContainer) {
+            flatContainer.addEventListener('touchstart', (e) => {
+                flatTouchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            flatContainer.addEventListener('touchend', (e) => {
+                flatTouchEndX = e.changedTouches[0].screenX;
+                if (flatTouchStartX - flatTouchEndX > 35) {
+                    activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+                    updateFlatPositions();
+                } else if (flatTouchEndX - flatTouchStartX > 35) {
+                    activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+                    updateFlatPositions();
+                }
+            }, { passive: true });
+        }
+
         // Touch Swipe Gesture for Arc Carousel
         let touchStartX = 0;
         let touchEndX = 0;
