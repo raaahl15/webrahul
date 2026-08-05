@@ -26,7 +26,7 @@
             background-size: 40px 40px;
         }
 
-        /* Ambient Gradient Light Glows */
+        /* Ambient Light Glows */
         .glow-purple {
             background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(11, 5, 18, 0) 70%);
         }
@@ -71,7 +71,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Bottom Section Curved Arc Ring Background */
+        /* Bottom Arc Ring Section */
         .arc-container {
             position: relative;
             width: 100%;
@@ -100,16 +100,16 @@
             transform: translateY(-6px) scale(1.02);
         }
 
-        /* Smooth Carousel Item Positions */
+        /* Smooth Carousel Item Animations */
         .carousel-card-item {
             position: absolute;
             will-change: transform, opacity, filter;
-            transform-origin: center center;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, border-color 0.3s ease;
         }
 
         .active-glow-card {
             box-shadow: 0 0 35px rgba(236, 72, 153, 0.45), 0 0 15px rgba(168, 85, 247, 0.3);
-            border-color: rgba(236, 72, 153, 0.65) !important;
+            border-color: rgba(236, 72, 153, 0.7) !important;
         }
 
         @keyframes spinSlow {
@@ -165,7 +165,7 @@
         </header>
 
         <!-- MAIN HERO SECTION -->
-        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16" id="home">
             <!-- Left Hero Content -->
             <div class="lg:col-span-7 space-y-6">
                 <div class="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-semibold text-pink-300 border border-pink-500/30">
@@ -243,7 +243,7 @@
                 </div>
             </div>
 
-            <!-- Flat Carousel Container (Lurus Horizontal Track Without Gaps) -->
+            <!-- Flat Carousel Container (Lurus Horizontal Track) -->
             <div class="relative w-full max-w-6xl mx-auto h-[380px] sm:h-[400px] flex items-center justify-center overflow-hidden py-4 select-none px-2" id="flat-carousel-container">
                 <!-- Dynamically generated flat cards rendered via JavaScript -->
             </div>
@@ -364,7 +364,7 @@
             </div>
         </section>
 
-        <!-- BOTTOM CIRCULAR DIAL / ARC DISPLAY SECTION (Korsel Lurus Continuous) -->
+        <!-- BOTTOM CIRCULAR DIAL / ARC DISPLAY SECTION (Korsel Melengkung Setengah Lingkaran) -->
         <section class="arc-container flex flex-col items-center justify-start pt-6 relative select-none" id="arc-carousel-section">
             <!-- Glowing Curved Ring Backdrop -->
             <div class="arc-ring"></div>
@@ -389,7 +389,7 @@
 
             <!-- Carousel Items Container -->
             <div class="relative z-20 w-full h-[320px] flex items-center justify-center pt-2 overflow-hidden" id="arc-carousel-items">
-                <!-- Dynamically generated 3D Cards rendered via JS -->
+                <!-- Dynamically generated 3D Curved Cards rendered via JS -->
             </div>
 
             <!-- Bottom Floating Emblem / Logo Badge -->
@@ -425,6 +425,39 @@
     <!-- Initialize Lucide Icons & Carousel Logic -->
     <script>
         lucide.createIcons();
+
+        /* ==========================================================================
+           3 MENU UTAMA DATA (SHARED FOR CAROUSELS)
+           ========================================================================== */
+        const mainCategoriesData = [
+            {
+                id: "virtual",
+                badge: "Virtual 3D",
+                title: "Virtual Mortara 3D",
+                subtitle: "Dokumentasi 3D Cadas Prasejarah",
+                desc: "Eksplorasi lukisan cadas kuno dalam tampilan 3 Dimensi yang interaktif.",
+                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+                badgeColor: "text-pink-300 border-pink-500/30"
+            },
+            {
+                id: "digilib",
+                badge: "Digilib Mortara",
+                title: "Digilib Mortara",
+                subtitle: "Perpustakaan Digital Desa",
+                desc: "Koleksi literasi, arsip sejarah & dokumen Desa Ganda Ganda.",
+                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80",
+                badgeColor: "text-purple-300 border-purple-500/30"
+            },
+            {
+                id: "video",
+                badge: "Dokumenter",
+                title: "Video Dokumenter",
+                subtitle: "Dokumenter Sinematik Cadas",
+                desc: "Tayangan eksklusif penjelusuran situs cadas dan warisan budaya.",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+                badgeColor: "text-cyan-300 border-cyan-500/30"
+            }
+        ];
 
         /* ==========================================================================
            MODAL DETAIL DIALOG FOR DESA GANDA GANDA
@@ -499,16 +532,252 @@
         }
 
         /* ==========================================================================
-           1. FLAT SHOWCASE MIDDLE CAROUSEL (3 MENU UTAMA)
+           1. FLAT SHOWCASE MIDDLE CAROUSEL (3 MENU UTAMA - LURUS HORIZONTAL)
            ========================================================================== */
-<!-- ... existing code ...
+        let currentFlatIndex = 0;
+        const flatContainer = document.getElementById('flat-carousel-container');
+        const flatPrevBtn = document.getElementById('flat-prev-btn');
+        const flatNextBtn = document.getElementById('flat-next-btn');
+
+        function renderFlatCarousel() {
+            if (!flatContainer) return;
+            flatContainer.innerHTML = '';
+
+            const isMobile = window.innerWidth < 640;
+            const cardWidth = isMobile ? 260 : 320;
+            const spacingX = isMobile ? 180 : 250;
+
+            // Render 5 relative slots (-2 to +2) for continuous looping without empty space
+            for (let offset = -2; offset <= 2; offset++) {
+                let dataIndex = (currentFlatIndex + offset) % mainCategoriesData.length;
+                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
+
+                const item = mainCategoriesData[dataIndex];
+                const card = document.createElement('div');
+                card.className = `carousel-card-item glass-card rounded-[28px] p-4 flex flex-col justify-between border cursor-pointer ${
+                    offset === 0 ? 'active-glow-card border-pink-500/70 z-30' : 'border-white/10 z-10 hover:border-pink-500/40'
+                }`;
+
+                const translateX = offset * spacingX;
+                const scale = offset === 0 ? 1.05 : 0.92;
+                const opacity = offset === 0 ? 1 : (Math.abs(offset) === 1 ? 0.85 : 0.3);
+
+                card.style.width = `${cardWidth}px`;
+                card.style.height = `${isMobile ? 320 : 350}px`;
+                card.style.transform = `translateX(${translateX}px) scale(${scale})`;
+                card.style.opacity = opacity;
+
+                card.innerHTML = `
+                    <div class="w-full h-48 sm:h-52 rounded-2xl overflow-hidden relative mb-3 group">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                        <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold ${item.badgeColor}">
+                            ${item.badge}
+                        </span>
+                    </div>
+                    <div class="text-left px-1">
+                        <h3 class="text-base font-bold text-white leading-snug">${item.subtitle}</h3>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed line-clamp-2 font-normal">${item.desc}</p>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    if (offset !== 0) {
+                        currentFlatIndex = dataIndex;
+                        renderFlatCarousel();
+                    }
+                });
+
+                flatContainer.appendChild(card);
+            }
+            lucide.createIcons();
+        }
+
+        function setActiveCategory(index) {
+            currentFlatIndex = index % mainCategoriesData.length;
+            currentArcIndex = index % mainCategoriesData.length;
+            renderFlatCarousel();
+            renderArcCarousel();
+        }
+
+        if (flatPrevBtn) {
+            flatPrevBtn.addEventListener('click', () => {
+                currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                renderFlatCarousel();
+            });
+        }
+
+        if (flatNextBtn) {
+            flatNextBtn.addEventListener('click', () => {
+                currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
+                renderFlatCarousel();
+            });
+        }
+
+        /* ==========================================================================
+           2. BOTTOM ARC CAROUSEL (3 MENU UTAMA - SETENGAH LINGKARAN)
+           ========================================================================== */
+        let currentArcIndex = 0;
+        const arcContainer = document.getElementById('arc-carousel-items');
+        const prevArcBtn = document.getElementById('prev-arc-btn');
+        const nextArcBtn = document.getElementById('next-arc-btn');
+
+        function renderArcCarousel() {
+            if (!arcContainer) return;
+            arcContainer.innerHTML = '';
+
+            const isMobile = window.innerWidth < 640;
+            const cardWidth = isMobile ? 240 : 280;
+
+            // Render 5 relative slots along curved path
+            for (let offset = -2; offset <= 2; offset++) {
+                let dataIndex = (currentArcIndex + offset) % mainCategoriesData.length;
+                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
+
+                const item = mainCategoriesData[dataIndex];
+                const card = document.createElement('div');
+                
+                card.className = `carousel-card-item glass-card rounded-[28px] p-3 border cursor-pointer ${
+                    offset === 0 ? 'active-glow-card border-pink-500/70 z-30' : 'border-white/10 z-10 hover:border-pink-500/40'
+                }`;
+
+                // Curved Semicircle Arc Math: Calculate X offset, Y drop, and rotation angle
+                let translateX = 0;
+                let translateY = 0;
+                let rotate = 0;
+                let scale = 1;
+                let opacity = 1;
+
+                if (offset === 0) {
+                    translateX = 0;
+                    translateY = 0;
+                    rotate = 0;
+                    scale = 1.05;
+                    opacity = 1;
+                } else if (offset === -1) {
+                    translateX = isMobile ? -160 : -220;
+                    translateY = isMobile ? 25 : 35;
+                    rotate = -14;
+                    scale = 0.88;
+                    opacity = 0.8;
+                } else if (offset === 1) {
+                    translateX = isMobile ? 160 : 220;
+                    translateY = isMobile ? 25 : 35;
+                    rotate = 14;
+                    scale = 0.88;
+                    opacity = 0.8;
+                } else if (offset < -1) {
+                    translateX = isMobile ? -280 : -380;
+                    translateY = isMobile ? 60 : 90;
+                    rotate = -28;
+                    scale = 0.7;
+                    opacity = 0;
+                } else if (offset > 1) {
+                    translateX = isMobile ? 280 : 380;
+                    translateY = isMobile ? 60 : 90;
+                    rotate = 28;
+                    scale = 0.7;
+                    opacity = 0;
+                }
+
+                card.style.width = `${cardWidth}px`;
+                card.style.height = `${isMobile ? 240 : 260}px`;
+                card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+                card.style.opacity = opacity;
+
+                card.innerHTML = `
+                    <div class="h-36 sm:h-40 rounded-[20px] overflow-hidden relative mb-2 group">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover">
+                        <div class="absolute top-2 right-2 w-7 h-7 glass-pill rounded-full flex items-center justify-center text-white">
+                            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-pink-300"></i>
+                        </div>
+                        <div class="absolute bottom-2 left-2 right-2 p-2 glass-card rounded-xl">
+                            <p class="text-[11px] font-bold text-white truncate">${item.subtitle}</p>
+                            <p class="text-[9px] text-pink-300 font-medium">${item.badge}</p>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-300 px-1 line-clamp-2 text-center font-normal">${item.desc}</p>
+                `;
+
+                card.addEventListener('click', () => {
+                    if (offset !== 0) {
+                        currentArcIndex = dataIndex;
+                        renderArcCarousel();
+                    }
+                });
+
+                arcContainer.appendChild(card);
+            }
+            lucide.createIcons();
+        }
+
+        if (prevArcBtn) {
+            prevArcBtn.addEventListener('click', () => {
+                currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                renderArcCarousel();
+            });
+        }
+
+        if (nextArcBtn) {
+            nextArcBtn.addEventListener('click', () => {
+                currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
+                renderArcCarousel();
+            });
+        }
+
+        // TOUCH SWIPE GESTURE HANDLERS FOR MOBILE
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (flatContainer) {
+            flatContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            flatContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 40) {
+                    currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
+                    renderFlatCarousel();
+                } else if (touchEndX - touchStartX > 40) {
+                    currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                    renderFlatCarousel();
+                }
+            }, { passive: true });
+        }
+
+        if (arcContainer) {
+            arcContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            arcContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 40) {
+                    currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
+                    renderArcCarousel();
+                } else if (touchEndX - touchStartX > 40) {
+                    currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                    renderArcCarousel();
+                }
+            }, { passive: true });
+        }
+
+        // Initialize Carousels & Responsiveness
+        window.addEventListener('load', () => {
+            renderFlatCarousel();
+            renderArcCarousel();
+        });
+
+        window.addEventListener('resize', () => {
+            renderFlatCarousel();
+            renderArcCarousel();
+        });
+    </script>
+</body>
+</html>
 ```
 
-### Ringkasan Fitur Baru:
-1. **Seksi Baru**: Menu *"Mengenal Lebih Jauh Desa Ganda Ganda"* telah ditempatkan tepat di antara **Korsel Tengah** dan **Korsel Bawah**.
-2. **4 Kartu Menu Utama Desa**:
-   - **Geografis & Alam** (Profil & bentang pesisir Teluk Tomori & kars).
-   - **Situs Cadas Prasejarah** (Dokumentasi peninggalan purba).
-   - **Seni & Budaya Adat** (Kearifan lokal & tradisi).
-   - **Ekowisata & Komunitas** (Destinasi & pemberdayaan masyarakat).
-3. **Modal Pop-up Interaktif**: Saat diklik, tiap kartu akan langsung menampilkan dialog pop-up berisi informasi ringkas dan dokumentasi lengkap mengenai topik yang dipilih.
+### Ringkasan Fitur Lengkap:
+1. **Korsel Tengah (Galeri & Digilib)**:
+   - Bergerak **Lurus Horizontal (Flat)** sejajar tanpa rotasi.
+   - Tombol Kanan & Kiri berfungsi normal dengan *smooth looping*.
+2. **Korsel Bawah (Arc Display)**:
+   - Bergerak **Setengah Lingkaran (Curved Semicircle)** mengikuti kurva busur pendar neon.
+   - Tombol Kanan & Kiri berfungsi normal dengan efek rotasi melengkung.
+3. **Mengenal Lebih Jauh Desa Ganda Ganda**:
+   - Berada persis di antara Korsel Tengah dan Korsel Bawah dengan 4 kartu interaktif lengkap dengan pop-up modal dialog detail.
