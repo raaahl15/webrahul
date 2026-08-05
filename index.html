@@ -309,7 +309,206 @@
         lucide.createIcons();
 
         /* ==========================================================================
-           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (Korsel Setengah Lingkaran Seamless)
+           1. FLAT SHOWCASE MIDDLE CAROUSEL (Korsel Lurus Tengah Seamless)
+           ========================================================================== */
+        const flatItemsData = [
+            {
+                title: "Perpustakaan Digital",
+                subtitle: "Koleksi literasi, arsip sejarah & dokumen Desa Ganda Ganda",
+                badge: "Digilib Mortara",
+                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Virtual Mortara 3D",
+                subtitle: "Dokumentasi 3D Cadas Prasejarah & Lukisan Kuno",
+                badge: "Virtual 3D",
+                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Video Dokumenter",
+                subtitle: "Ekspedisi Sinematik Situs Cadas Desa Ganda Ganda",
+                badge: "Dokumenter",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Galeri Telapak Tangan",
+                subtitle: "Dokumentasi Foto Artefak Prasejarah",
+                badge: "Arsip Foto",
+                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Peta Geospasial Cadas",
+                subtitle: "Titik Koordinat Warisan Leluhur Ganda Ganda",
+                badge: "Geofasilitas",
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Katalog Artefak Batu",
+                subtitle: "Penemuan Alat Serpih & Batu Purba",
+                badge: "Artefak",
+                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        let activeFlatIndex = 0;
+        const flatContainer = document.getElementById('flat-carousel-container');
+
+        function createFlatCards() {
+            if (!flatContainer) return;
+            flatContainer.innerHTML = '';
+            flatItemsData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
+                card.dataset.index = idx;
+
+                card.innerHTML = `
+                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute top-3 left-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold text-pink-300 border border-pink-500/30">
+                            ${item.badge}
+                        </div>
+                        <div class="absolute bottom-3 left-3 right-3 p-3 glass-card rounded-xl border border-white/10 backdrop-blur-md">
+                            <p class="text-xs font-bold text-white tracking-wide truncate">${item.title}</p>
+                            <p class="text-[10px] text-slate-300 mt-0.5 truncate">${item.subtitle}</p>
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    if (idx !== activeFlatIndex) {
+                        activeFlatIndex = idx;
+                        updateFlatPositions();
+                    }
+                });
+
+                flatContainer.appendChild(card);
+            });
+            updateFlatPositions();
+        }
+
+        function updateFlatPositions() {
+            if (!flatContainer) return;
+            const cards = flatContainer.querySelectorAll('.carousel-card-item');
+            const total = flatItemsData.length;
+            const isMobile = window.innerWidth < 640;
+            const spacingX = isMobile ? 150 : 235;
+
+            cards.forEach((card, idx) => {
+                let diff = idx - activeFlatIndex;
+                while (diff > total / 2) diff -= total;
+                while (diff < -total / 2) diff += total;
+
+                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
+                card.dataset.prevDiff = diff;
+                const isJumping = Math.abs(diff - prevDiff) > 1.8;
+
+                if (isJumping) {
+                    card.style.transition = 'none';
+                } else {
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+
+                if (diff === 0) {
+                    // Center Active (FLAT LURUS)
+                    card.style.transform = `translateX(0px) scale(1)`;
+                    card.style.opacity = '1';
+                    card.style.zIndex = '30';
+                    card.style.filter = 'none';
+                    card.classList.add('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 1) {
+                    // Right 1 (FLAT LURUS)
+                    card.style.transform = `translateX(${spacingX}px) scale(0.88)`;
+                    card.style.opacity = '0.85';
+                    card.style.zIndex = '20';
+                    card.style.filter = 'brightness(0.82)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === -1) {
+                    // Left 1 (FLAT LURUS)
+                    card.style.transform = `translateX(-${spacingX}px) scale(0.88)`;
+                    card.style.opacity = '0.85';
+                    card.style.zIndex = '20';
+                    card.style.filter = 'brightness(0.82)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 2) {
+                    // Right 2 (FLAT LURUS)
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.55';
+                    card.style.zIndex = '10';
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else if (diff === -2) {
+                    // Left 2 (FLAT LURUS)
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(-${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.55';
+                    card.style.zIndex = '10';
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else {
+                    const side = diff > 0 ? 1 : -1;
+                    const posX = side * spacingX * 2.6;
+                    card.style.transform = `translateX(${posX}px) scale(0.6)`;
+                    card.style.opacity = '0';
+                    card.style.zIndex = '1';
+                    card.style.filter = 'brightness(0.3)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'none';
+                }
+
+                if (isJumping) {
+                    void card.offsetHeight;
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+            });
+        }
+
+        const flatPrevBtn = document.getElementById('flat-prev-btn');
+        if (flatPrevBtn) {
+            flatPrevBtn.addEventListener('click', () => {
+                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+                updateFlatPositions();
+            });
+        }
+
+        const flatNextBtn = document.getElementById('flat-next-btn');
+        if (flatNextBtn) {
+            flatNextBtn.addEventListener('click', () => {
+                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+                updateFlatPositions();
+            });
+        }
+
+        // Touch Swipe Gesture for Flat Carousel
+        let flatTouchStartX = 0;
+        let flatTouchEndX = 0;
+
+        if (flatContainer) {
+            flatContainer.addEventListener('touchstart', (e) => {
+                flatTouchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            flatContainer.addEventListener('touchend', (e) => {
+                flatTouchEndX = e.changedTouches[0].screenX;
+                if (flatTouchStartX - flatTouchEndX > 35) {
+                    activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+                    updateFlatPositions();
+                } else if (flatTouchEndX - flatTouchStartX > 35) {
+                    activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+                    updateFlatPositions();
+                }
+            }, { passive: true });
+        }
+
+
+        /* ==========================================================================
+           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (Korsel Setengah Lingkaran Bawah)
            ========================================================================== */
         const arcItemsData = [
             {
@@ -354,6 +553,7 @@
         const arcContainer = document.getElementById('arc-carousel-items');
 
         function createArcCards() {
+            if (!arcContainer) return;
             arcContainer.innerHTML = '';
             arcItemsData.forEach((item, idx) => {
                 const card = document.createElement('div');
@@ -389,7 +589,8 @@
         }
 
         function updateArcPositions() {
-            const cards = arcContainer.querySelectorAll('#arc-carousel-items .carousel-card-item');
+            if (!arcContainer) return;
+            const cards = arcContainer.querySelectorAll('.carousel-card-item');
             const total = arcItemsData.length;
             const isMobile = window.innerWidth < 640;
 
@@ -473,229 +674,42 @@
             });
         }
 
-        document.getElementById('flat-prev-btn').addEventListener('click', () => {
-            activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-            updateFlatPositions();
-        });
-
-        document.getElementById('flat-next-btn').addEventListener('click', () => {
-            activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-            updateFlatPositions();
-        });
-
-        // Touch Swipe Gesture for Flat Carousel
-        let flatTouchStartX = 0;
-        let flatTouchEndX = 0;
-
-        flatContainer.addEventListener('touchstart', (e) => {
-            flatTouchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        flatContainer.addEventListener('touchend', (e) => {
-            flatTouchEndX = e.changedTouches[0].screenX;
-            if (flatTouchStartX - flatTouchEndX > 35) {
-                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                updateFlatPositions();
-            } else if (flatTouchEndX - flatTouchStartX > 35) {
-                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                updateFlatPositions();
-            }
-        }, { passive: true });
-
-
-        /* ==========================================================================
-           2. STRAIGHT BOTTOM CAROUSEL (Korsel Lurus Bawah Seamless)
-           ========================================================================== */
-        const arcItemsData = [
-            {
-                title: "Eksplorasi Ruang 3D Cadas",
-                subtitle: "Desa Ganda Ganda, Morowali Utara",
-                badge: "Virtual 3D",
-                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Perpustakaan Digital Mortara",
-                subtitle: "Koleksi Dokumen & Sejarah Purba",
-                badge: "Digilib",
-                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Video Dokumenter Sinematik",
-                subtitle: "Ekspedisi Situs Cadas Prasejarah",
-                badge: "Dokumenter",
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                title: "Galeri Telapak Tangan Purba",
-                subtitle: "Situs Artefak Cadas Ganda Ganda",
-                badge: "Arsip Foto",
-                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Peta Geospasial Situs Cadas",
-                subtitle: "Titik Koordinat Warisan Leluhur",
-                badge: "Geofasilitas",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Katalog Artefak Batu Purba",
-                subtitle: "Penemuan Alat Serpih & Artefak Cadas",
-                badge: "Artefak",
-                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
-
-        let activeArcIndex = 0;
-        const arcContainer = document.getElementById('arc-carousel-items');
-
-        function createArcCards() {
-            arcContainer.innerHTML = '';
-            arcItemsData.forEach((item, idx) => {
-                const card = document.createElement('div');
-                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
-                card.dataset.index = idx;
-
-                card.innerHTML = `
-                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
-                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
-                        
-                        <div class="absolute top-3 right-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold text-pink-300 border border-pink-500/30">
-                            ${item.badge}
-                        </div>
-
-                        <div class="absolute bottom-3 left-3 right-3 p-3 glass-card rounded-xl border border-white/10 backdrop-blur-md">
-                            <p class="text-xs font-bold text-white tracking-wide truncate">${item.title}</p>
-                            <p class="text-[10px] text-slate-300 mt-0.5 truncate">${item.subtitle}</p>
-                        </div>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    if (idx !== activeArcIndex) {
-                        activeArcIndex = idx;
-                        updateArcPositions();
-                    }
-                });
-
-                arcContainer.appendChild(card);
-            });
-            updateArcPositions();
-        }
-
-        function updateArcPositions() {
-            const cards = arcContainer.querySelectorAll('#arc-carousel-items .carousel-card-item');
-            const total = arcItemsData.length;
-            const isMobile = window.innerWidth < 640;
-
-            const spacingX = isMobile ? 150 : 235;
-
-            cards.forEach((card, idx) => {
-                let diff = idx - activeArcIndex;
-
-                while (diff > total / 2) diff -= total;
-                while (diff < -total / 2) diff += total;
-
-                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
-                card.dataset.prevDiff = diff;
-
-                const isJumping = Math.abs(diff - prevDiff) > 1.8;
-
-                if (isJumping) {
-                    card.style.transition = 'none';
-                } else {
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-
-                if (diff === 0) {
-                    // Center Active
-                    card.style.transform = `translateX(0px) scale(1)`;
-                    card.style.opacity = '1';
-                    card.style.zIndex = '30';
-                    card.style.filter = 'none';
-                    card.classList.add('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === 1) {
-                    // Right 1
-                    card.style.transform = `translateX(${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === -1) {
-                    // Left 1
-                    card.style.transform = `translateX(-${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === 2) {
-                    // Right 2 (Populates outer desktop space so NO empty gaps exist)
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.55';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
-                } else if (diff === -2) {
-                    // Left 2 (Populates outer desktop space so NO empty gaps exist)
-                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
-                    card.style.transform = `translateX(-${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
-                    card.style.opacity = isMobile ? '0' : '0.55';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.55)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
-                } else {
-                    // Offscreen hidden zone
-                    const side = diff > 0 ? 1 : -1;
-                    const posX = side * spacingX * 2.6;
-                    card.style.transform = `translateX(${posX}px) scale(0.6)`;
-                    card.style.opacity = '0';
-                    card.style.zIndex = '1';
-                    card.style.filter = 'brightness(0.3)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'none';
-                }
-
-                if (isJumping) {
-                    void card.offsetHeight;
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
+        const prevArcBtn = document.getElementById('prev-arc-btn');
+        if (prevArcBtn) {
+            prevArcBtn.addEventListener('click', () => {
+                activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
+                updateArcPositions();
             });
         }
 
-        document.getElementById('prev-arc-btn').addEventListener('click', () => {
-            activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
-            updateArcPositions();
-        });
-
-        document.getElementById('next-arc-btn').addEventListener('click', () => {
-            activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
-            updateArcPositions();
-        });
+        const nextArcBtn = document.getElementById('next-arc-btn');
+        if (nextArcBtn) {
+            nextArcBtn.addEventListener('click', () => {
+                activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
+                updateArcPositions();
+            });
+        }
 
         // Touch Swipe Gesture for Arc Carousel
         let touchStartX = 0;
         let touchEndX = 0;
 
-        arcContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+        if (arcContainer) {
+            arcContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
 
-        arcContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 35) {
-                activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
-                updateArcPositions();
-            } else if (touchEndX - touchStartX > 35) {
-                activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
-                updateArcPositions();
-            }
-        }, { passive: true });
+            arcContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 35) {
+                    activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
+                    updateArcPositions();
+                } else if (touchEndX - touchStartX > 35) {
+                    activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
+                    updateArcPositions();
+                }
+            }, { passive: true });
+        }
 
         window.addEventListener('resize', () => {
             updateFlatPositions();
