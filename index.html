@@ -548,9 +548,9 @@
             const isMobile = window.innerWidth < 640;
             const cardWidth = isMobile ? 260 : 320;
 
-            // Buat 6 kartu (doubled dari 3 menu) agar rotasi pergeseran lurus tidak pernah terputus
-            for (let i = 0; i < 6; i++) {
-                const item = mainCategoriesData[i % mainCategoriesData.length];
+            // Buat 3 kartu sesuai 3 menu utama
+            for (let i = 0; i < mainCategoriesData.length; i++) {
+                const item = mainCategoriesData[i];
                 const card = document.createElement('div');
                 card.className = 'carousel-card-item glass-card rounded-[28px] p-4 flex flex-col justify-between border cursor-pointer';
                 card.style.width = `${cardWidth}px`;
@@ -582,16 +582,16 @@
 
             const isMobile = window.innerWidth < 640;
             const spacingX = isMobile ? 180 : 250;
-            const M = flatCardElements.length; // 6 cards
+            const M = flatCardElements.length; // 3 cards
 
             flatCardElements.forEach((card, index) => {
                 let diff = (index - (currentFlatIndex % M) + M) % M;
-                if (diff > M / 2) diff -= M; // Menghasilkan jarak relative slot (-2, -1, 0, 1, 2)
+                if (diff > M / 2) diff -= M; // Menghasilkan posisi slot (-1, 0, 1)
 
                 const translateX = diff * spacingX;
                 const scale = diff === 0 ? 1.05 : 0.92;
-                const opacity = diff === 0 ? 1 : (Math.abs(diff) === 1 ? 0.85 : (Math.abs(diff) === 2 ? 0.3 : 0));
-                const zIndex = diff === 0 ? 30 : (30 - Math.abs(diff) * 10);
+                const opacity = diff === 0 ? 1 : 0.85;
+                const zIndex = diff === 0 ? 30 : 20;
 
                 // Terapkan animasi transformasi lurus horizontal
                 card.style.transform = `translateX(${translateX}px) scale(${scale})`;
@@ -653,9 +653,9 @@
             const isMobile = window.innerWidth < 640;
             const cardWidth = isMobile ? 240 : 280;
 
-            // Buat 6 kartu (doubled dari 3 menu) agar gerakan menyusuri kurva setengah lingkaran berjalan terus-menerus
-            for (let i = 0; i < 6; i++) {
-                const item = mainCategoriesData[i % mainCategoriesData.length];
+            // Buat 3 kartu sesuai 3 menu utama
+            for (let i = 0; i < mainCategoriesData.length; i++) {
+                const item = mainCategoriesData[i];
                 const card = document.createElement('div');
                 card.className = 'carousel-card-item glass-card rounded-[28px] p-3 border cursor-pointer';
                 card.style.width = `${cardWidth}px`;
@@ -686,7 +686,7 @@
             if (!arcCardElements.length) return;
 
             const isMobile = window.innerWidth < 640;
-            const M = arcCardElements.length; // 6 cards
+            const M = arcCardElements.length; // 3 cards
 
             arcCardElements.forEach((card, index) => {
                 let diff = (index - (currentArcIndex % M) + M) % M;
@@ -711,36 +711,15 @@
                     translateY = isMobile ? 25 : 35;
                     rotate = -14;
                     scale = 0.88;
-                    opacity = 0.8;
+                    opacity = 0.85;
                     zIndex = 20;
                 } else if (diff === 1) {
                     translateX = isMobile ? 160 : 220;
                     translateY = isMobile ? 25 : 35;
                     rotate = 14;
                     scale = 0.88;
-                    opacity = 0.8;
+                    opacity = 0.85;
                     zIndex = 20;
-                } else if (diff === -2) {
-                    translateX = isMobile ? -280 : -380;
-                    translateY = isMobile ? 60 : 90;
-                    rotate = -28;
-                    scale = 0.7;
-                    opacity = 0.3;
-                    zIndex = 10;
-                } else if (diff === 2) {
-                    translateX = isMobile ? 280 : 380;
-                    translateY = isMobile ? 60 : 90;
-                    rotate = 28;
-                    scale = 0.7;
-                    opacity = 0.3;
-                    zIndex = 10;
-                } else {
-                    translateX = diff < 0 ? -450 : 450;
-                    translateY = 120;
-                    rotate = diff < 0 ? -35 : 35;
-                    scale = 0.5;
-                    opacity = 0;
-                    zIndex = 5;
                 }
 
                 // Terapkan animasi transformasi kurva setengah lingkaran
