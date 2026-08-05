@@ -532,7 +532,7 @@
         }
 
         /* ==========================================================================
-           1. FLAT SHOWCASE MIDDLE CAROUSEL (PERSISTENT DOM WITH SMOOTH ANIMATION)
+           1. FLAT SHOWCASE MIDDLE CAROUSEL (LURUS HORIZONTAL DENGAN ANIMASI SLIDE)
            ========================================================================== */
         let currentFlatIndex = 0;
         const flatContainer = document.getElementById('flat-carousel-container');
@@ -548,46 +548,13 @@
             const isMobile = window.innerWidth < 640;
             const cardWidth = isMobile ? 260 : 320;
 
-            // Create 5 persistent card elements for smooth CSS transition
-            for (let i = 0; i < 5; i++) {
+            // Buat 6 kartu (doubled dari 3 menu) agar rotasi pergeseran lurus tidak pernah terputus
+            for (let i = 0; i < 6; i++) {
+                const item = mainCategoriesData[i % mainCategoriesData.length];
                 const card = document.createElement('div');
                 card.className = 'carousel-card-item glass-card rounded-[28px] p-4 flex flex-col justify-between border cursor-pointer';
                 card.style.width = `${cardWidth}px`;
                 card.style.height = `${isMobile ? 320 : 350}px`;
-                flatContainer.appendChild(card);
-                flatCardElements.push(card);
-            }
-            updateFlatCarousel();
-        }
-
-        function updateFlatCarousel() {
-            if (!flatCardElements.length) return;
-
-            const isMobile = window.innerWidth < 640;
-            const spacingX = isMobile ? 180 : 250;
-
-            flatCardElements.forEach((card, index) => {
-                const offset = index - 2; // Slots: -2, -1, 0, 1, 2
-                let dataIndex = (currentFlatIndex + offset) % mainCategoriesData.length;
-                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
-
-                const item = mainCategoriesData[dataIndex];
-                const translateX = offset * spacingX;
-                const scale = offset === 0 ? 1.05 : 0.92;
-                const opacity = offset === 0 ? 1 : (Math.abs(offset) === 1 ? 0.85 : 0.3);
-                const zIndex = offset === 0 ? 30 : (30 - Math.abs(offset) * 10);
-
-                card.style.transform = `translateX(${translateX}px) scale(${scale})`;
-                card.style.opacity = opacity;
-                card.style.zIndex = zIndex;
-
-                if (offset === 0) {
-                    card.classList.add('active-glow-card', 'border-pink-500/70');
-                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
-                } else {
-                    card.classList.remove('active-glow-card', 'border-pink-500/70');
-                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
-                }
 
                 card.innerHTML = `
                     <div class="w-full h-48 sm:h-52 rounded-2xl overflow-hidden relative mb-3 group">
@@ -603,14 +570,49 @@
                     </div>
                 `;
 
+                flatContainer.appendChild(card);
+                flatCardElements.push(card);
+            }
+            updateFlatCarousel();
+            lucide.createIcons();
+        }
+
+        function updateFlatCarousel() {
+            if (!flatCardElements.length) return;
+
+            const isMobile = window.innerWidth < 640;
+            const spacingX = isMobile ? 180 : 250;
+            const M = flatCardElements.length; // 6 cards
+
+            flatCardElements.forEach((card, index) => {
+                let diff = (index - (currentFlatIndex % M) + M) % M;
+                if (diff > M / 2) diff -= M; // Menghasilkan jarak relative slot (-2, -1, 0, 1, 2)
+
+                const translateX = diff * spacingX;
+                const scale = diff === 0 ? 1.05 : 0.92;
+                const opacity = diff === 0 ? 1 : (Math.abs(diff) === 1 ? 0.85 : (Math.abs(diff) === 2 ? 0.3 : 0));
+                const zIndex = diff === 0 ? 30 : (30 - Math.abs(diff) * 10);
+
+                // Terapkan animasi transformasi lurus horizontal
+                card.style.transform = `translateX(${translateX}px) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+
+                if (diff === 0) {
+                    card.classList.add('active-glow-card', 'border-pink-500/70');
+                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
+                } else {
+                    card.classList.remove('active-glow-card', 'border-pink-500/70');
+                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
+                }
+
                 card.onclick = () => {
-                    if (offset !== 0) {
-                        currentFlatIndex = dataIndex;
+                    if (diff !== 0) {
+                        currentFlatIndex = (currentFlatIndex + diff + M) % M;
                         updateFlatCarousel();
                     }
                 };
             });
-            lucide.createIcons();
         }
 
         function setActiveCategory(index) {
@@ -622,20 +624,20 @@
 
         if (flatPrevBtn) {
             flatPrevBtn.onclick = () => {
-                currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                currentFlatIndex = (currentFlatIndex - 1 + flatCardElements.length) % flatCardElements.length;
                 updateFlatCarousel();
             };
         }
 
         if (flatNextBtn) {
             flatNextBtn.onclick = () => {
-                currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
+                currentFlatIndex = (currentFlatIndex + 1) % flatCardElements.length;
                 updateFlatCarousel();
             };
         }
 
         /* ==========================================================================
-           2. BOTTOM ARC CAROUSEL (PERSISTENT DOM WITH CURVED SEMICIRCLE TRANSITION)
+           2. BOTTOM ARC CAROUSEL (SETENGAH LINGKARAN DENGAN ANIMASI ROTASI)
            ========================================================================== */
         let currentArcIndex = 0;
         const arcContainer = document.getElementById('arc-carousel-items');
@@ -651,85 +653,13 @@
             const isMobile = window.innerWidth < 640;
             const cardWidth = isMobile ? 240 : 280;
 
-            // Create 5 persistent card elements for smooth arc animation
-            for (let i = 0; i < 5; i++) {
+            // Buat 6 kartu (doubled dari 3 menu) agar gerakan menyusuri kurva setengah lingkaran berjalan terus-menerus
+            for (let i = 0; i < 6; i++) {
+                const item = mainCategoriesData[i % mainCategoriesData.length];
                 const card = document.createElement('div');
                 card.className = 'carousel-card-item glass-card rounded-[28px] p-3 border cursor-pointer';
                 card.style.width = `${cardWidth}px`;
                 card.style.height = `${isMobile ? 240 : 260}px`;
-                arcContainer.appendChild(card);
-                arcCardElements.push(card);
-            }
-            updateArcCarousel();
-        }
-
-        function updateArcCarousel() {
-            if (!arcCardElements.length) return;
-
-            const isMobile = window.innerWidth < 640;
-
-            arcCardElements.forEach((card, index) => {
-                const offset = index - 2; // Slots: -2, -1, 0, 1, 2
-                let dataIndex = (currentArcIndex + offset) % mainCategoriesData.length;
-                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
-
-                const item = mainCategoriesData[dataIndex];
-
-                let translateX = 0;
-                let translateY = 0;
-                let rotate = 0;
-                let scale = 1;
-                let opacity = 1;
-                let zIndex = 10;
-
-                if (offset === 0) {
-                    translateX = 0;
-                    translateY = 0;
-                    rotate = 0;
-                    scale = 1.05;
-                    opacity = 1;
-                    zIndex = 30;
-                } else if (offset === -1) {
-                    translateX = isMobile ? -160 : -220;
-                    translateY = isMobile ? 25 : 35;
-                    rotate = -14;
-                    scale = 0.88;
-                    opacity = 0.8;
-                    zIndex = 20;
-                } else if (offset === 1) {
-                    translateX = isMobile ? 160 : 220;
-                    translateY = isMobile ? 25 : 35;
-                    rotate = 14;
-                    scale = 0.88;
-                    opacity = 0.8;
-                    zIndex = 20;
-                } else if (offset < -1) {
-                    translateX = isMobile ? -280 : -380;
-                    translateY = isMobile ? 60 : 90;
-                    rotate = -28;
-                    scale = 0.7;
-                    opacity = 0;
-                    zIndex = 10;
-                } else if (offset > 1) {
-                    translateX = isMobile ? 280 : 380;
-                    translateY = isMobile ? 60 : 90;
-                    rotate = 28;
-                    scale = 0.7;
-                    opacity = 0;
-                    zIndex = 10;
-                }
-
-                card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
-                card.style.opacity = opacity;
-                card.style.zIndex = zIndex;
-
-                if (offset === 0) {
-                    card.classList.add('active-glow-card', 'border-pink-500/70');
-                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
-                } else {
-                    card.classList.remove('active-glow-card', 'border-pink-500/70');
-                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
-                }
 
                 card.innerHTML = `
                     <div class="h-36 sm:h-40 rounded-[20px] overflow-hidden relative mb-2 group">
@@ -745,26 +675,106 @@
                     <p class="text-[10px] text-slate-300 px-1 line-clamp-2 text-center font-normal">${item.desc}</p>
                 `;
 
+                arcContainer.appendChild(card);
+                arcCardElements.push(card);
+            }
+            updateArcCarousel();
+            lucide.createIcons();
+        }
+
+        function updateArcCarousel() {
+            if (!arcCardElements.length) return;
+
+            const isMobile = window.innerWidth < 640;
+            const M = arcCardElements.length; // 6 cards
+
+            arcCardElements.forEach((card, index) => {
+                let diff = (index - (currentArcIndex % M) + M) % M;
+                if (diff > M / 2) diff -= M;
+
+                let translateX = 0;
+                let translateY = 0;
+                let rotate = 0;
+                let scale = 1;
+                let opacity = 1;
+                let zIndex = 10;
+
+                if (diff === 0) {
+                    translateX = 0;
+                    translateY = 0;
+                    rotate = 0;
+                    scale = 1.05;
+                    opacity = 1;
+                    zIndex = 30;
+                } else if (diff === -1) {
+                    translateX = isMobile ? -160 : -220;
+                    translateY = isMobile ? 25 : 35;
+                    rotate = -14;
+                    scale = 0.88;
+                    opacity = 0.8;
+                    zIndex = 20;
+                } else if (diff === 1) {
+                    translateX = isMobile ? 160 : 220;
+                    translateY = isMobile ? 25 : 35;
+                    rotate = 14;
+                    scale = 0.88;
+                    opacity = 0.8;
+                    zIndex = 20;
+                } else if (diff === -2) {
+                    translateX = isMobile ? -280 : -380;
+                    translateY = isMobile ? 60 : 90;
+                    rotate = -28;
+                    scale = 0.7;
+                    opacity = 0.3;
+                    zIndex = 10;
+                } else if (diff === 2) {
+                    translateX = isMobile ? 280 : 380;
+                    translateY = isMobile ? 60 : 90;
+                    rotate = 28;
+                    scale = 0.7;
+                    opacity = 0.3;
+                    zIndex = 10;
+                } else {
+                    translateX = diff < 0 ? -450 : 450;
+                    translateY = 120;
+                    rotate = diff < 0 ? -35 : 35;
+                    scale = 0.5;
+                    opacity = 0;
+                    zIndex = 5;
+                }
+
+                // Terapkan animasi transformasi kurva setengah lingkaran
+                card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+
+                if (diff === 0) {
+                    card.classList.add('active-glow-card', 'border-pink-500/70');
+                    card.classList.remove('border-white/10', 'hover:border-pink-500/40');
+                } else {
+                    card.classList.remove('active-glow-card', 'border-pink-500/70');
+                    card.classList.add('border-white/10', 'hover:border-pink-500/40');
+                }
+
                 card.onclick = () => {
-                    if (offset !== 0) {
-                        currentArcIndex = dataIndex;
+                    if (diff !== 0) {
+                        currentArcIndex = (currentArcIndex + diff + M) % M;
                         updateArcCarousel();
                     }
                 };
             });
-            lucide.createIcons();
         }
 
         if (prevArcBtn) {
             prevArcBtn.onclick = () => {
-                currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                currentArcIndex = (currentArcIndex - 1 + arcCardElements.length) % arcCardElements.length;
                 updateArcCarousel();
             };
         }
 
         if (nextArcBtn) {
             nextArcBtn.onclick = () => {
-                currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
+                currentArcIndex = (currentArcIndex + 1) % arcCardElements.length;
                 updateArcCarousel();
             };
         }
@@ -778,10 +788,10 @@
             flatContainer.addEventListener('touchend', e => {
                 touchEndX = e.changedTouches[0].screenX;
                 if (touchStartX - touchEndX > 40) {
-                    currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
+                    currentFlatIndex = (currentFlatIndex + 1) % flatCardElements.length;
                     updateFlatCarousel();
                 } else if (touchEndX - touchStartX > 40) {
-                    currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                    currentFlatIndex = (currentFlatIndex - 1 + flatCardElements.length) % flatCardElements.length;
                     updateFlatCarousel();
                 }
             }, { passive: true });
@@ -792,10 +802,10 @@
             arcContainer.addEventListener('touchend', e => {
                 touchEndX = e.changedTouches[0].screenX;
                 if (touchStartX - touchEndX > 40) {
-                    currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
+                    currentArcIndex = (currentArcIndex + 1) % arcCardElements.length;
                     updateArcCarousel();
                 } else if (touchEndX - touchStartX > 40) {
-                    currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
+                    currentArcIndex = (currentArcIndex - 1 + arcCardElements.length) % arcCardElements.length;
                     updateArcCarousel();
                 }
             }, { passive: true });
