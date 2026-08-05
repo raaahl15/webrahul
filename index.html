@@ -244,7 +244,7 @@
             </div>
 
             <!-- Flat Carousel Container (Lurus Horizontal Track) -->
-            <div class="relative max-w-5xl mx-auto h-[380px] sm:h-[400px] flex items-center justify-center overflow-hidden py-4 select-none" id="flat-carousel-container">
+            <div class="relative max-w-6xl mx-auto h-[380px] sm:h-[400px] flex items-center justify-center overflow-hidden py-4 select-none px-2" id="flat-carousel-container">
                 <!-- Dynamically generated flat cards rendered via JavaScript -->
             </div>
 
@@ -361,26 +361,26 @@
             flatContainer.innerHTML = '';
             flatItemsData.forEach((item, idx) => {
                 const card = document.createElement('div');
-                // Posisi tegak lurus sempurna tanpa kelas scale terbalik
-                card.className = `absolute transition-all duration-500 ease-out glass-card rounded-[32px] p-4 cursor-pointer select-none w-[270px] sm:w-[320px]`;
+                // Posisi tegak lurus sempurna tanpa kelas scale terbalik & rapat
+                card.className = `absolute transition-all duration-500 ease-out glass-card rounded-[28px] p-3.5 cursor-pointer select-none w-[230px] sm:w-[270px] md:w-[290px]`;
                 card.dataset.index = idx;
 
                 card.innerHTML = `
-                    <div class="h-56 sm:h-64 rounded-[24px] overflow-hidden relative mb-3 group">
+                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative mb-3 group">
                         <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
                         
-                        <div class="absolute top-3 left-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold ${item.badgeColor} border border-white/20">
+                        <div class="absolute top-3 left-3 px-2.5 py-1 glass-pill rounded-full text-[10px] font-bold ${item.badgeColor} border border-white/20">
                             ${item.badge}
                         </div>
 
-                        <div class="absolute top-3 right-3 w-8 h-8 glass-pill rounded-full flex items-center justify-center text-white shadow-md">
-                            <i data-lucide="${item.icon}" class="w-4 h-4 text-pink-300"></i>
+                        <div class="absolute top-3 right-3 w-7 h-7 glass-pill rounded-full flex items-center justify-center text-white shadow-md">
+                            <i data-lucide="${item.icon}" class="w-3.5 h-3.5 text-pink-300"></i>
                         </div>
                     </div>
-                    <div class="text-left px-2">
-                        <h3 class="text-base sm:text-lg font-bold text-white truncate">${item.title}</h3>
-                        <p class="text-xs text-slate-300 mt-1 line-clamp-2">${item.desc}</p>
+                    <div class="text-left px-1">
+                        <h3 class="text-sm sm:text-base font-bold text-white truncate">${item.title}</h3>
+                        <p class="text-[11px] text-slate-300 mt-1 line-clamp-2">${item.desc}</p>
                     </div>
                 `;
 
@@ -401,7 +401,8 @@
             const cards = flatContainer.querySelectorAll('.absolute');
             const total = flatItemsData.length;
             const isMobile = window.innerWidth < 640;
-            const spacingX = isMobile ? 190 : 310;
+            // Spacing lebih rapat agar 3 kartu terlihat bersamaan dengan jelas
+            const spacingX = isMobile ? 150 : 240;
 
             cards.forEach((card, idx) => {
                 let diff = idx - activeFlatIndex;
@@ -415,23 +416,23 @@
                     card.style.opacity = '1';
                     card.style.zIndex = '30';
                     card.style.filter = 'none';
-                    card.classList.add('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/10');
+                    card.classList.add('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === 1) {
-                    // Posisi Kanan - Lurus
-                    card.style.transform = `translateX(${spacingX}px) scale(0.85)`;
-                    card.style.opacity = '0.6';
+                    // Posisi Kanan - Rapat & Jelas Kelihatan
+                    card.style.transform = `translateX(${spacingX}px) scale(0.9)`;
+                    card.style.opacity = '0.85';
                     card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.75)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/10');
+                    card.style.filter = 'brightness(0.85)';
+                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === -1) {
-                    // Posisi Kiri - Lurus
-                    card.style.transform = `translateX(-${spacingX}px) scale(0.85)`;
-                    card.style.opacity = '0.6';
+                    // Posisi Kiri - Rapat & Jelas Kelihatan
+                    card.style.transform = `translateX(-${spacingX}px) scale(0.9)`;
+                    card.style.opacity = '0.85';
                     card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.75)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/10');
+                    card.style.filter = 'brightness(0.85)';
+                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'auto';
                 } else {
                     // Posisi Tersembunyi di Luar Layar
@@ -440,7 +441,7 @@
                     card.style.opacity = '0';
                     card.style.zIndex = '10';
                     card.style.filter = 'brightness(0.4)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/10');
+                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'none';
                 }
             });
