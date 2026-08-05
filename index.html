@@ -362,7 +362,7 @@
             flatItemsData.forEach((item, idx) => {
                 const card = document.createElement('div');
                 // Posisi tegak lurus sempurna tanpa kelas scale terbalik & rapat
-                card.className = `absolute transition-all duration-500 ease-out glass-card rounded-[28px] p-3.5 cursor-pointer select-none w-[230px] sm:w-[270px] md:w-[290px]`;
+                card.className = `absolute glass-card rounded-[28px] p-3.5 cursor-pointer select-none w-[230px] sm:w-[270px] md:w-[290px]`;
                 card.dataset.index = idx;
 
                 card.innerHTML = `
@@ -410,6 +410,18 @@
                 if (diff > total / 2) diff -= total;
                 if (diff < -total / 2) diff += total;
 
+                // Deteksi jika kartu melompat dari ujung kanan ke kiri / sebaliknya
+                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
+                card.dataset.prevDiff = diff;
+
+                const isJumping = Math.abs(diff - prevDiff) > 1.5;
+
+                if (isJumping) {
+                    card.style.transition = 'none';
+                } else {
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+
                 if (diff === 0) {
                     // Posisi Tengah (Aktif) - Lurus tanpa rotasi/terbalik
                     card.style.transform = `translateX(0px) scale(1)`;
@@ -435,7 +447,7 @@
                     card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'auto';
                 } else {
-                    // Posisi Tersembunyi di Luar Layar
+                    // Posisi Tersembunyi di Luar Layar (Siap meluncur masuk)
                     const side = diff > 0 ? 1 : -1;
                     card.style.transform = `translateX(${side * spacingX * 1.8}px) scale(0.7)`;
                     card.style.opacity = '0';
@@ -443,6 +455,12 @@
                     card.style.filter = 'brightness(0.4)';
                     card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
                     card.style.pointerEvents = 'none';
+                }
+
+                if (isJumping) {
+                    // Force reflow lalu kembalikan animasi transisi mulus
+                    void card.offsetHeight;
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
                 }
             });
         }
@@ -565,6 +583,17 @@
                 if (diff > total / 2) diff -= total;
                 if (diff < -total / 2) diff += total;
 
+                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
+                card.dataset.prevDiff = diff;
+
+                const isJumping = Math.abs(diff - prevDiff) > 1.5;
+
+                if (isJumping) {
+                    card.style.transition = 'none';
+                } else {
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+
                 if (diff === 0) {
                     card.style.transform = `translateX(0px) translateY(0px) rotate(0deg) scale(1)`;
                     card.style.opacity = '1';
@@ -595,6 +624,11 @@
                     card.style.filter = 'brightness(0.4)';
                     card.classList.remove('arc-card-active');
                     card.style.pointerEvents = 'none';
+                }
+
+                if (isJumping) {
+                    void card.offsetHeight;
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
                 }
             });
         }
