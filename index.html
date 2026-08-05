@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -25,18 +26,18 @@
             background-size: 40px 40px;
         }
 
-        /* Glowing Orbs / Gradient Ambient Light */
+        /* Ambient Gradient Light Glows */
         .glow-purple {
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, rgba(11, 5, 18, 0) 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(11, 5, 18, 0) 70%);
         }
         .glow-pink {
             background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, rgba(11, 5, 18, 0) 70%);
         }
         .glow-blue {
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(11, 5, 18, 0) 70%);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(11, 5, 18, 0) 70%);
         }
 
-        /* Glassmorphism Styles */
+        /* Glassmorphism Styling */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px);
@@ -58,19 +59,19 @@
         }
 
         .glass-nav {
-            background: rgba(18, 10, 32, 0.6);
+            background: rgba(18, 10, 32, 0.65);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        /* Text Gradients */
+        /* Custom Text Gradients */
         .text-gradient-pink {
             background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Custom Curved Arc Ring for Bottom Section */
+        /* Bottom Section Curved Arc Ring Background */
         .arc-container {
             position: relative;
             width: 100%;
@@ -83,15 +84,15 @@
             bottom: -320px;
             left: 50%;
             transform: translateX(-50%);
-            width: 900px;
+            width: 960px;
             height: 600px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(11, 5, 18, 0.8) 70%);
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(11, 5, 18, 0.85) 70%);
             border: 2px solid rgba(236, 72, 153, 0.3);
-            box-shadow: 0 -10px 40px rgba(168, 85, 247, 0.3), inset 0 0 30px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 -10px 45px rgba(168, 85, 247, 0.3), inset 0 0 35px rgba(56, 189, 248, 0.2);
         }
 
-        /* Hover Scale Transitions */
+        /* Hover Elevation Effects */
         .hover-scale {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -99,17 +100,16 @@
             transform: translateY(-6px) scale(1.02);
         }
 
-        /* 3D Arc Carousel Smooth Styling */
-        .arc-card-item {
+        /* Smooth Carousel Item Positions */
+        .carousel-card-item {
             position: absolute;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, filter 0.6s ease;
+            will-change: transform, opacity, filter;
             transform-origin: center center;
-            will-change: transform, opacity;
         }
 
-        .arc-card-active {
-            box-shadow: 0 0 35px rgba(236, 72, 153, 0.4), 0 0 15px rgba(168, 85, 247, 0.3);
-            border-color: rgba(236, 72, 153, 0.6) !important;
+        .active-glow-card {
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.45), 0 0 15px rgba(168, 85, 247, 0.3);
+            border-color: rgba(236, 72, 153, 0.65) !important;
         }
 
         @keyframes spinSlow {
@@ -124,11 +124,11 @@
 <body class="bg-grid-pattern relative min-h-screen">
 
     <!-- Ambient Light Effects -->
-    <div class="glow-purple absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none rounded-full"></div>
+    <div class="glow-purple absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[500px] pointer-events-none rounded-full"></div>
     <div class="glow-pink absolute top-[400px] left-[-100px] w-[500px] h-[500px] pointer-events-none rounded-full"></div>
     <div class="glow-blue absolute bottom-0 right-[-100px] w-[600px] h-[600px] pointer-events-none rounded-full"></div>
 
-    <!-- Main Container -->
+    <!-- Main Outer Container -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
 
         <!-- HEADER / NAVIGATION BAR -->
@@ -148,17 +148,17 @@
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
                 <a href="#home" class="text-white font-semibold hover:text-pink-400 transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-pink-500 after:rounded-full">Beranda</a>
-                <a href="#virtual" class="hover:text-pink-400 transition-colors">Virtual Mortara</a>
-                <a href="#digilib" class="hover:text-pink-400 transition-colors">Digilib Mortara</a>
-                <a href="#about" class="hover:text-pink-400 transition-colors">Tentang Desa</a>
-                <a href="#contact" class="glass-pill px-5 py-2 rounded-full text-white font-medium text-xs tracking-wider uppercase border border-pink-500/30">
+                <a href="#flat-showcase-section" class="hover:text-pink-400 transition-colors">Virtual Mortara</a>
+                <a href="#flat-showcase-section" class="hover:text-pink-400 transition-colors">Digilib Mortara</a>
+                <a href="#arc-carousel-section" class="hover:text-pink-400 transition-colors">Tentang Desa</a>
+                <a href="#flat-showcase-section" class="glass-pill px-5 py-2 rounded-full text-white font-medium text-xs tracking-wider uppercase border border-pink-500/30">
                     Eksplor
                 </a>
             </nav>
 
             <!-- Mobile Menu Toggle Button -->
             <div class="flex items-center gap-3">
-                <button class="glass-pill p-2.5 rounded-full text-slate-200 hover:text-white md:hidden">
+                <button class="glass-pill p-2.5 rounded-full text-slate-200 hover:text-white md:hidden" aria-label="Toggle Menu">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -189,7 +189,7 @@
 
                 <!-- CTA Button -->
                 <div class="pt-2">
-                    <a href="#virtual" class="glass-pill inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-semibold text-white shadow-lg hover:shadow-pink-500/25 group">
+                    <a href="#flat-showcase-section" class="glass-pill inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-semibold text-white shadow-lg hover:shadow-pink-500/25 group">
                         <span>Jelajahi Warisan</span>
                         <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-pink-500 transition-colors">
                             <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
@@ -243,8 +243,8 @@
                 </div>
             </div>
 
-            <!-- Flat Carousel Container (Lurus Horizontal Track) -->
-            <div class="relative max-w-6xl mx-auto h-[380px] sm:h-[400px] flex items-center justify-center overflow-hidden py-4 select-none px-2" id="flat-carousel-container">
+            <!-- Flat Carousel Container (Lurus Horizontal Track Without Gaps) -->
+            <div class="relative w-full max-w-6xl mx-auto h-[380px] sm:h-[400px] flex items-center justify-center overflow-hidden py-4 select-none px-2" id="flat-carousel-container">
                 <!-- Dynamically generated flat cards rendered via JavaScript -->
             </div>
 
@@ -259,7 +259,7 @@
             </div>
         </section>
 
-        <!-- BOTTOM CIRCULAR DIAL / ARC DISPLAY SECTION (Korsel Bergilir Busur) -->
+        <!-- BOTTOM CIRCULAR DIAL / ARC DISPLAY SECTION (Korsel Lurus Continuous) -->
         <section class="arc-container flex flex-col items-center justify-start pt-6 relative select-none" id="arc-carousel-section">
             <!-- Glowing Curved Ring Backdrop -->
             <div class="arc-ring"></div>
@@ -283,7 +283,7 @@
             </div>
 
             <!-- Carousel Items Container -->
-            <div class="relative z-20 w-full h-[320px] flex items-center justify-center pt-2" id="arc-carousel-items">
+            <div class="relative z-20 w-full h-[320px] flex items-center justify-center pt-2 overflow-hidden" id="arc-carousel-items">
                 <!-- Dynamically generated 3D Cards rendered via JS -->
             </div>
 
@@ -309,193 +309,7 @@
         lucide.createIcons();
 
         /* ==========================================================================
-           1. FLAT HORIZONTAL CAROUSEL (Korsel Lurus Tengah)
-           ========================================================================== */
-        const flatItemsData = [
-            {
-                title: "Perpustakaan Digital",
-                desc: "Koleksi literasi, arsip sejarah & dokumen Desa Ganda Ganda.",
-                badge: "Digilib Mortara",
-                badgeColor: "text-purple-300",
-                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80",
-                icon: "book-open"
-            },
-            {
-                title: "Dokumentasi 3D Cadas Prasejarah",
-                desc: "Eksplorasi lukisan cadas kuno dalam tampilan 3 Dimensi yang interaktif.",
-                badge: "Virtual Mortara 3D",
-                badgeColor: "text-pink-300",
-                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
-                icon: "box"
-            },
-            {
-                title: "Video Dokumenter Sinematik",
-                desc: "Tayangan sinematik ekspedisi riset situs prasejarah Morowali Utara.",
-                badge: "Video Dokumenter",
-                badgeColor: "text-cyan-300",
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-                icon: "play"
-            },
-            {
-                title: "Galeri Etnografi & Budaya",
-                desc: "Kumpulan artefak, ritual adat & dokumentasi sejarah masyarakat lokal.",
-                badge: "Arsip Budaya",
-                badgeColor: "text-emerald-300",
-                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80",
-                icon: "image"
-            },
-            {
-                title: "Peta Interaktif Geospasial",
-                desc: "Pemetaan lokasi situs cadas purba & rute penjelajahan lapangan.",
-                badge: "Peta Geospasial",
-                badgeColor: "text-amber-300",
-                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-                icon: "map-pin"
-            }
-        ];
-
-        let activeFlatIndex = 1; // Default di Virtual Mortara 3D
-        const flatContainer = document.getElementById('flat-carousel-container');
-
-        function createFlatCards() {
-            flatContainer.innerHTML = '';
-            flatItemsData.forEach((item, idx) => {
-                const card = document.createElement('div');
-                // Posisi tegak lurus sempurna tanpa kelas scale terbalik & rapat
-                card.className = `absolute glass-card rounded-[28px] p-3.5 cursor-pointer select-none w-[230px] sm:w-[270px] md:w-[290px]`;
-                card.dataset.index = idx;
-
-                card.innerHTML = `
-                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative mb-3 group">
-                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
-                        
-                        <div class="absolute top-3 left-3 px-2.5 py-1 glass-pill rounded-full text-[10px] font-bold ${item.badgeColor} border border-white/20">
-                            ${item.badge}
-                        </div>
-
-                        <div class="absolute top-3 right-3 w-7 h-7 glass-pill rounded-full flex items-center justify-center text-white shadow-md">
-                            <i data-lucide="${item.icon}" class="w-3.5 h-3.5 text-pink-300"></i>
-                        </div>
-                    </div>
-                    <div class="text-left px-1">
-                        <h3 class="text-sm sm:text-base font-bold text-white truncate">${item.title}</h3>
-                        <p class="text-[11px] text-slate-300 mt-1 line-clamp-2">${item.desc}</p>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    if (idx !== activeFlatIndex) {
-                        activeFlatIndex = idx;
-                        updateFlatPositions();
-                    }
-                });
-
-                flatContainer.appendChild(card);
-            });
-            lucide.createIcons();
-            updateFlatPositions();
-        }
-
-        function updateFlatPositions() {
-            const cards = flatContainer.querySelectorAll('.absolute');
-            const total = flatItemsData.length;
-            const isMobile = window.innerWidth < 640;
-            // Spacing lebih rapat agar 3 kartu terlihat bersamaan dengan jelas
-            const spacingX = isMobile ? 150 : 240;
-
-            cards.forEach((card, idx) => {
-                let diff = idx - activeFlatIndex;
-
-                if (diff > total / 2) diff -= total;
-                if (diff < -total / 2) diff += total;
-
-                // Deteksi jika kartu melompat dari ujung kanan ke kiri / sebaliknya
-                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
-                card.dataset.prevDiff = diff;
-
-                const isJumping = Math.abs(diff - prevDiff) > 1.5;
-
-                if (isJumping) {
-                    card.style.transition = 'none';
-                } else {
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-
-                if (diff === 0) {
-                    // Posisi Tengah (Aktif) - Lurus tanpa rotasi/terbalik
-                    card.style.transform = `translateX(0px) scale(1)`;
-                    card.style.opacity = '1';
-                    card.style.zIndex = '30';
-                    card.style.filter = 'none';
-                    card.classList.add('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === 1) {
-                    // Posisi Kanan - Rapat & Jelas Kelihatan
-                    card.style.transform = `translateX(${spacingX}px) scale(0.9)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.85)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === -1) {
-                    // Posisi Kiri - Rapat & Jelas Kelihatan
-                    card.style.transform = `translateX(-${spacingX}px) scale(0.9)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.85)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
-                    card.style.pointerEvents = 'auto';
-                } else {
-                    // Posisi Tersembunyi di Luar Layar (Siap meluncur masuk)
-                    const side = diff > 0 ? 1 : -1;
-                    card.style.transform = `translateX(${side * spacingX * 1.8}px) scale(0.7)`;
-                    card.style.opacity = '0';
-                    card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.4)';
-                    card.classList.remove('border-pink-500/50', 'shadow-2xl', 'shadow-pink-500/20');
-                    card.style.pointerEvents = 'none';
-                }
-
-                if (isJumping) {
-                    // Force reflow lalu kembalikan animasi transisi mulus
-                    void card.offsetHeight;
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-            });
-        }
-
-        document.getElementById('flat-prev-btn').addEventListener('click', () => {
-            activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-            updateFlatPositions();
-        });
-
-        document.getElementById('flat-next-btn').addEventListener('click', () => {
-            activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-            updateFlatPositions();
-        });
-
-        // Touch Swipe untuk Korsel Lurus
-        let flatTouchStartX = 0;
-        let flatTouchEndX = 0;
-
-        flatContainer.addEventListener('touchstart', (e) => {
-            flatTouchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        flatContainer.addEventListener('touchend', (e) => {
-            flatTouchEndX = e.changedTouches[0].screenX;
-            if (flatTouchStartX - flatTouchEndX > 40) {
-                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                updateFlatPositions();
-            } else if (flatTouchEndX - flatTouchStartX > 40) {
-                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                updateFlatPositions();
-            }
-        }, { passive: true });
-
-        /* ==========================================================================
-           2. ARC CURVED CAROUSEL (Korsel Melengkung Bawah)
+           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (Korsel Setengah Lingkaran Seamless)
            ========================================================================== */
         const arcItemsData = [
             {
@@ -527,21 +341,27 @@
                 subtitle: "Titik Koordinat Warisan Leluhur",
                 badge: "Geofasilitas",
                 img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Katalog Artefak Batu Purba",
+                subtitle: "Penemuan Alat Serpih & Artefak Cadas",
+                badge: "Artefak",
+                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
         let activeArcIndex = 0;
-        const container = document.getElementById('arc-carousel-items');
+        const arcContainer = document.getElementById('arc-carousel-items');
 
         function createArcCards() {
-            container.innerHTML = '';
+            arcContainer.innerHTML = '';
             arcItemsData.forEach((item, idx) => {
                 const card = document.createElement('div');
-                card.className = `arc-card-item glass-card rounded-[32px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
+                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
                 card.dataset.index = idx;
 
                 card.innerHTML = `
-                    <div class="h-48 sm:h-56 rounded-[24px] overflow-hidden relative group">
+                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
                         <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
                         
@@ -563,29 +383,28 @@
                     }
                 });
 
-                container.appendChild(card);
+                arcContainer.appendChild(card);
             });
             updateArcPositions();
         }
 
         function updateArcPositions() {
-            const cards = container.querySelectorAll('.arc-card-item');
+            const cards = arcContainer.querySelectorAll('#arc-carousel-items .carousel-card-item');
             const total = arcItemsData.length;
             const isMobile = window.innerWidth < 640;
 
-            // Spacing horizontal rapat dan lurus tanpa penurunan vertikal atau kemiringan sudut
-            const spacingX = isMobile ? 150 : 240;
+            const spacingX = isMobile ? 135 : 215;
 
             cards.forEach((card, idx) => {
                 let diff = idx - activeArcIndex;
 
-                if (diff > total / 2) diff -= total;
-                if (diff < -total / 2) diff += total;
+                while (diff > total / 2) diff -= total;
+                while (diff < -total / 2) diff += total;
 
                 const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
                 card.dataset.prevDiff = diff;
 
-                const isJumping = Math.abs(diff - prevDiff) > 1.5;
+                const isJumping = Math.abs(diff - prevDiff) > 1.8;
 
                 if (isJumping) {
                     card.style.transition = 'none';
@@ -594,38 +413,251 @@
                 }
 
                 if (diff === 0) {
-                    // Posisi Tengah (Aktif) - Lurus Tegak Tanpa Rotasi
+                    // Peak of the Semicircle Arc (Center)
+                    card.style.transform = `translateX(0px) translateY(0px) rotate(0deg) scale(1)`;
+                    card.style.opacity = '1';
+                    card.style.zIndex = '30';
+                    card.style.filter = 'none';
+                    card.classList.add('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 1) {
+                    // Right 1 - Descending along Semicircle Arc
+                    card.style.transform = `translateX(${spacingX}px) translateY(${isMobile ? 18 : 28}px) rotate(${isMobile ? 8 : 12}deg) scale(0.88)`;
+                    card.style.opacity = '0.85';
+                    card.style.zIndex = '20';
+                    card.style.filter = 'brightness(0.82)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === -1) {
+                    // Left 1 - Descending along Semicircle Arc
+                    card.style.transform = `translateX(-${spacingX}px) translateY(${isMobile ? 18 : 28}px) rotate(${isMobile ? -8 : -12}deg) scale(0.88)`;
+                    card.style.opacity = '0.85';
+                    card.style.zIndex = '20';
+                    card.style.filter = 'brightness(0.82)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'auto';
+                } else if (diff === 2) {
+                    // Right 2 - Lower along Semicircle Arc
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(${posX}px) translateY(${isMobile ? 48 : 72}px) rotate(${isMobile ? 14 : 20}deg) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.6';
+                    card.style.zIndex = '10';
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else if (diff === -2) {
+                    // Left 2 - Lower along Semicircle Arc
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(-${posX}px) translateY(${isMobile ? 48 : 72}px) rotate(${isMobile ? -14 : -20}deg) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.6';
+                    card.style.zIndex = '10';
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else {
+                    // Offscreen Semicircle Zone
+                    const side = diff > 0 ? 1 : -1;
+                    const posX = side * spacingX * 2.5;
+                    card.style.transform = `translateX(${posX}px) translateY(110px) rotate(${side * 25}deg) scale(0.6)`;
+                    card.style.opacity = '0';
+                    card.style.zIndex = '1';
+                    card.style.filter = 'brightness(0.3)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = 'none';
+                }
+
+                if (isJumping) {
+                    void card.offsetHeight;
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+            });
+        }
+
+        document.getElementById('flat-prev-btn').addEventListener('click', () => {
+            activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+            updateFlatPositions();
+        });
+
+        document.getElementById('flat-next-btn').addEventListener('click', () => {
+            activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+            updateFlatPositions();
+        });
+
+        // Touch Swipe Gesture for Flat Carousel
+        let flatTouchStartX = 0;
+        let flatTouchEndX = 0;
+
+        flatContainer.addEventListener('touchstart', (e) => {
+            flatTouchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        flatContainer.addEventListener('touchend', (e) => {
+            flatTouchEndX = e.changedTouches[0].screenX;
+            if (flatTouchStartX - flatTouchEndX > 35) {
+                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
+                updateFlatPositions();
+            } else if (flatTouchEndX - flatTouchStartX > 35) {
+                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
+                updateFlatPositions();
+            }
+        }, { passive: true });
+
+
+        /* ==========================================================================
+           2. STRAIGHT BOTTOM CAROUSEL (Korsel Lurus Bawah Seamless)
+           ========================================================================== */
+        const arcItemsData = [
+            {
+                title: "Eksplorasi Ruang 3D Cadas",
+                subtitle: "Desa Ganda Ganda, Morowali Utara",
+                badge: "Virtual 3D",
+                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Perpustakaan Digital Mortara",
+                subtitle: "Koleksi Dokumen & Sejarah Purba",
+                badge: "Digilib",
+                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Video Dokumenter Sinematik",
+                subtitle: "Ekspedisi Situs Cadas Prasejarah",
+                badge: "Dokumenter",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                title: "Galeri Telapak Tangan Purba",
+                subtitle: "Situs Artefak Cadas Ganda Ganda",
+                badge: "Arsip Foto",
+                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Peta Geospasial Situs Cadas",
+                subtitle: "Titik Koordinat Warisan Leluhur",
+                badge: "Geofasilitas",
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Katalog Artefak Batu Purba",
+                subtitle: "Penemuan Alat Serpih & Artefak Cadas",
+                badge: "Artefak",
+                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        let activeArcIndex = 0;
+        const arcContainer = document.getElementById('arc-carousel-items');
+
+        function createArcCards() {
+            arcContainer.innerHTML = '';
+            arcItemsData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
+                card.dataset.index = idx;
+
+                card.innerHTML = `
+                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
+                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
+                        
+                        <div class="absolute top-3 right-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold text-pink-300 border border-pink-500/30">
+                            ${item.badge}
+                        </div>
+
+                        <div class="absolute bottom-3 left-3 right-3 p-3 glass-card rounded-xl border border-white/10 backdrop-blur-md">
+                            <p class="text-xs font-bold text-white tracking-wide truncate">${item.title}</p>
+                            <p class="text-[10px] text-slate-300 mt-0.5 truncate">${item.subtitle}</p>
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    if (idx !== activeArcIndex) {
+                        activeArcIndex = idx;
+                        updateArcPositions();
+                    }
+                });
+
+                arcContainer.appendChild(card);
+            });
+            updateArcPositions();
+        }
+
+        function updateArcPositions() {
+            const cards = arcContainer.querySelectorAll('#arc-carousel-items .carousel-card-item');
+            const total = arcItemsData.length;
+            const isMobile = window.innerWidth < 640;
+
+            const spacingX = isMobile ? 150 : 235;
+
+            cards.forEach((card, idx) => {
+                let diff = idx - activeArcIndex;
+
+                while (diff > total / 2) diff -= total;
+                while (diff < -total / 2) diff += total;
+
+                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
+                card.dataset.prevDiff = diff;
+
+                const isJumping = Math.abs(diff - prevDiff) > 1.8;
+
+                if (isJumping) {
+                    card.style.transition = 'none';
+                } else {
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
+                }
+
+                if (diff === 0) {
+                    // Center Active
                     card.style.transform = `translateX(0px) scale(1)`;
                     card.style.opacity = '1';
                     card.style.zIndex = '30';
                     card.style.filter = 'none';
-                    card.classList.add('arc-card-active');
+                    card.classList.add('active-glow-card');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === 1) {
-                    // Posisi Kanan - Lurus Tegak
+                    // Right 1
                     card.style.transform = `translateX(${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.8';
+                    card.style.opacity = '0.85';
                     card.style.zIndex = '20';
                     card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('arc-card-active');
+                    card.classList.remove('active-glow-card');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === -1) {
-                    // Posisi Kiri - Lurus Tegak
+                    // Left 1
                     card.style.transform = `translateX(-${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.8';
+                    card.style.opacity = '0.85';
                     card.style.zIndex = '20';
                     card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('arc-card-active');
+                    card.classList.remove('active-glow-card');
                     card.style.pointerEvents = 'auto';
-                } else {
-                    // Posisi Tersembunyi (Persiapan Masuk)
-                    const side = diff > 0 ? 1 : -1;
-                    const farX = side * (spacingX * 1.8);
-                    card.style.transform = `translateX(${farX}px) scale(0.7)`;
-                    card.style.opacity = '0';
+                } else if (diff === 2) {
+                    // Right 2 (Populates outer desktop space so NO empty gaps exist)
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.55';
                     card.style.zIndex = '10';
-                    card.style.filter = 'brightness(0.4)';
-                    card.classList.remove('arc-card-active');
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else if (diff === -2) {
+                    // Left 2 (Populates outer desktop space so NO empty gaps exist)
+                    const posX = isMobile ? spacingX * 1.5 : spacingX * 1.85;
+                    card.style.transform = `translateX(-${posX}px) scale(${isMobile ? '0.7' : '0.76'})`;
+                    card.style.opacity = isMobile ? '0' : '0.55';
+                    card.style.zIndex = '10';
+                    card.style.filter = 'brightness(0.55)';
+                    card.classList.remove('active-glow-card');
+                    card.style.pointerEvents = isMobile ? 'none' : 'auto';
+                } else {
+                    // Offscreen hidden zone
+                    const side = diff > 0 ? 1 : -1;
+                    const posX = side * spacingX * 2.6;
+                    card.style.transform = `translateX(${posX}px) scale(0.6)`;
+                    card.style.opacity = '0';
+                    card.style.zIndex = '1';
+                    card.style.filter = 'brightness(0.3)';
+                    card.classList.remove('active-glow-card');
                     card.style.pointerEvents = 'none';
                 }
 
@@ -646,19 +678,20 @@
             updateArcPositions();
         });
 
+        // Touch Swipe Gesture for Arc Carousel
         let touchStartX = 0;
         let touchEndX = 0;
 
-        container.addEventListener('touchstart', (e) => {
+        arcContainer.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
 
-        container.addEventListener('touchend', (e) => {
+        arcContainer.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 40) {
+            if (touchStartX - touchEndX > 35) {
                 activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
                 updateArcPositions();
-            } else if (touchEndX - touchStartX > 40) {
+            } else if (touchEndX - touchStartX > 35) {
                 activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
                 updateArcPositions();
             }
@@ -669,7 +702,7 @@
             updateArcPositions();
         });
 
-        // Inisialisasi awal kedua korsel
+        // Initialize both continuous carousels
         createFlatCards();
         createArcCards();
     </script>
