@@ -259,6 +259,111 @@
             </div>
         </section>
 
+        <!-- SECTION: MENGENAL LEBIH JAUH DESA GANDA GANDA -->
+        <section class="my-20 relative z-20" id="about-village-section">
+            <div class="text-center max-w-3xl mx-auto mb-12 px-4">
+                <div class="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-300 border border-cyan-500/30 mb-3">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-cyan-400"></i>
+                    <span>Informasi & Destinasi Desa</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                    Mengenal Lebih Jauh <span class="bg-gradient-to-r from-cyan-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">Desa Ganda Ganda</span>
+                </h2>
+                <p class="text-slate-300 text-xs sm:text-sm mt-3 leading-relaxed">
+                    Jelajahi ragam keunikan, latar belakang sejarah, lanskap geografis, serta kearifan lokal masyarakat Desa Ganda Ganda di Morowali Utara.
+                </p>
+            </div>
+
+            <!-- Grid Menu Desa Ganda Ganda -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-2">
+                
+                <!-- Menu 1: Profil & Geografis -->
+                <div class="glass-card rounded-[28px] p-4 flex flex-col justify-between hover-scale group cursor-pointer border border-white/10 hover:border-cyan-400/50 transition-all duration-300 shadow-lg" onclick="openVillageModal('geografis')">
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Profil & Geografis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                            <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold text-cyan-300 border border-cyan-400/30">
+                                Profil Wilayah
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">Geografis & Alam</h3>
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-2">
+                            Lanskap pesisir memukau yang dikelilingi gugusan kars purba dan perairan Teluk Tomori.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-cyan-400">
+                        <span>Baca Selengkapnya</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Menu 2: Sejarah & Situs Cadas -->
+                <div class="glass-card rounded-[28px] p-4 flex flex-col justify-between hover-scale group cursor-pointer border border-white/10 hover:border-pink-400/50 transition-all duration-300 shadow-lg" onclick="openVillageModal('sejarah')">
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Situs Cadas Prasejarah" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                            <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold text-pink-300 border border-pink-400/30">
+                                Warisan Purba
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-pink-300 transition-colors">Situs Cadas Prasejarah</h3>
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-2">
+                            Dokumentasi artefak dan lukisan cap tangan cadas dari zaman megalitikum purba.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-pink-400">
+                        <span>Baca Selengkapnya</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Menu 3: Tradisi & Budaya -->
+                <div class="glass-card rounded-[28px] p-4 flex flex-col justify-between hover-scale group cursor-pointer border border-white/10 hover:border-purple-400/50 transition-all duration-300 shadow-lg" onclick="openVillageModal('budaya')">
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Seni & Budaya" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                            <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold text-purple-300 border border-purple-400/30">
+                                Adat & Tradisi
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors">Seni & Budaya Adat</h3>
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-2">
+                            Kearifan lokal, adat istiadat, serta kehidupan sosial masyarakat pribumi Morowali.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-purple-400">
+                        <span>Baca Selengkapnya</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Menu 4: Ekowisata & Komunitas -->
+                <div class="glass-card rounded-[28px] p-4 flex flex-col justify-between hover-scale group cursor-pointer border border-white/10 hover:border-amber-400/50 transition-all duration-300 shadow-lg" onclick="openVillageModal('wisata')">
+                    <div>
+                        <div class="h-44 rounded-2xl overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80" alt="Ekowisata & Komunitas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
+                            <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold text-amber-300 border border-amber-400/30">
+                                Destinasi Desa
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">Ekowisata & Komunitas</h3>
+                        <p class="text-xs text-slate-300 mt-1.5 leading-relaxed line-clamp-2">
+                            Pengembangan desa wisata berbasis konservasi sejarah dan bahari ramah lingkungan.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-amber-400">
+                        <span>Baca Selengkapnya</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- BOTTOM CIRCULAR DIAL / ARC DISPLAY SECTION (Korsel Lurus Continuous) -->
         <section class="arc-container flex flex-col items-center justify-start pt-6 relative select-none" id="arc-carousel-section">
             <!-- Glowing Curved Ring Backdrop -->
@@ -304,364 +409,106 @@
 
     </div>
 
+    <!-- MODAL POPUP DIALOG FOR DESA GANDA GANDA DETAILS -->
+    <div id="village-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card max-w-2xl w-full rounded-[32px] p-6 sm:p-8 relative border border-white/20 shadow-2xl overflow-y-auto max-h-[90vh]">
+            <!-- Close Button -->
+            <button onclick="closeVillageModal()" class="absolute top-5 right-5 w-9 h-9 glass-pill rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-pink-500/30 transition-all">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Dynamic Content Slot -->
+            <div id="village-modal-content"></div>
+        </div>
+    </div>
+
     <!-- Initialize Lucide Icons & Carousel Logic -->
     <script>
         lucide.createIcons();
 
         /* ==========================================================================
+           MODAL DETAIL DIALOG FOR DESA GANDA GANDA
+           ========================================================================== */
+        const modalData = {
+            geografis: {
+                title: "Geografis & Alam Desa Ganda Ganda",
+                badge: "Profil Wilayah",
+                badgeColor: "text-cyan-300 border-cyan-500/30",
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+                desc: "Desa Ganda Ganda terletak di Kecamatan Petasia, Kabupaten Morowali Utara, Sulawesi Tengah. Wilayah ini dianugerahi lanskap pesisir yang indah yang berbatasan langsung dengan perairan Teluk Tomori serta dikelilingi bentang pegunungan kars purba.<br><br>Keberadaan batuan kars ini menjadi benteng alami yang menyimpan jejak sejarah prasejarah serta keanekaragaman hayati flora dan fauna endemik Sulawesi."
+            },
+            sejarah: {
+                title: "Situs Cadas Prasejarah Ganda Ganda",
+                badge: "Warisan Purba",
+                badgeColor: "text-pink-300 border-pink-500/30",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+                desc: "Situs Cadas Desa Ganda Ganda menyimpan peninggalan arkeologis bernilai tinggi berupa cap-cap tangan prasejarah dan lukisan figuratif pada dinding tebing kars.<br><br>Lukisan cadas ini diperkirakan berusia ribuan tahun dan merupakan bukti migrasi serta kehidupan spiritual manusia purba Austronesia di wilayah Nusantara timur."
+            },
+            budaya: {
+                title: "Seni, Budaya & Kehidupan Adat",
+                badge: "Adat & Tradisi",
+                badgeColor: "text-purple-300 border-purple-500/30",
+                img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+                desc: "Masyarakat Desa Ganda Ganda memelihara nilai-nilai kearifan lokal yang diwariskan secara turun-temurun. Tradisi bergotong royong, tarian adat, serta penghormatan terhadap alam pesisir dan tebing kars menjadi bagian dari ritme kehidupan sehari-hari.<br><br>Melalui Mortara Heritage, nilai budaya ini didokumentasikan secara digital agar tetap lestari bagi generasi mendatang."
+            },
+            wisata: {
+                title: "Ekowisata & Pemberdayaan Komunitas",
+                badge: "Destinasi Desa",
+                badgeColor: "text-amber-300 border-amber-500/30",
+                img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+                desc: "Dengan potensi alam dan nilai sejarahnya, Desa Ganda Ganda dikembangkan menuju destinasi ekowisata berbasis edukasi sejarah dan konservasi alam.<br><br>Inisiatif perpustakaan digital (Digilib) dan museum virtual 3D menjadi jembatan pemberdayaan ekonomi kreatif serta pemuda desa lokal dalam menyambut wisatawan."
+            }
+        };
+
+        function openVillageModal(type) {
+            const data = modalData[type];
+            if (!data) return;
+
+            const modal = document.getElementById('village-detail-modal');
+            const content = document.getElementById('village-modal-content');
+
+            content.innerHTML = `
+                <div class="inline-flex items-center gap-2 glass-pill px-3.5 py-1 rounded-full text-xs font-bold ${data.badgeColor} border mb-4">
+                    ${data.badge}
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-white mb-4">${data.title}</h3>
+                <div class="w-full h-56 sm:h-64 rounded-2xl overflow-hidden mb-5 border border-white/10">
+                    <img src="${data.img}" alt="${data.title}" class="w-full h-full object-cover">
+                </div>
+                <div class="text-slate-300 text-xs sm:text-sm leading-relaxed space-y-3 font-normal">
+                    <p>${data.desc}</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex justify-end">
+                    <button onclick="closeVillageModal()" class="glass-pill px-6 py-2 rounded-full text-xs font-semibold text-white hover:bg-pink-500/30">
+                        Tutup
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeVillageModal() {
+            const modal = document.getElementById('village-detail-modal');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* ==========================================================================
            1. FLAT SHOWCASE MIDDLE CAROUSEL (3 MENU UTAMA)
            ========================================================================== */
-        const flatItemsData = [
-            {
-                id: "virtual",
-                title: "Virtual Mortara 3D",
-                subtitle: "Dokumentasi 3D Cadas Prasejarah & Lukisan Kuno",
-                badge: "Virtual 3D",
-                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                id: "digilib",
-                title: "Digilib Mortara",
-                subtitle: "Koleksi Literasi, Arsip Sejarah & Dokumen Desa Ganda Ganda",
-                badge: "Digilib Mortara",
-                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: "video",
-                title: "Video Dokumenter",
-                subtitle: "Ekspedisi Sinematik Situs Cadas Desa Ganda Ganda",
-                badge: "Video Dokumenter",
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            }
-        ];
+<!-- ... existing code ...
+```
 
-        let activeFlatIndex = 0;
-        const flatContainer = document.getElementById('flat-carousel-container');
-
-        function setActiveCategory(idx) {
-            activeFlatIndex = idx;
-            activeArcIndex = idx;
-            updateFlatPositions();
-            updateArcPositions();
-        }
-
-        function createFlatCards() {
-            if (!flatContainer) return;
-            flatContainer.innerHTML = '';
-            flatItemsData.forEach((item, idx) => {
-                const card = document.createElement('div');
-                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
-                card.dataset.index = idx;
-
-                card.innerHTML = `
-                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
-                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute top-3 left-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold text-pink-300 border border-pink-500/30">
-                            ${item.badge}
-                        </div>
-                        <div class="absolute bottom-3 left-3 right-3 p-3 glass-card rounded-xl border border-white/10 backdrop-blur-md">
-                            <p class="text-xs font-bold text-white tracking-wide truncate">${item.title}</p>
-                            <p class="text-[10px] text-slate-300 mt-0.5 truncate">${item.subtitle}</p>
-                        </div>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    if (idx !== activeFlatIndex) {
-                        activeFlatIndex = idx;
-                        updateFlatPositions();
-                    }
-                });
-
-                flatContainer.appendChild(card);
-            });
-            updateFlatPositions();
-        }
-
-        function updateFlatPositions() {
-            if (!flatContainer) return;
-            const cards = flatContainer.querySelectorAll('.carousel-card-item');
-            const total = flatItemsData.length;
-            const isMobile = window.innerWidth < 640;
-            const spacingX = isMobile ? 160 : 250;
-
-            cards.forEach((card, idx) => {
-                let diff = idx - activeFlatIndex;
-                while (diff > total / 2) diff -= total;
-                while (diff < -total / 2) diff += total;
-
-                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
-                card.dataset.prevDiff = diff;
-                const isJumping = Math.abs(diff - prevDiff) > 1.8;
-
-                if (isJumping) {
-                    card.style.transition = 'none';
-                } else {
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-
-                if (diff === 0) {
-                    // Center Active (FLAT LURUS)
-                    card.style.transform = `translateX(0px) scale(1)`;
-                    card.style.opacity = '1';
-                    card.style.zIndex = '30';
-                    card.style.filter = 'none';
-                    card.classList.add('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === 1) {
-                    // Right 1 (FLAT LURUS)
-                    card.style.transform = `translateX(${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === -1) {
-                    // Left 1 (FLAT LURUS)
-                    card.style.transform = `translateX(-${spacingX}px) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else {
-                    const side = diff > 0 ? 1 : -1;
-                    const posX = side * spacingX * 2.2;
-                    card.style.transform = `translateX(${posX}px) scale(0.6)`;
-                    card.style.opacity = '0';
-                    card.style.zIndex = '1';
-                    card.style.filter = 'brightness(0.3)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'none';
-                }
-
-                if (isJumping) {
-                    void card.offsetHeight;
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-            });
-        }
-
-        /* ==========================================================================
-           2. CURVED SEMICIRCLE BOTTOM CAROUSEL (3 MENU UTAMA)
-           ========================================================================== */
-        const arcItemsData = [
-            {
-                id: "virtual",
-                title: "Virtual Mortara 3D",
-                subtitle: "Eksplorasi Ruang 3D Cadas Prasejarah",
-                badge: "Virtual 3D",
-                img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-                id: "digilib",
-                title: "Digilib Mortara",
-                subtitle: "Perpustakaan Digital & Dokumen Sejarah",
-                badge: "Digilib Mortara",
-                img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: "video",
-                title: "Video Dokumenter",
-                subtitle: "Ekspedisi Sinematik Ganda Ganda",
-                badge: "Video Dokumenter",
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            }
-        ];
-
-        let activeArcIndex = 0;
-        const arcContainer = document.getElementById('arc-carousel-items');
-
-        function createArcCards() {
-            if (!arcContainer) return;
-            arcContainer.innerHTML = '';
-            arcItemsData.forEach((item, idx) => {
-                const card = document.createElement('div');
-                card.className = `carousel-card-item glass-card rounded-[30px] p-3 border border-white/20 cursor-pointer select-none w-64 sm:w-80`;
-                card.dataset.index = idx;
-
-                card.innerHTML = `
-                    <div class="h-48 sm:h-56 rounded-[22px] overflow-hidden relative group">
-                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-80"></div>
-                        
-                        <div class="absolute top-3 right-3 px-3 py-1 glass-pill rounded-full text-[10px] font-bold text-pink-300 border border-pink-500/30">
-                            ${item.badge}
-                        </div>
-
-                        <div class="absolute bottom-3 left-3 right-3 p-3 glass-card rounded-xl border border-white/10 backdrop-blur-md">
-                            <p class="text-xs font-bold text-white tracking-wide truncate">${item.title}</p>
-                            <p class="text-[10px] text-slate-300 mt-0.5 truncate">${item.subtitle}</p>
-                        </div>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    if (idx !== activeArcIndex) {
-                        activeArcIndex = idx;
-                        updateArcPositions();
-                    }
-                });
-
-                arcContainer.appendChild(card);
-            });
-            updateArcPositions();
-        }
-
-        function updateArcPositions() {
-            if (!arcContainer) return;
-            const cards = arcContainer.querySelectorAll('.carousel-card-item');
-            const total = arcItemsData.length;
-            const isMobile = window.innerWidth < 640;
-
-            const spacingX = isMobile ? 140 : 230;
-
-            cards.forEach((card, idx) => {
-                let diff = idx - activeArcIndex;
-
-                while (diff > total / 2) diff -= total;
-                while (diff < -total / 2) diff += total;
-
-                const prevDiff = card.dataset.prevDiff !== undefined ? parseFloat(card.dataset.prevDiff) : diff;
-                card.dataset.prevDiff = diff;
-
-                const isJumping = Math.abs(diff - prevDiff) > 1.8;
-
-                if (isJumping) {
-                    card.style.transition = 'none';
-                } else {
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-
-                if (diff === 0) {
-                    // Peak of the Semicircle Arc (Center)
-                    card.style.transform = `translateX(0px) translateY(0px) rotate(0deg) scale(1)`;
-                    card.style.opacity = '1';
-                    card.style.zIndex = '30';
-                    card.style.filter = 'none';
-                    card.classList.add('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === 1) {
-                    // Right 1 - Descending along Semicircle Arc
-                    card.style.transform = `translateX(${spacingX}px) translateY(${isMobile ? 20 : 32}px) rotate(${isMobile ? 10 : 14}deg) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else if (diff === -1) {
-                    // Left 1 - Descending along Semicircle Arc
-                    card.style.transform = `translateX(-${spacingX}px) translateY(${isMobile ? 20 : 32}px) rotate(${isMobile ? -10 : -14}deg) scale(0.88)`;
-                    card.style.opacity = '0.85';
-                    card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.82)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'auto';
-                } else {
-                    // Offscreen Semicircle Zone
-                    const side = diff > 0 ? 1 : -1;
-                    const posX = side * spacingX * 2.2;
-                    card.style.transform = `translateX(${posX}px) translateY(110px) rotate(${side * 25}deg) scale(0.6)`;
-                    card.style.opacity = '0';
-                    card.style.zIndex = '1';
-                    card.style.filter = 'brightness(0.3)';
-                    card.classList.remove('active-glow-card');
-                    card.style.pointerEvents = 'none';
-                }
-
-                if (isJumping) {
-                    void card.offsetHeight;
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease';
-                }
-            });
-        }
-
-        const prevArcBtn = document.getElementById('prev-arc-btn');
-        if (prevArcBtn) {
-            prevArcBtn.addEventListener('click', () => {
-                activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
-                updateArcPositions();
-            });
-        }
-
-        const nextArcBtn = document.getElementById('next-arc-btn');
-        if (nextArcBtn) {
-            nextArcBtn.addEventListener('click', () => {
-                activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
-                updateArcPositions();
-            });
-        }
-
-        /* ==========================================================================
-           3. FLAT SHOWCASE NAVIGATION & TOUCH EVENT LISTENERS
-           ========================================================================== */
-        const flatPrevBtn = document.getElementById('flat-prev-btn');
-        if (flatPrevBtn) {
-            flatPrevBtn.addEventListener('click', () => {
-                activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                updateFlatPositions();
-            });
-        }
-
-        const flatNextBtn = document.getElementById('flat-next-btn');
-        if (flatNextBtn) {
-            flatNextBtn.addEventListener('click', () => {
-                activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                updateFlatPositions();
-            });
-        }
-
-        // Touch Swipe Gesture for Flat Carousel
-        let flatTouchStartX = 0;
-        let flatTouchEndX = 0;
-
-        if (flatContainer) {
-            flatContainer.addEventListener('touchstart', (e) => {
-                flatTouchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            flatContainer.addEventListener('touchend', (e) => {
-                flatTouchEndX = e.changedTouches[0].screenX;
-                if (flatTouchStartX - flatTouchEndX > 35) {
-                    activeFlatIndex = (activeFlatIndex + 1) % flatItemsData.length;
-                    updateFlatPositions();
-                } else if (flatTouchEndX - flatTouchStartX > 35) {
-                    activeFlatIndex = (activeFlatIndex - 1 + flatItemsData.length) % flatItemsData.length;
-                    updateFlatPositions();
-                }
-            }, { passive: true });
-        }
-
-        // Touch Swipe Gesture for Arc Carousel
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        if (arcContainer) {
-            arcContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            arcContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                if (touchStartX - touchEndX > 35) {
-                    activeArcIndex = (activeArcIndex + 1) % arcItemsData.length;
-                    updateArcPositions();
-                } else if (touchEndX - touchStartX > 35) {
-                    activeArcIndex = (activeArcIndex - 1 + arcItemsData.length) % arcItemsData.length;
-                    updateArcPositions();
-                }
-            }, { passive: true });
-        }
-
-        window.addEventListener('resize', () => {
-            updateFlatPositions();
-            updateArcPositions();
-        });
-
-        // Initialize both continuous carousels
-        createFlatCards();
-        createArcCards();
-    </script>
-</body>
-</html>
+### Ringkasan Fitur Baru:
+1. **Seksi Baru**: Menu *"Mengenal Lebih Jauh Desa Ganda Ganda"* telah ditempatkan tepat di antara **Korsel Tengah** dan **Korsel Bawah**.
+2. **4 Kartu Menu Utama Desa**:
+   - **Geografis & Alam** (Profil & bentang pesisir Teluk Tomori & kars).
+   - **Situs Cadas Prasejarah** (Dokumentasi peninggalan purba).
+   - **Seni & Budaya Adat** (Kearifan lokal & tradisi).
+   - **Ekowisata & Komunitas** (Destinasi & pemberdayaan masyarakat).
+3. **Modal Pop-up Interaktif**: Saat diklik, tiap kartu akan langsung menampilkan dialog pop-up berisi informasi ringkas dan dokumentasi lengkap mengenai topik yang dipilih.
