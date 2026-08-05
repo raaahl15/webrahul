@@ -103,7 +103,7 @@
         .arc-card-item {
             position: absolute;
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, filter 0.6s ease;
-            transform-origin: center bottom;
+            transform-origin: center center;
             will-change: transform, opacity;
         }
 
@@ -573,9 +573,8 @@
             const total = arcItemsData.length;
             const isMobile = window.innerWidth < 640;
 
-            const spacingX = isMobile ? 120 : 210;
-            const dropY = isMobile ? 24 : 38;
-            const rotDeg = isMobile ? 12 : 18;
+            // Spacing horizontal rapat dan lurus tanpa penurunan vertikal atau kemiringan sudut
+            const spacingX = isMobile ? 150 : 240;
 
             cards.forEach((card, idx) => {
                 let diff = idx - activeArcIndex;
@@ -595,30 +594,34 @@
                 }
 
                 if (diff === 0) {
-                    card.style.transform = `translateX(0px) translateY(0px) rotate(0deg) scale(1)`;
+                    // Posisi Tengah (Aktif) - Lurus Tegak Tanpa Rotasi
+                    card.style.transform = `translateX(0px) scale(1)`;
                     card.style.opacity = '1';
                     card.style.zIndex = '30';
                     card.style.filter = 'none';
                     card.classList.add('arc-card-active');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === 1) {
-                    card.style.transform = `translateX(${spacingX}px) translateY(${dropY}px) rotate(${rotDeg}deg) scale(0.82)`;
-                    card.style.opacity = '0.65';
+                    // Posisi Kanan - Lurus Tegak
+                    card.style.transform = `translateX(${spacingX}px) scale(0.88)`;
+                    card.style.opacity = '0.8';
                     card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.75)';
+                    card.style.filter = 'brightness(0.82)';
                     card.classList.remove('arc-card-active');
                     card.style.pointerEvents = 'auto';
                 } else if (diff === -1) {
-                    card.style.transform = `translateX(-${spacingX}px) translateY(${dropY}px) rotate(-${rotDeg}deg) scale(0.82)`;
-                    card.style.opacity = '0.65';
+                    // Posisi Kiri - Lurus Tegak
+                    card.style.transform = `translateX(-${spacingX}px) scale(0.88)`;
+                    card.style.opacity = '0.8';
                     card.style.zIndex = '20';
-                    card.style.filter = 'brightness(0.75)';
+                    card.style.filter = 'brightness(0.82)';
                     card.classList.remove('arc-card-active');
                     card.style.pointerEvents = 'auto';
                 } else {
+                    // Posisi Tersembunyi (Persiapan Masuk)
                     const side = diff > 0 ? 1 : -1;
                     const farX = side * (spacingX * 1.8);
-                    card.style.transform = `translateX(${farX}px) translateY(${dropY * 2.2}px) rotate(${side * rotDeg * 1.8}deg) scale(0.6)`;
+                    card.style.transform = `translateX(${farX}px) scale(0.7)`;
                     card.style.opacity = '0';
                     card.style.zIndex = '10';
                     card.style.filter = 'brightness(0.4)';
