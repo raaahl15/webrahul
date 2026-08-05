@@ -532,89 +532,6 @@
         }
 
         /* ==========================================================================
-           1. FLAT SHOWCASE MIDDLE CAROUSEL (3 MENU UTAMA - LURUS HORIZONTAL)
-           ========================================================================== */
-        let currentFlatIndex = 0;
-        const flatContainer = document.getElementById('flat-carousel-container');
-        const flatPrevBtn = document.getElementById('flat-prev-btn');
-        const flatNextBtn = document.getElementById('flat-next-btn');
-
-        function renderFlatCarousel() {
-            if (!flatContainer) return;
-            flatContainer.innerHTML = '';
-
-            const isMobile = window.innerWidth < 640;
-            const cardWidth = isMobile ? 260 : 320;
-            const spacingX = isMobile ? 180 : 250;
-
-            // Render 5 relative slots (-2 to +2) for continuous looping without empty space
-            for (let offset = -2; offset <= 2; offset++) {
-                let dataIndex = (currentFlatIndex + offset) % mainCategoriesData.length;
-                if (dataIndex < 0) dataIndex += mainCategoriesData.length;
-
-                const item = mainCategoriesData[dataIndex];
-                const card = document.createElement('div');
-                card.className = `carousel-card-item glass-card rounded-[28px] p-4 flex flex-col justify-between border cursor-pointer ${
-                    offset === 0 ? 'active-glow-card border-pink-500/70 z-30' : 'border-white/10 z-10 hover:border-pink-500/40'
-                }`;
-
-                const translateX = offset * spacingX;
-                const scale = offset === 0 ? 1.05 : 0.92;
-                const opacity = offset === 0 ? 1 : (Math.abs(offset) === 1 ? 0.85 : 0.3);
-
-                card.style.width = `${cardWidth}px`;
-                card.style.height = `${isMobile ? 320 : 350}px`;
-                card.style.transform = `translateX(${translateX}px) scale(${scale})`;
-                card.style.opacity = opacity;
-
-                card.innerHTML = `
-                    <div class="w-full h-48 sm:h-52 rounded-2xl overflow-hidden relative mb-3 group">
-                        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0512] via-transparent to-transparent opacity-70"></div>
-                        <span class="absolute top-3 left-3 glass-pill px-3 py-1 rounded-full text-[10px] font-bold ${item.badgeColor}">
-                            ${item.badge}
-                        </span>
-                    </div>
-                    <div class="text-left px-1">
-                        <h3 class="text-base font-bold text-white leading-snug">${item.subtitle}</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed line-clamp-2 font-normal">${item.desc}</p>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    if (offset !== 0) {
-                        currentFlatIndex = dataIndex;
-                        renderFlatCarousel();
-                    }
-                });
-
-                flatContainer.appendChild(card);
-            }
-            lucide.createIcons();
-        }
-
-        function setActiveCategory(index) {
-            currentFlatIndex = index % mainCategoriesData.length;
-            currentArcIndex = index % mainCategoriesData.length;
-            renderFlatCarousel();
-            renderArcCarousel();
-        }
-
-        if (flatPrevBtn) {
-            flatPrevBtn.addEventListener('click', () => {
-                currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
-                renderFlatCarousel();
-            });
-        }
-
-        if (flatNextBtn) {
-            flatNextBtn.addEventListener('click', () => {
-                currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
-                renderFlatCarousel();
-            });
-        }
-
-        /* ==========================================================================
            1. FLAT SHOWCASE MIDDLE CAROUSEL (PERSISTENT DOM WITH SMOOTH ANIMATION)
            ========================================================================== */
         let currentFlatIndex = 0;
@@ -704,17 +621,17 @@
         }
 
         if (flatPrevBtn) {
-            flatPrevBtn.addEventListener('click', () => {
+            flatPrevBtn.onclick = () => {
                 currentFlatIndex = (currentFlatIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
                 updateFlatCarousel();
-            });
+            };
         }
 
         if (flatNextBtn) {
-            flatNextBtn.addEventListener('click', () => {
+            flatNextBtn.onclick = () => {
                 currentFlatIndex = (currentFlatIndex + 1) % mainCategoriesData.length;
                 updateFlatCarousel();
-            });
+            };
         }
 
         /* ==========================================================================
@@ -839,17 +756,17 @@
         }
 
         if (prevArcBtn) {
-            prevArcBtn.addEventListener('click', () => {
+            prevArcBtn.onclick = () => {
                 currentArcIndex = (currentArcIndex - 1 + mainCategoriesData.length) % mainCategoriesData.length;
                 updateArcCarousel();
-            });
+            };
         }
 
         if (nextArcBtn) {
-            nextArcBtn.addEventListener('click', () => {
+            nextArcBtn.onclick = () => {
                 currentArcIndex = (currentArcIndex + 1) % mainCategoriesData.length;
                 updateArcCarousel();
-            });
+            };
         }
 
         // TOUCH SWIPE GESTURE HANDLERS FOR MOBILE
